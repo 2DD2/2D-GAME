@@ -40,8 +40,9 @@ MyGame.prototype.initialize = function () {
     gManager.ObjectPool.addObject(sprite);
     
     var box = new BoundBox(this.kBoundBox_Path);
-    gManager.ObjectPool.addObject(box);
-    
+    gManager.ObjectPool.addObject(box.mBoundBox); // mBoundBox is a objectSet,
+                                                  // and box is a self defined class only
+           
     var animate = new Minion(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(animate);
     
