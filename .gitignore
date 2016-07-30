@@ -17,6 +17,7 @@ out/
 test/
 nbproject/
 .idea/
+*bak
 
 # Gradle files
 .gradle/
