@@ -1,0 +1,30 @@
+<MyGameLevel>
+
+	<Camera_Num Number="6"/>
+    <Camera_1 CenterX="0" CenterY="0" Width="40" 
+              Viewport="550 50 800 700"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />
+	<Camera_2 CenterX="0" CenterY="0" Width="10" 
+              Viewport="200 600 150 150"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />
+	<Camera_3 CenterX="0" CenterY="0" Width="10" 
+              Viewport="200 370 150 150"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />
+	<Camera_4 CenterX="0" CenterY="0" Width="10" 
+              Viewport="40 210 150 150"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />
+	<Camera_5 CenterX="0" CenterY="0" Width="10" 
+              Viewport="360 210 150 150"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />
+    <Camera_6 CenterX="0" CenterY="0" Width="10" 
+              Viewport="200 50 150 150"   
+              BgColor="0.8 0.8 0.8 1.0"
+              />          
+              
+   
+</MyGameLevel>
