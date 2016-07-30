@@ -10,7 +10,7 @@ var EventList = function () {
 
 
 }
-EventList.prototype.addEvent = function (command) {
+EventList.prototype.registerEvent = function (command) {
     this.mList.push(command);
 };
 
@@ -23,7 +23,7 @@ EventList.prototype.excuteEvent = function () {
 };
 
 
-EventList.prototype.removeEvent = function (index) {
+EventList.prototype.unRegisterEvent = function (index) {
     this.mList[index] = null;
 };
 

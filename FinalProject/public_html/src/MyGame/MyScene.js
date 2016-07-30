@@ -11,14 +11,10 @@ function MyScene(){
 
 gEngine.Core.inheritPrototype(MyScene,Scene);
 
-<<<<<<< HEAD:FinalProject/public_html/src/MyGame/Main.js
-Main.prototype.initialize = function(){
-    gManager.InputManager.initManager();
-=======
 MyScene.prototype.initialize = function(){
-
->>>>>>> 7971362331759097b84c32e4870f5801da546005:FinalProject/public_html/src/MyGame/MyScene.js
     gManager.CameraManager.initManager();
+    
+    gManager.InputManager.initManager();
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Right,new Move());
 
 };

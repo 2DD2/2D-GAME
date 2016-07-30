@@ -19,22 +19,23 @@ gManager.InputManager = (function () {
     };
 
     var bindCommand = function (eventName, keyCode, commandName) {
+        console.log(onClickedMap[keyCode]);
         if (eventName == "click") {
-            onClickedMap[keyCode].addEvent(commandName);
+            onClickedMap[keyCode].registerEvent(commandName);
             return;
         }
         if (eventName == "press") {
-            onPressedMap[keyCode].addEvent(commandName);
+            onPressedMap[keyCode].registerEvent(commandName);
         }
     };
 
     var unBindCommand = function (eventName, keyCode, index) {
         if (eventName == "click") {
-            onClickedMap[keyCode].removeEvent(index);
+            onClickedMap[keyCode].unRegisterEvent(index);
             return;
         }
         if (eventName == "press") {
-            onPressedMap[keyCode].removeEvent(index);
+            onPressedMap[keyCode].unRegisterEvent(index);
         }
     }
 
