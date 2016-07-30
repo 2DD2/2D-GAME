@@ -20,6 +20,7 @@ MyScene.prototype.initialize = function(){
 };
 
 MyScene.prototype.draw = function(){
+    gEngine.Core.clearCanvas([0.9,0.9,0.9,0.9]);
     while(true){
         // 得到当前的相机
         var camera = gManager.CameraManager.nextCamera();

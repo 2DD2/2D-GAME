@@ -12,11 +12,11 @@ function BoundBox(imgPath) {
     this.mBoundBox= new GameObjectSet();
     this.x=0;
     this.y=0;
-    this.mWidth = 10;
-    this.mHeight = 10;
+    this.mWidth = 8;
+    this.mHeight = 7;
     this.mImgPath = imgPath;
     // The outside boarder
-    this.mBoarder = new GameObject(new TextureRenderable(this.mImgPath));
+    this.mBoarder = new GameObject(new SpriteRenderable(this.mImgPath));
     this.mBoarder.getXform().setPosition(this.x,this.y);
     this.mBoarder.getXform().setSize(this.mWidth,this.mHeight);
     this.mBoundBox.addToSet(this.mBoarder);

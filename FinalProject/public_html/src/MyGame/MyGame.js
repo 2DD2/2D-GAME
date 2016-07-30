@@ -6,7 +6,7 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine: false, Scene: false, SpriteRenderable: false, Camera: false, vec2: false,
-  TextureRenderable: false, Renderable: false, SpriteAnimateRenderable, MyScene, gManager: false */
+  TextureRenderable: false, Renderable: false, SpriteAnimateRenderable, MyScene, gManager, Engine: false */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -33,21 +33,32 @@ MyGame.prototype.unloadScene = function () {
 
 MyGame.prototype.initialize = function () {
     MyScene.prototype.initialize.call(this);
-    
-    var sprite = new GameObject(new TextureRenderable(this.kSpritesSheet_Path));
+
+    // sprite on the right
+    var sprite = new GameObject(new SpriteRenderable(this.kSpritesSheet_Path));
     sprite.getXform().setPosition(0,0);
     sprite.getXform().setSize(40,20);
+    sprite.getRenderable().setElementPixelPositions(0,1024,0,512);
     gManager.ObjectPool.addObject(sprite);
     
+    // the moving box 
     var box = new BoundBox(this.kBoundBox_Path);
     gManager.ObjectPool.addObject(box.mBoundBox);
     
-    var renderSprite = new SpriteAnimateRenderable(this.kSpritesSheet_Path);
-    renderSprite.getXform().setPosition(100,100);
-    renderSprite.getXform().setSize(10,10);
+    // the animation
+    var renderSprite = new AnimationBox(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(renderSprite);
 
-    
+        
+    // For echoing status
+    this.mMsg = new FontRenderable("Status Message");
+    this.mMsg.setColor([0, 0, 0, 1]);
+    this.mMsg.getXform().setPosition(-20, -15);
+    this.mMsg.setTextHeight(1);
+    gManager.ObjectPool.addObject(this.mMsg);
+
+
+    //Here is the command
     var MoveCommand = [new Move(),new Move(),new Move(),new Move()];
     MoveCommand[0].initEvent(box,[-0.1,0]);
     MoveCommand[1].initEvent(box,[0.1,0]);
@@ -59,20 +70,24 @@ MyGame.prototype.initialize = function () {
     gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,MoveCommand[3]);
     
     
-    var UVCommand = new UVChangeCommand();
-    UVCommand.initEvent(box,renderSprite);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,UVCommand);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,UVCommand);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,UVCommand);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,UVCommand);
+    // var UVCommand = new UVChangeCommand();
+    // UVCommand.initEvent(box,this.box);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,UVCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,UVCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,UVCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,UVCommand);
     
+
+    // var AnimateCommand = new MoveAnimation(this.renderSprite);
+    // AnimateCommand.initEvent(box,renderSprite,this.mMsg);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.A, AnimateCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand);
+    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand);
     
-    
-    
-    
-    
-    
-    
+    //以上两个命令由于未完成，所以效率十分低下
+    //第二个是加载字的
+
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
         var camera = loader.LoadCamera("Camera_" + i);
@@ -86,5 +101,7 @@ MyGame.prototype.draw = function () {
 };
 
 MyGame.prototype.update = function () {
+    // update animation
     MyScene.prototype.update.call(this);
 };
+

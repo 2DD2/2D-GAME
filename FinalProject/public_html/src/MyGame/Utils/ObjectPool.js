@@ -78,12 +78,13 @@ gManager.ObjectPool = (function () {
      };   
     var updateAll = function(){
         for(var i =0;i < mObjectArray.length ; i++){
-            if(mObjectState[i] === false)
+            if(mObjectState[i] === false){
                 mObjectArray[i].update();
+            }
         }
     };
-    
-     var mPubulic={
+
+    var mPubulic={
           setMaxSize:setMaxSize,   //set the largest size of this pool
           resetState:resetState,   //reset some state of the obj
           activeState:activeState, //active some state of the obj
