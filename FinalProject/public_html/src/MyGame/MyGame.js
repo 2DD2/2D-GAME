@@ -12,6 +12,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
+    this.kBoundBox_Path = "assets/Bound.png";
     this.kSpritesSheet_Path = "assets/spritesheet1.png";
     this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
 }
@@ -20,11 +21,13 @@ gEngine.Core.inheritPrototype(MyGame, MyScene);
 
 MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kSpritesSheet_Path);
+    gEngine.Textures.loadTexture(this.kBoundBox_Path);
     gEngine.TextFileLoader.loadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kSpritesSheet_Path);
+    gEngine.Textures.unloadTexture(this.kBoundBox_Path);
     gEngine.TextFileLoader.unloadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
@@ -35,6 +38,13 @@ MyGame.prototype.initialize = function () {
     sprite.getXform().setPosition(0,0);
     sprite.getXform().setSize(40,20);
     gManager.ObjectPool.addObject(sprite);
+    
+    var box = new BoundBox(this.kBoundBox_Path);
+    gManager.ObjectPool.addObject(box.mBoundBox); // mBoundBox is a objectSet,
+                                                  // and box is a self defined class only
+           
+    var animate = new Minion(this.kSpritesSheet_Path,box);
+    gManager.ObjectPool.addObject(animate);
     
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
