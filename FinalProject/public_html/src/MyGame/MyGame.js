@@ -44,7 +44,6 @@ MyGame.prototype.initialize = function () {
 };
 
 
-
 MyGame.prototype.draw = function () {
     MyScene.prototype.draw.call(this);
 };

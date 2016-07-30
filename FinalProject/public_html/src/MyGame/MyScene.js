@@ -15,7 +15,7 @@ MyScene.prototype.initialize = function(){
     gManager.CameraManager.initManager();
     
     gManager.InputManager.initManager();
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Right,new Move());
+    
 
 };
 

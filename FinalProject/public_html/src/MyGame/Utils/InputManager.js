@@ -1,5 +1,7 @@
 
 
+/* global gEngine */
+
 var gManager = gManager || {};
 
 gManager.InputManager = (function () {
@@ -9,44 +11,43 @@ gManager.InputManager = (function () {
     var onPressedMap = {};
 
     var initManager = function () {
-        var keyMap = gEngine.Input.keys;
-        for (key in keyMap) {
-            onClickedMap[key] = new EventList();
+
+        for(var i = 0 ; i < gEngine.Input.keys.LastKeyCode; i++){
+            onClickedMap[i] = new EventList();
         }
-        for (key in keyMap) {
-            onPressedMap[key] = new EventList();
+        for(var i = 0 ; i < gEngine.Input.keys.LastKeyCode; i++){
+            onPressedMap[i] = new EventList();
         }
     };
 
     var bindCommand = function (eventName, keyCode, commandName) {
         console.log(onClickedMap[keyCode]);
-        if (eventName == "click") {
+        if (eventName === "click") {
             onClickedMap[keyCode].registerEvent(commandName);
             return;
         }
-        if (eventName == "press") {
+        if (eventName === "press") {
             onPressedMap[keyCode].registerEvent(commandName);
         }
     };
 
     var unBindCommand = function (eventName, keyCode, index) {
-        if (eventName == "click") {
+        if (eventName === "click") {
             onClickedMap[keyCode].unRegisterEvent(index);
             return;
         }
-        if (eventName == "press") {
+        if (eventName === "press") {
             onPressedMap[keyCode].unRegisterEvent(index);
         }
-    }
+    };
 
     var update = function () {
-        var keyMap = gEngine.Input.keys;
-        for (var key in keyMap) {
-            if (gEngine.Input.isKeyClicked(key)) {
-                onClickedMap[keyMap[key]].excuteEvent();
+        for (var i = 0 ; i < gEngine.Input.keys.LastKeyCode;i++) {
+            if (gEngine.Input.isKeyClicked(i)) {
+                onClickedMap[i].excuteEvent();
             }
-            if (gEngine.Input.isKeyPressed(key)) {
-                onPressedMap[keyMap[key]].excuteEvent();
+            if (gEngine.Input.isKeyPressed(i)) {
+                onPressedMap[i].excuteEvent();
             }
         }
     };

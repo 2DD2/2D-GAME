@@ -15,7 +15,7 @@ EventList.prototype.registerEvent = function (command) {
 };
 
 EventList.prototype.excuteEvent = function () {
-    for(var i ; i<this.mList.length;i++){
+    for(var i = 0 ; i<this.mList.length;i++){
         if(this.mList[i]){
             this.mList[i].excute();
         }
