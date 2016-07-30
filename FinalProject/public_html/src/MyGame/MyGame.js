@@ -13,16 +13,19 @@
 
 function MyGame() {
     this.kSpritesSheet_Path = "assets/spritesheet1.png";
+    this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
 }
 
 gEngine.Core.inheritPrototype(MyGame, MyScene);
 
 MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kSpritesSheet_Path);
+    gEngine.TextFileLoader.loadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kSpritesSheet_Path);
+    gEngine.TextFileLoader.unloadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 MyGame.prototype.initialize = function () {
@@ -33,32 +36,14 @@ MyGame.prototype.initialize = function () {
     sprite.getXform().setSize(40,20);
     gManager.ObjectPool.addObject(sprite);
     
-    // TODO: 这里需要改下。从文件读取数据初始化
-    var camera1 = new Camera(vec2.fromValues(0,0),
-                            40,
-                            [550,50,800,700]);
-    var camera2 = new Camera(vec2.fromValues(0,0),
-                            10,
-                            [200,600,150,150]);
-    var camera3 = new Camera(vec2.fromValues(0,0),
-                            10,
-                            [200,370,150,150]);
-    var camera4 = new Camera(vec2.fromValues(0,0),
-                            10,
-                            [40,210,150,150]);
-    var camera5 = new Camera(vec2.fromValues(0,0),
-                            10,
-                            [360,210,150,150]);
-    var camera6 = new Camera(vec2.fromValues(0,0),
-                            10,
-                            [200,50,150,150]);
-    gManager.CameraManager.registerCamera(camera1,1);
-    gManager.CameraManager.registerCamera(camera2,2);
-    gManager.CameraManager.registerCamera(camera3,3);
-    gManager.CameraManager.registerCamera(camera4,4);
-    gManager.CameraManager.registerCamera(camera5,5);
-    gManager.CameraManager.registerCamera(camera6,6);
+    var loader = new SceneDataLoader(this.kSceneData_Path);
+    for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
+        var camera = loader.LoadCamera("Camera_" + i);
+        gManager.CameraManager.registerCamera(camera,i);
+    }
 };
+
+
 
 MyGame.prototype.draw = function () {
     MyScene.prototype.draw.call(this);
