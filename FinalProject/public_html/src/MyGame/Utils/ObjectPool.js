@@ -1,11 +1,13 @@
+/* global addProject */
+
 //  Global variable ObjectPool
 //  the following syntax enforces there can only be one instance of ObjectPool
 "use strict"; 
 // Operate in Strict mode such that variables must be declared before used!
 
-var ObjectPool = ObjectPool || {};
+var gManager = ObjectPool || {};
 
-ObjectPool = (function () {
+gManager.ObjectPool = (function () {
      // Initialize the object set
      this.mObjectArray = [];
      this.mObjectState = []; //To define each object if it is in use 
@@ -29,12 +31,12 @@ ObjectPool = (function () {
           // add new project into this pool
           // and the project is not in use
           this.mObjectArray.push(ob);
-          this.mObjectState.push(True);
+          this.mObjectState.push(true);
      };
 
      //remove it
      var removeObject = function(ob){
-          var index = this.mSet.indexOf(obj);
+          var index = this.mSet.indexOf(ob);
                if (index > -1){
                     this.mObjectArray.splice(index, 1);
                     this.mObjectState.splice(index,1);
@@ -48,12 +50,12 @@ ObjectPool = (function () {
 
      // use the obj
      var activeState = function(id){
-          this.mObjectState[i] = False; // it is in use
+          this.mObjectState[id] = false; // it is in use
      };
 
      // reset it
      var resetState = function(id){
-          this.mObjectState[i] = True; // it is in use
+          this.mObjectState[id] = true; // it is in use
      };
 
      var resetAll =function(){
@@ -72,14 +74,15 @@ ObjectPool = (function () {
      };   
 
      var mPubulic={
-          setMaxSize:setMaxSize;   //set the largest size of this pool
-          resetState:resetState;   //reset some state of the obj
-          activeState:activeState; //active some state of the obj
-          getSize:getSize;         //get the current size
-          addProject:addProject;   //add
-          getObjectAt:getObjectAt; //get one obj by id
-          resetAll:resetAll;       //reset all obj to state true
-          renderAll:renderAll;     //render all obj
+          setMaxSize:setMaxSize,   //set the largest size of this pool
+          resetState:resetState,   //reset some state of the obj
+          activeState:activeState, //active some state of the obj
+          getSize:getSize,        //get the current size
+          addObject : addObject,   //add
+          getObjectAt:getObjectAt, //get one obj by id
+          resetAll:resetAll,       //reset all obj to state true
+          renderAll:renderAll,     //render all obj
+          removeObject : removeObject
      };    
 
      return mPubulic;
