@@ -30,20 +30,38 @@ MyGame.prototype.initialize = function () {
     
     var sprite = new GameObject(new TextureRenderable(this.kSpritesSheet_Path));
     sprite.getXform().setPosition(0,0);
-    sprite.getXform().setSize(20,20);
+    sprite.getXform().setSize(40,20);
     gManager.ObjectPool.addObject(sprite);
     
-    var camera = new Camera(vec2.fromValues(0,0),
-                            30,
-                            [200,50,400,400]);
-    gManager.CameraManager.registerCamera(camera,1);
+    // TODO: 这里需要改下。从文件读取数据初始化
+    var camera1 = new Camera(vec2.fromValues(0,0),
+                            40,
+                            [550,50,800,700]);
+    var camera2 = new Camera(vec2.fromValues(0,0),
+                            10,
+                            [200,600,150,150]);
+    var camera3 = new Camera(vec2.fromValues(0,0),
+                            10,
+                            [200,370,150,150]);
+    var camera4 = new Camera(vec2.fromValues(0,0),
+                            10,
+                            [40,210,150,150]);
+    var camera5 = new Camera(vec2.fromValues(0,0),
+                            10,
+                            [360,210,150,150]);
+    var camera6 = new Camera(vec2.fromValues(0,0),
+                            10,
+                            [200,50,150,150]);
+    gManager.CameraManager.registerCamera(camera1,1);
+    gManager.CameraManager.registerCamera(camera2,2);
+    gManager.CameraManager.registerCamera(camera3,3);
+    gManager.CameraManager.registerCamera(camera4,4);
+    gManager.CameraManager.registerCamera(camera5,5);
+    gManager.CameraManager.registerCamera(camera6,6);
 };
 
 MyGame.prototype.draw = function () {
     MyScene.prototype.draw.call(this);
-    //var camera = gManager.CameraManager.getCamera(1);
-    //camera.setupViewProjection();
-    //this.sprite.draw(camera);
 };
 
 MyGame.prototype.update = function () {
