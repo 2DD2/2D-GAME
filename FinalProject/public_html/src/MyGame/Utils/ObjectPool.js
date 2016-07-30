@@ -9,70 +9,80 @@ var gManager = ObjectPool || {};
 
 gManager.ObjectPool = (function () {
      // Initialize the object set
-     this.mObjectArray = [];
-     this.mObjectState = []; //To define each object if it is in use 
+     var mObjectArray = [];
+     var mObjectState = []; //To define each object if it is in use 
                              //if in use ,state is False;
                              //not in use,True and you can use it.
      // define the initial size
-     this.MAX_POOLSIZE = 10; 
+     var MAX_POOLSIZE = 10; 
 
      // set the max size if needed
      var setMaxSize =function(size){
-          this.MAX_POOLSIZE = size;
+          MAX_POOLSIZE = size;
      };
 
      // get the size of current object Array
      var getSize = function() {
-          return this.mObjectArray.length;
+          return mObjectArray.length;
      };
      
      // add obj and set the initial state
      var addObject = function(ob) {
           // add new project into this pool
           // and the project is not in use
-          this.mObjectArray.push(ob);
-          this.mObjectState.push(true);
+          mObjectArray.push(ob);
+          mObjectState.push(true);
      };
 
      //remove it
      var removeObject = function(ob){
-          var index = this.mSet.indexOf(ob);
+          var index = mObjectArray.indexOf(ob);
                if (index > -1){
                     this.mObjectArray.splice(index, 1);
                     this.mObjectState.splice(index,1);
                }
      };
+     var removeObjectAt = function(index){
+          this.mObjectArray.splice(index, 1);
+          this.mObjectState.splice(index,1);
+     };
 
      // get the obj through id
      var getObjectAt = function (index) {
-          return this.mObjectArray[index];
+          return mObjectArray[index];
      };
 
      // use the obj
      var activeState = function(id){
-          this.mObjectState[id] = false; // it is in use
+          mObjectState[id] = false; // it is in use
      };
 
      // reset it
      var resetState = function(id){
-          this.mObjectState[id] = true; // it is in use
+          mObjectState[id] = true; // it is in use
      };
 
      var resetAll =function(){
-          for(var i = 0;i < this.mObjectArray.length; i++){
-               this.resetState(i);
+        for(var i = 0;i < this.mObjectArray.length; i++){
+            resetState(i);
           }
      };
 
      var renderAll = function(camera){
-          for(var i = 0 ; i < mObjectArray.length; i++){
-               if(this.mObjectState){
-                    this.mObjectArray[i].draw(camera);
-                    activeState(i);
-               }
-          }
+        for(var i = 0 ; i < mObjectArray.length; i++){
+            if(mObjectState){
+                mObjectArray[i].draw(camera);
+                activeState(i);
+            }
+        }
      };   
-
+    var updateAll = function(){
+        for(var i =0;i < mObjectArray.length ; i++){
+            if(mObjectState[i] === false)
+                mObjectArray[i].update();
+        }
+    };
+    
      var mPubulic={
           setMaxSize:setMaxSize,   //set the largest size of this pool
           resetState:resetState,   //reset some state of the obj
@@ -80,9 +90,11 @@ gManager.ObjectPool = (function () {
           getSize:getSize,        //get the current size
           addObject : addObject,   //add
           getObjectAt:getObjectAt, //get one obj by id
+          removeObjectAt:removeObjectAt,
+          removeObject: removeObject,//remove
           resetAll:resetAll,       //reset all obj to state true
           renderAll:renderAll,     //render all obj
-          removeObject : removeObject
+          updateAll: updateAll
      };    
 
      return mPubulic;
