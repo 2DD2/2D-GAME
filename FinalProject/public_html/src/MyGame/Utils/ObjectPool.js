@@ -5,7 +5,7 @@
 "use strict"; 
 // Operate in Strict mode such that variables must be declared before used!
 
-var gManager = ObjectPool || {};
+var gManager = gManager || {};
 
 gManager.ObjectPool = (function () {
      // Initialize the object set

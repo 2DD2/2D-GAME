@@ -6,40 +6,18 @@
 
 /* global gEngine, Scene, gManager, vec2 */
 
-function Main(){
+function MyScene(){
 }
 
-gEngine.Core.inheritPrototype(Main,Scene);
+gEngine.Core.inheritPrototype(MyScene,Scene);
 
-//Main.prototype.loadScene = function () {
-//
-//    gEngine.Textures.loadTexture(this.kSpritesSheet_Path);
-//};
-//
-//Main.prototype.unloadScene = function () {
-//
-//    gEngine.Textures.unloadTexture(this.kSpritesSheet_Path);
-//};
-
-Main.prototype.initialize = function(){
-
-//    this.mSprite = new GameObject(this.kSpritesSheet_Path);
-//    this.mSprite.getXform().setPosition(0,0);
-//    this.mSprite.getXform().setSize(20,20);
-//    gManager.ObjectPool.addObject(this.mSprite);
+MyScene.prototype.initialize = function(){
 
     gManager.CameraManager.initManager();
-    
-//    var camera = new Camera(
-//        vec2.fromValues(0,0),
-//        50,
-//        [20,20,400,400]
-//    );
-//    gManager.CameraManager.registerCamera(camera,2);
 
 };
 
-Main.prototype.draw = function(){
+MyScene.prototype.draw = function(){
     while(true){
         // 得到当前的相机
         var camera = gManager.CameraManager.nextCamera();
@@ -55,11 +33,12 @@ Main.prototype.draw = function(){
     }
 };
 
-Main.prototype.update = function(){
+MyScene.prototype.update = function(){
 
     // 更新输入
 
     // 更新物体池内物体
+    gManager.ObjectPool.updateAll();
 
     // 更新相机
 };
