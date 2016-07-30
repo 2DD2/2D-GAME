@@ -40,11 +40,10 @@ MyGame.prototype.initialize = function () {
     gManager.ObjectPool.addObject(sprite);
     
     var box = new BoundBox(this.kBoundBox_Path);
-    gManager.ObjectPool.addObject(box.mBoundBox); // mBoundBox is a objectSet,
-                                                  // and box is a self defined class only
+    gManager.ObjectPool.addObject(box.mBoundBox);
+    
+    var renderSprite = new GameObject(new SpriteAnimaateRenderable);
            
-    var animate = new Minion(this.kSpritesSheet_Path,box);
-    gManager.ObjectPool.addObject(animate);
     
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
