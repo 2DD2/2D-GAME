@@ -1,0 +1,30 @@
+﻿Merge branch 'master' of https://github.com/2DD2/2D-GAME
+
+# Conflicts:
+#	FinalProject/nbproject/private/private.xml
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	deleted:    FinalProject/nbproject/private/private.xml
+#	modified:   FinalProject/public_html/index.html
+#	modified:   FinalProject/public_html/src/MyGame/BoundBox.js
+#	modified:   FinalProject/public_html/src/MyGame/Minion.js
+#	modified:   FinalProject/public_html/src/MyGame/MyGame.js
+#	new file:   FinalProject/public_html/src/MyGame/Utils/Commands/UVChangeCommand.js
+#	new file:   e3xoe0pa.vm0.txt.bak
+#
+
