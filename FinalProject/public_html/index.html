@@ -93,14 +93,16 @@
         
 
         <script type="text/javascript" src="src/MyGame/Utils/ObjectPool.js"></script>
-
-        <script type="text/javascript" src="src/MyGame/Main.js"></script>
-
         <script type="text/javascript" src="src/MyGame/Utils/CameraManager.js"></script>
+        
+        
+        <script type="text/javascript" src="src/MyGame/MyScene.js"></script>
+
+        
     </head>
 
     <body onload="
-        var mMain = new Main();
+        var mMain = new MyGame();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      ">
         <canvas id="GLCanvas" width="1280" height="720">
