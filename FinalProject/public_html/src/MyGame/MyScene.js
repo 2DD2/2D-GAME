@@ -4,38 +4,26 @@
  * and open the template in the editor.
  */
 
-/* global gEngine, Scene */
+/* global gEngine, Scene, gManager, vec2 */
 
-function Main(){
-    
+function MyScene(){
 }
 
-gEngine.Core.inheritPrototype(Main,Scene);
+gEngine.Core.inheritPrototype(MyScene,Scene);
 
-Main.prototype.initialize = function(){
+MyScene.prototype.initialize = function(){
 
     gManager.CameraManager.initManager();
 
-
-    var camera = new Camera(
-        vec2.fromValues(0,0),
-        50,
-        [20,20,400,400]
-    );
-    gManager.CameraManager.registerCamera(camera,2);
-
 };
 
-Main.prototype.draw = function(){
-
+MyScene.prototype.draw = function(){
     while(true){
         // 得到当前的相机
         var camera = gManager.CameraManager.nextCamera();
         if(camera){
-
             // 渲染物体
-            //
-            // gManager.ObjectsPool.renderAll(camera);
+            gManager.ObjectPool.renderAll(camera);
         }
         // 这一帧渲染结束
         else {
@@ -45,11 +33,12 @@ Main.prototype.draw = function(){
     }
 };
 
-Main.prototype.update = function(){
+MyScene.prototype.update = function(){
 
     // 更新输入
 
     // 更新物体池内物体
+    gManager.ObjectPool.updateAll();
 
     // 更新相机
 };
