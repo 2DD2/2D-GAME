@@ -2,10 +2,10 @@
 
 	<Camera_Num Number="6"/>
     <Camera_1 CenterX="0" CenterY="0" Width="40" 
-              Viewport="550 50 800 700"   
+              Viewport="550 200 800 400"   
               BgColor="0.8 0.8 0.8 1.0"
               />
-	<Camera_2 CenterX="0" CenterY="0" Width="10" 
+	<Camera_2 CenterX="100" CenterY="100" Width="10" 
               Viewport="200 600 150 150"   
               BgColor="0.8 0.8 0.8 1.0"
               />

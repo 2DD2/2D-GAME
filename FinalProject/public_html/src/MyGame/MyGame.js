@@ -42,8 +42,36 @@ MyGame.prototype.initialize = function () {
     var box = new BoundBox(this.kBoundBox_Path);
     gManager.ObjectPool.addObject(box.mBoundBox);
     
-    var renderSprite = new GameObject(new SpriteAnimaateRenderable);
-           
+    var renderSprite = new SpriteAnimateRenderable(this.kSpritesSheet_Path);
+    renderSprite.getXform().setPosition(100,100);
+    renderSprite.getXform().setSize(10,10);
+    gManager.ObjectPool.addObject(renderSprite);
+
+    
+    var MoveCommand = [new Move(),new Move(),new Move(),new Move()];
+    MoveCommand[0].initEvent(box,[-0.1,0]);
+    MoveCommand[1].initEvent(box,[0.1,0]);
+    MoveCommand[2].initEvent(box,[0,0.1]);
+    MoveCommand[3].initEvent(box,[0,-0.1]);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,MoveCommand[0]);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,MoveCommand[1]);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,MoveCommand[2]);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,MoveCommand[3]);
+    
+    
+    var UVCommand = new UVChangeCommand();
+    UVCommand.initEvent(box,renderSprite);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,UVCommand);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,UVCommand);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,UVCommand);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,UVCommand);
+    
+    
+    
+    
+    
+    
+    
     
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){

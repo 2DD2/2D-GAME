@@ -21,7 +21,6 @@ gManager.InputManager = (function () {
     };
 
     var bindCommand = function (eventName, keyCode, commandName) {
-        console.log(onClickedMap[keyCode]);
         if (eventName === "click") {
             onClickedMap[keyCode].registerEvent(commandName);
             return;

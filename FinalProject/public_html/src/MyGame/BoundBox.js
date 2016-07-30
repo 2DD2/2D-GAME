@@ -25,22 +25,22 @@ function BoundBox(imgPath) {
     this.mSquare = new Renderable(gEngine.DefaultResources.getConstColorShader());
     this.mSquare.setColor([0.8, 0.2, 0.2, 1]);
     this.mSquare.getXform().setPosition(this.x-this.mWidth/2, this.y+this.mHeight/2);
-    this.mSquare.getXform().setSize(1.5, 1.5);
+    this.mSquare.getXform().setSize(1, 1);
   // the square2
     this.mSquare1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
     this.mSquare1.setColor([0.8, 0.2, 0.2, 1]);
     this.mSquare1.getXform().setPosition(this.x+this.mWidth/2, this.y+this.mHeight/2);
-    this.mSquare1.getXform().setSize(1.5, 1.5);
+    this.mSquare1.getXform().setSize(1, 1);
   // the square3  
     this.mSquare2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
     this.mSquare2.setColor([0.8, 0.2, 0.2, 1]);
     this.mSquare2.getXform().setPosition(this.x-this.mWidth/2, this.y-this.mHeight/2);
-    this.mSquare2.getXform().setSize(1.5, 1.5);
+    this.mSquare2.getXform().setSize(1, 1);
   // the square4  
     this.mSquare3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
     this.mSquare3.setColor([0.8, 0.2, 0.2, 1]);
     this.mSquare3.getXform().setPosition(this.x+this.mWidth/2, this.y-this.mHeight/2);
-    this.mSquare3.getXform().setSize(1.5, 1.5);
+    this.mSquare3.getXform().setSize(1, 1);
  
     this.mBoundBox.addToSet(this.mSquare);
     this.mBoundBox.addToSet(this.mSquare1);
@@ -52,7 +52,7 @@ function BoundBox(imgPath) {
       this.mSquare1.getXform().setPosition(this.x+this.mWidth/2, this.y+this.mHeight/2);
       this.mSquare2.getXform().setPosition(this.x-this.mWidth/2, this.y-this.mHeight/2);
       this.mSquare3.getXform().setPosition(this.x+this.mWidth/2, this.y-this.mHeight/2);
-      console.log("change");
+      this.mBoarder.getXform().setPosition(this.x, this.y);
   };
   
 }
@@ -85,9 +85,10 @@ function BoundBox(imgPath) {
       var pX=0; 
       this.x = this.x + dX;
       for(var i ;i<this.mBoundBox.size;i++){
-          pX = this.mBoundBox[i].getXform().getXPos();
-          this.mBoundBox[i].getXform().setXform( pX + dX );
+          pX = this.mBoundBox.getObjectAt(i).getXform().getXPos();
+          this.mBoundBox.getObjectAt(i).getXform().setXPos( pX + dX );
       }
+      this.changeSquare();
   };
   
  //the change of y pos
@@ -95,9 +96,10 @@ function BoundBox(imgPath) {
       var pY=0;
       this.y = this.y + dY;
       for(var i =0; i<this.mBoundBox.size;i++){
-           pY = this.mBoundBox[i].getXform().getYPos();
-           this.mBoundBox[i].getXform().setYPos( dY + pY );
+           pY = this.getObjectAt(i).getXform().getYPos();
+           this.getObjectAt(i).getXform().setYPos( dY + pY );
       }
+      this.changeSquare();
   };
   
 BoundBox.prototype.setPos= function(X,Y){
