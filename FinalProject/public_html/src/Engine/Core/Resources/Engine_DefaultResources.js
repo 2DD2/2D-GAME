@@ -13,7 +13,7 @@ var gEngine = gEngine || { };
 
 gEngine.DefaultResources = (function () {
     // Global Ambient color
-    var mGlobalAmbientColor = [0.3, 0.3, 0.3, 1];
+    var mGlobalAmbientColor = [1, 1, 1, 1];
     var mGlobalAmbientIntensity = 1;
     var getGlobalAmbientIntensity = function () { return mGlobalAmbientIntensity; };
     var setGlobalAmbientIntensity = function (v) { mGlobalAmbientIntensity = v; };
