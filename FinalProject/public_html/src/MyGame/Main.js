@@ -13,8 +13,9 @@ function Main(){
 gEngine.Core.inheritPrototype(Main,Scene);
 
 Main.prototype.initialize = function(){
-
+    gManager.InputManager.initManager();
     gManager.CameraManager.initManager();
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Right,new Move());
 
 
     var camera = new Camera(
@@ -48,6 +49,7 @@ Main.prototype.draw = function(){
 Main.prototype.update = function(){
 
     // 更新输入
+    gManager.InputManager.update();
 
     // 更新物体池内物体
 
