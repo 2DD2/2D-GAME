@@ -53,7 +53,7 @@ function BoundBox(imgPath) {
       this.mSquare2.getXform().setPosition(this.x-this.mWidth/2, this.y-this.mHeight/2);
       this.mSquare3.getXform().setPosition(this.x+this.mWidth/2, this.y-this.mHeight/2);
       console.log("change");
-  }
+  };
   
 }
  
@@ -83,15 +83,17 @@ function BoundBox(imgPath) {
  //the change of x pos (The delta)
   BoundBox.prototype.moveX = function(dX){
       var pX=0; 
+      this.x = this.x + dX;
       for(var i ;i<this.mBoundBox.size;i++){
           pX = this.mBoundBox[i].getXform().getXPos();
-          this.mBoundBox[i].setXform( pX + dX );
+          this.mBoundBox[i].getXform().setXform( pX + dX );
       }
   };
   
  //the change of y pos
  BoundBox.prototype.moveY = function(dY){
       var pY=0;
+      this.y = this.y + dY;
       for(var i =0; i<this.mBoundBox.size;i++){
            pY = this.mBoundBox[i].getXform().getYPos();
            this.mBoundBox[i].getXform().setYPos( dY + pY );
