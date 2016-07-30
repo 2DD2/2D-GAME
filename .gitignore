@@ -12,7 +12,11 @@
 bin/
 gen/
 out/
+
+# Project files
 test/
+nbproject/
+.idea/
 
 # Gradle files
 .gradle/
