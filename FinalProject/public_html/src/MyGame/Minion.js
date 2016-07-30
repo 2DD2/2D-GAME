@@ -11,8 +11,15 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Minion(spriteTexture) {
+function Minion (spriteTexture,animateObj) {
+    this.mBound = animateObj.getObjectAt(0);
+    this.mWidth = 1024;
+    this.mHeight = 512;
+    this.kMinionSprite = spriteTexture;
     this.mMinion = new SpriteAnimateRenderable(this.kMinionSprite);
+    
+    GameObject.call(this,this.mMinion);
+    
     this.mMinion.setColor([1, 1, 1, 0]);
     this.mMinion.getXform().setPosition(this.mBound.getXform().getXPos(),this.mBound.getXform().getYPos());
     this.mMinion.getXform().setSize(1024, 512);
@@ -25,6 +32,7 @@ function Minion(spriteTexture) {
     this.mMinion.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
     this.mMinion.setAnimationSpeed(30);
 }
+
 gEngine.Core.inheritPrototype(Minion, GameObject);
 
 Minion.prototype.update = function () {
