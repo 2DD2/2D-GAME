@@ -89,7 +89,13 @@ gManager.CameraManager = (function(){
         // 返回相机
         return camera;
     };
-
+    var update = function(){
+        for(var i = 0; i < kMaxCameraNumber;i++){
+            if(mCameraRenderArray[i])
+                mCameraRenderArray[i].update();
+        }
+    };
+    
     /*
     将当前相机编号移回渲染序列开头
      */
@@ -123,7 +129,8 @@ gManager.CameraManager = (function(){
         moveIndexToHead : moveIndexToHead,
         getMaxCameraNumber : getMaxCameraNumber,
         getCurrentCameraIndex : getCurrentCameraIndex,
-        getCamera : getCamera
+        getCamera : getCamera,
+        update:update
     };
 
     return mPublic;

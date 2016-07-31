@@ -45,4 +45,5 @@ MyScene.prototype.update = function(){
     gManager.ObjectPool.updateAll();
 
     // 更新相机
+    gManager.CameraManager.update();
 };

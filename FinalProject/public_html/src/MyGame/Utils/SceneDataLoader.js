@@ -33,7 +33,16 @@ SceneDataLoader.prototype.LoadCamera = function (nameCma) {
         viewport[j] = Number(viewport[j]);
     }
 
-    var cam = new Camera(
+    var cam = null;
+    var type = Number(camElm[0].getAttribute("Type"));
+    if(type === 0)
+        cam = new Camera(
+        vec2.fromValues(cx, cy),  
+        w,                        
+        viewport                  
+        );
+    else if(type === 1)
+        cam = new CameraChase(
         vec2.fromValues(cx, cy),  
         w,                        
         viewport                  

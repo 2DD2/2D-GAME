@@ -6,7 +6,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable, SpriteAnimateRenderable, Command: false */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  
@@ -18,7 +18,9 @@ function AnimationBox(spriteTexture,obj) {
     this.bindBox = obj; //bind to position of a object
     this.mAnimationBox.setColor([0, 1, 1, 0]);
     this.mAnimationBox.getXform().setPosition(30, 20);
-    this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
+    
+    //this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
+    this.mAnimationBox.getXform().setSize(10, 10);
     this.mAnimationBox.setElementPixelPositions(0, 1024, 0, 512);
     // if the sprite is not 1024*512 , we will see nothing
 
@@ -103,17 +105,18 @@ MoveAnimation.prototype.excute = function(){
                  (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
     this.aniLeft = this.spW/2 +
                  (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
-    this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
+    //this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
     
     this.target.setSpriteSequence(this.aniTop,this.aniLeft,
                                           this.aniW,this.aniH,
                                           this.aniNum,0);
- 
-    this.statusStr= "Status: Bound Pos = ("
-            + (this.source.getXPos()+20).toFixed(2).toString() +" "
-            + (this.source.getYPos()+10).toFixed(2).toString()
-            + ") Size = (  " + this.source.getWidth().toFixed(2).toString() +" "
-            + this.source.getHeight().toFixed(2).toString() + ")";
-    
-    this.msg.setText(this.statusStr);
+                                          
+    // TODO 这里有待优化
+//    this.statusStr= "Status: Bound Pos = ("
+//            + (this.source.getXPos()+20).toFixed(2).toString() +" "
+//            + (this.source.getYPos()+10).toFixed(2).toString()
+//            + ") Size = (  " + this.source.getWidth().toFixed(2).toString() +" "
+//            + this.source.getHeight().toFixed(2).toString() + ")";
+//    
+//    this.msg.setText(this.statusStr);
 };

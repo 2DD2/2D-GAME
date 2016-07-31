@@ -3,22 +3,17 @@
 
 /* global Command, gEngine */
 
-function Move(){
+function Move(target,speed){
     
     /*
      * 目标
      */
-    this.mTarget = null;
+    this.mTarget = target;
     
-    this.mSpeed = [];
+    this.mSpeed = speed;
 };
 
 gEngine.Core.inheritPrototype(Move,Command);
-
-Move.prototype.initEvent = function(target,speed){
-    this.mTarget = target;
-    this.mSpeed = speed;
-};
 
 Move.prototype.excute = function(){ 
     this.mTarget.moveX(this.mSpeed[0]);

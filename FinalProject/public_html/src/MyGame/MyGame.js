@@ -45,54 +45,60 @@ MyGame.prototype.initialize = function () {
     var box = new BoundBox(this.kBoundBox_Path);
     gManager.ObjectPool.addObject(box.mBoundBox);
     
+
     // the animation
     var renderSprite = new AnimationBox(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(renderSprite);
 
-        
     // For echoing status
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([0, 0, 0, 1]);
     this.mMsg.getXform().setPosition(-20, -15);
     this.mMsg.setTextHeight(1);
     gManager.ObjectPool.addObject(this.mMsg);
-
-
-    //Here is the command
-    var MoveCommand = [new Move(),new Move(),new Move(),new Move()];
-    MoveCommand[0].initEvent(box,[-0.1,0]);
-    MoveCommand[1].initEvent(box,[0.1,0]);
-    MoveCommand[2].initEvent(box,[0,0.1]);
-    MoveCommand[3].initEvent(box,[0,-0.1]);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,MoveCommand[0]);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,MoveCommand[1]);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,MoveCommand[2]);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,MoveCommand[3]);
     
-    
-    // var UVCommand = new UVChangeCommand();
-    // UVCommand.initEvent(box,this.box);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,UVCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,UVCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,UVCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,UVCommand);
-    
+    /*
+     * 移动框事件
+     */
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.A,new Move(box,[-0.1,0]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.D,new Move(box,[0.1,0]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.W,new Move(box,[0,0.1]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.S,new Move(box,[0,-0.1]));
 
-    // var AnimateCommand = new MoveAnimation(this.renderSprite);
-    // AnimateCommand.initEvent(box,renderSprite,this.mMsg);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.A, AnimateCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand);
-    // gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand);
-    
-    //以上两个命令由于未完成，所以效率十分低下
-    //第二个是加载字的
+    /*
+     * 
+     * 框缩放事件
+     */
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left,new ScaleCommand(box,[-0.1,0]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right,new ScaleCommand(box,[0.1,0]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Up,new ScaleCommand(box,[0,0.1]));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Down,new ScaleCommand(box,[0,-0.1]));
 
+    /*
+     * 精灵动画更新事件
+     */
+     var AnimateCommand = new MoveAnimation(this.renderSprite);
+     AnimateCommand.initEvent(box,renderSprite,this.mMsg);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.A, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand);
+    
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
         var camera = loader.LoadCamera("Camera_" + i);
         gManager.CameraManager.registerCamera(camera,i);
     }
+    
+    var camera = gManager.CameraManager.getCamera(3);
+    camera.setTarget(box.mSquare);
+    camera = gManager.CameraManager.getCamera(4);
+    camera.setTarget(box.mSquare1);
+    camera = gManager.CameraManager.getCamera(5);
+    camera.setTarget(box.mSquare2);
+    camera = gManager.CameraManager.getCamera(6);
+    camera.setTarget(box.mSquare3);
+    
 };
 
 
@@ -104,4 +110,6 @@ MyGame.prototype.update = function () {
     // update animation
     MyScene.prototype.update.call(this);
 };
+
+
 

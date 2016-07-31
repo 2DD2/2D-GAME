@@ -56,6 +56,7 @@ function BoundBox(imgPath) {
   };
   
 }
+
  
   BoundBox.prototype.getWidth= function(){
      return this.mWidth ;
