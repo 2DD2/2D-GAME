@@ -20,7 +20,7 @@ function AnimationBox(spriteTexture,obj) {
     this.mAnimationBox.getXform().setPosition(30, 30);
     
     //this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
-    this.mAnimationBox.getXform().setSize(10, 10);
+    this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
     this.mAnimationBox.setElementPixelPositions(0, 1024, 0, 512);
     // if the sprite is not 1024*512 , we will see nothing
 
@@ -70,6 +70,7 @@ function AnimationBox(spriteTexture,obj) {
 gEngine.Core.inheritPrototype(AnimationBox, GameObject);
 
 AnimationBox.prototype.update = function () {
+    this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
     // remember to update this.mMinion's animation
     this.mAnimationBox.updateAnimation();
 };
