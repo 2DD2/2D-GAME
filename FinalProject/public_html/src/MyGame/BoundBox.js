@@ -24,22 +24,22 @@ function BoundBox(imgPath) {
    // the square1
     this.mSquare = new Renderable(gEngine.DefaultResources.getConstColorShader());
     this.mSquare.setColor([0.8, 0.2, 0.2, 1]);
-    this.mSquare.getXform().setPosition(this.x-this.mWidth/2, this.y+this.mHeight/2);
+    this.mSquare.getXform().setPosition(this.x, this.y+this.mHeight/2);
     this.mSquare.getXform().setSize(1, 1);
   // the square2
     this.mSquare1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    this.mSquare1.setColor([0.8, 0.2, 0.2, 1]);
-    this.mSquare1.getXform().setPosition(this.x+this.mWidth/2, this.y+this.mHeight/2);
+    this.mSquare1.setColor([0.2, 0.8, 0.2, 1]);
+    this.mSquare1.getXform().setPosition(this.x-this.mWidth/2, this.y);
     this.mSquare1.getXform().setSize(1, 1);
   // the square3  
     this.mSquare2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    this.mSquare2.setColor([0.8, 0.2, 0.2, 1]);
-    this.mSquare2.getXform().setPosition(this.x-this.mWidth/2, this.y-this.mHeight/2);
+    this.mSquare2.setColor([0.2, 0.2, 0.8, 1]);
+    this.mSquare2.getXform().setPosition(this.x+this.mWidth/2, this.y);
     this.mSquare2.getXform().setSize(1, 1);
   // the square4  
     this.mSquare3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    this.mSquare3.setColor([0.8, 0.2, 0.2, 1]);
-    this.mSquare3.getXform().setPosition(this.x+this.mWidth/2, this.y-this.mHeight/2);
+    this.mSquare3.setColor([0.8, 0.8, 0.2, 1]);
+    this.mSquare3.getXform().setPosition(this.x, this.y-this.mHeight/2);
     this.mSquare3.getXform().setSize(1, 1);
  
     this.mBoundBox.addToSet(this.mSquare);
@@ -48,10 +48,10 @@ function BoundBox(imgPath) {
     this.mBoundBox.addToSet(this.mSquare3);    
     
     this.changeSquare = function(){
-      this.mSquare.getXform().setPosition(this.x-this.mWidth/2, this.y+this.mHeight/2);
-      this.mSquare1.getXform().setPosition(this.x+this.mWidth/2, this.y+this.mHeight/2);
-      this.mSquare2.getXform().setPosition(this.x-this.mWidth/2, this.y-this.mHeight/2);
-      this.mSquare3.getXform().setPosition(this.x+this.mWidth/2, this.y-this.mHeight/2);
+      this.mSquare.getXform().setPosition(this.x, this.y+this.mHeight/2);
+      this.mSquare1.getXform().setPosition(this.x-this.mWidth/2, this.y);
+      this.mSquare2.getXform().setPosition(this.x+this.mWidth/2, this.y);
+      this.mSquare3.getXform().setPosition(this.x, this.y-this.mHeight/2);
       this.mBoarder.getXform().setPosition(this.x, this.y);
   };
   
