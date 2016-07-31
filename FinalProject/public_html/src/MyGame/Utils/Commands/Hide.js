@@ -11,11 +11,11 @@ function Hide(){  //id in the objectpool
 
 gEngine.Core.inheritPrototype(Hide,Command);
 
-Show.prototype.initEvent = function(id,obj){ 
+Hide.prototype.initEvent = function(id,obj){ 
     this.mTargetID = id;
     this.mTarget= obj;
 };
-Show.prototype.excute = function(){ 
+Hide.prototype.excute = function(){ 
     gManager.ObjectPool.resetState(this.mTargetID);
 
 };

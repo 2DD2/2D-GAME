@@ -69,8 +69,8 @@ MyGame.prototype.initialize = function () {
 
     // 6: Press Q and some box will show
     //resetState to false
-   // var frame = new FrameBox(this.kBoundBox_Path)
-   // gManager.ObjectPool.addObject(frame.mFrameBox); 
+    var frame = new FrameBox(this.kBoundBox_Path)
+    gManager.ObjectPool.addObject(frame.mFrameBox); 
    
     /*
      * 移动框事件
@@ -103,8 +103,11 @@ MyGame.prototype.initialize = function () {
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left, AnimateCommand);
     
-    //var FrameShow = new Show(frame);
-    //gManager.InputManager.bindCommand("press",gEngine.Input.keys.Q, FrameShow);
+    var FrameShow = new Show(frame);
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Q, FrameShow);
+  
+  
+  
   
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
