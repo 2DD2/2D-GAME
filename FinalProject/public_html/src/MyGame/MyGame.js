@@ -12,8 +12,11 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
+    // this is the path of the box
     this.kBoundBox_Path = "assets/Bound.png";
-    this.kSpritesSheet_Path = "assets/spritesheet1.png";
+    // this is the path of the sprite
+    this.kSpritesSheet_Path = "assets/minion_sprite.png";
+    // the setting of camera
     this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
 }
 
@@ -34,53 +37,41 @@ MyGame.prototype.unloadScene = function () {
 MyGame.prototype.initialize = function () {
     MyScene.prototype.initialize.call(this);
 
-    // sprite on the right
+    // 0:sprite on the right
     var sprite = new GameObject(new SpriteRenderable(this.kSpritesSheet_Path));
     sprite.getXform().setPosition(0,0);
     sprite.getXform().setSize(40,20);
     sprite.getRenderable().setElementPixelPositions(0,1024,0,512);
     gManager.ObjectPool.addObject(sprite);
     
-    // borderline of the sprite
+    // 1:borderline of the sprite
     var border =new BorderLine(sprite,0.1);
     gManager.ObjectPool.addObject(border);
     
-    // the moving box 
+    // 2:the moving box 
     var box = new BoundBox(this.kBoundBox_Path);
     gManager.ObjectPool.addObject(box.mBoundBox);
    
-    // the animation
+    // 3:the animation
     var renderSprite = new AnimationBox(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(renderSprite);
 
-    // For echoing status
+    // 4:For echoing status
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([0, 0, 0, 1]);
     this.mMsg.getXform().setPosition(-20, -15);
     this.mMsg.setTextHeight(1);
     gManager.ObjectPool.addObject(this.mMsg);
 
-    // Square outside
-    var spriteSquare = new GameObjectSet();
-    var Sq1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    Sq1.setColor([0.1, 0.1, 1, 1]);
-    Sq1.getXform().setPosition(-20,10);
-    spriteSquare.addToSet(Sq1);
-    var Sq2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    Sq2.setColor([0.3, 0.2, 0.2, 1]);
-    Sq2.getXform().setPosition(20,10);
-    spriteSquare.addToSet(Sq2);
-    var Sq3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    Sq3.setColor([0.8, 0.6, 0.2, 1]);
-    Sq3.getXform().setPosition(-20,-10);
-    spriteSquare.addToSet(Sq3);
-    var Sq4 = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    Sq4.setColor([0.3, 0.2, 0.9, 1]);
-    Sq4.getXform().setPosition(20,-10);
-    spriteSquare.addToSet(Sq4);
-    gManager.ObjectPool.addObject(spriteSquare);
-    
-    
+    // 5:Square outside
+    var squareOut = new OutSq();
+    gManager.ObjectPool.addObject(squareOut);
+
+    // 6: Press Q and some box will show
+    //resetState to false
+   // var frame = new FrameBox(this.kBoundBox_Path)
+   // gManager.ObjectPool.addObject(frame.mFrameBox); 
+   
     /*
      * 移动框事件
      */
@@ -112,7 +103,9 @@ MyGame.prototype.initialize = function () {
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left, AnimateCommand);
     
-
+    //var FrameShow = new Show(frame);
+    //gManager.InputManager.bindCommand("press",gEngine.Input.keys.Q, FrameShow);
+  
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
         var camera = loader.LoadCamera("Camera_" + i);
@@ -143,6 +136,10 @@ MyGame.prototype.update = function () {
     // update animation
     MyScene.prototype.update.call(this);
 };
+
+/////////////////////////////////////////
+// Here is some definition of object set
+////////////////////////////////////////
 
 function BorderLine(obj,width){
     this.mBorderLine = new GameObjectSet();
@@ -177,5 +174,70 @@ function BorderLine(obj,width){
     return this.mBorderLine;
 }
 
+// Sprite 四角的方块
+function OutSq(){
+    
+    this.spriteSquare = new GameObjectSet();
+    
+    var Sq1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq1.setColor([0.1, 0.1, 1, 1]);
+    Sq1.getXform().setPosition(-20,10);
+    this.spriteSquare.addToSet(Sq1);
+    
+    var Sq2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq2.setColor([0.3, 0.2, 0.2, 1]);
+    Sq2.getXform().setPosition(20,10);
+    this.spriteSquare.addToSet(Sq2);
+    
+    var Sq3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq3.setColor([0.8, 0.6, 0.2, 1]);
+    Sq3.getXform().setPosition(-20,-10);
+    this.spriteSquare.addToSet(Sq3);
+    
+    var Sq4 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq4.setColor([0.3, 0.2, 0.9, 1]);
+    Sq4.getXform().setPosition(20,-10);
+    this.spriteSquare.addToSet(Sq4);
+    gManager.ObjectPool.addObject(Sq4);
 
+    return this.spriteSquare;
+}
+// 绘制Frame
+function FrameBox(bindObj,p,animationBox){
+    this.mFrameBox = new GameObjectSet(); 
+    this.mFrameCount=0;
+
+    this.bindBox=bindObj;   //box
+    this.path = p;          //render path
+    
+    this.frame= animationBox;// to get number of frame
+   
+}
+FrameBox.prototype.setVisibility = function(bool){
+    console.log("visible");
+    for(var i =1 ;i<this.mFrameBoxCount;i++){
+        this.mFrameBox[i].setVisibility(bool);
+    }
+};
+FrameBox.prototype.setCount= function(){
+    //获取 动画的帧数 然后 根据帧数来重新生成方块
+    //this.mFrameBox.mSet = []; //清空
+
+    this.mFrameCount=this.frame.getFrameNum(); //获取
+    this.xPos = this.bindBox.getXPos();
+    this.yPos = this.bindBox.getYPos();
+    this.fWid = this.bindBox.getWidth(); //frame width
+    this.fHei = this.bindBox.getHeight();//frame higth
+    
+    // console.log("frame number is",this.mFrameCount);
+    // for(var i=0 ; i<this.mFrameCount ;i++){
+    //      var i =1;     
+    //       var tempFrame = new TextureRenderable(this.path);
+    //      this.mFrameBox.addToSet(this.tempFrame);
+    //      console.log(tempFrame.getXform()); //an object
+    //      tempFrame.getXform().setPosition(this.xPos + i*this.fWid,this.yPos);
+    //      tempFrame.getXform().setSize(this.fWid,this.fHei);
+    // // }
+ 
+};
 

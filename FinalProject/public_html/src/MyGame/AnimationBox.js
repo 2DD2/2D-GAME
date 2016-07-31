@@ -45,7 +45,7 @@ function AnimationBox(spriteTexture,obj) {
                                           this.aniNum,0);
  
     this.mAnimationBox.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
-    this.mAnimationBox.setAnimationSpeed(10);
+    this.mAnimationBox.setAnimationSpeed(60);
 
 
     // this function have not been test 
@@ -73,6 +73,9 @@ AnimationBox.prototype.update = function () {
 
     // remember to update this.mMinion's animation
     this.mAnimationBox.updateAnimation();
+};
+AnimationBox.prototype.getFrameNum = function(){
+    return this.aniNum;
 };
 
 

@@ -10,9 +10,8 @@ var gManager = gManager || {};
 gManager.ObjectPool = (function () {
      // Initialize the object set
      var mObjectArray = [];
-     var mObjectState = []; //To define each object if it is in use 
-                             //if in use ,state is False;
-                             //not in use,True and you can use it.
+     var mObjectState = []; //To define each object if it can be draw
+                           
      // define the initial size
      var MAX_POOLSIZE = 10; 
 
@@ -54,12 +53,12 @@ gManager.ObjectPool = (function () {
 
      // use the obj
      var activeState = function(id){
-          mObjectState[id] = false; // it is in use
+          mObjectState[id] = true; // it is in use
      };
 
      // reset it
      var resetState = function(id){
-          mObjectState[id] = true; // it is in use
+          mObjectState[id] = false; // it can't be draw
      };
 
      var resetAll =function(){
@@ -72,13 +71,12 @@ gManager.ObjectPool = (function () {
         for(var i = 0 ; i < mObjectArray.length; i++){
             if(mObjectState){
                 mObjectArray[i].draw(camera);
-                activeState(i);
             }
         }
      };   
     var updateAll = function(){
         for(var i =0;i < mObjectArray.length ; i++){
-            if(mObjectState[i] === false){
+            if(mObjectState[i]){
                 mObjectArray[i].update();
             }
         }

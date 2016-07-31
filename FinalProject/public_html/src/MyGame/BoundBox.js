@@ -126,6 +126,10 @@ BoundBox.prototype.setPos= function(X,Y){
      this.mBoarder.getXform().setHeight(h);
      this.changeSquare();
  };
+ 
+ BoundBox.prototype.getFrame=function(){
+     
+ };
   
 
   
