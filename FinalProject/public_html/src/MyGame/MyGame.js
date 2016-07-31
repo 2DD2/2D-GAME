@@ -104,6 +104,10 @@ MyGame.prototype.initialize = function () {
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Up, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Down, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right, AnimateCommand);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left, AnimateCommand);
     
 
     var loader = new SceneDataLoader(this.kSceneData_Path);

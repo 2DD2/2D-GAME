@@ -20,7 +20,7 @@ function AnimationBox(spriteTexture,obj) {
     this.mAnimationBox.getXform().setPosition(30, 30);
     
     //this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
-    this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
+    this.mAnimationBox.getXform().setSize(10, 10);
     this.mAnimationBox.setElementPixelPositions(0, 1024, 0, 512);
     // if the sprite is not 1024*512 , we will see nothing
 
@@ -36,8 +36,8 @@ function AnimationBox(spriteTexture,obj) {
 
     this.aniTop = this.spH/2+(this.bindBox.getYPos()+this.bindBox.getHeight()/2)* ( 1024 / 40);
     this.aniLeft = this.spW/2+(this.bindBox.getXPos()-this.bindBox.getWidth()/2)* ( 512 / 20 ) ;
-    this.aniW = 204; // the width of the animation part
-    this.aniH = 168;
+    this.aniW = (this.bindBox.getWidth()/40)*1024; // the width of the animation part
+    this.aniH = (this.bindBox.getHeight()/20)*512;
     this.aniNum = parseInt((this.spW-this.aniLeft)/this.aniW);
     
     this.mAnimationBox.setSpriteSequence(this.aniTop,this.aniLeft,
@@ -70,7 +70,7 @@ function AnimationBox(spriteTexture,obj) {
 gEngine.Core.inheritPrototype(AnimationBox, GameObject);
 
 AnimationBox.prototype.update = function () {
-    this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
+
     // remember to update this.mMinion's animation
     this.mAnimationBox.updateAnimation();
 };
@@ -95,8 +95,8 @@ MoveAnimation.prototype.initEvent = function(s,t,m){
 
     this.spW = 1024;  //the width of the sprite
     this.spH = 512;
-    this.aniW = 204; // the width of the animation part
-    this.aniH = 168;
+    this.aniW = (this.source.getWidth()/40)*1024; // the width of the animation part
+    this.aniH = (this.source.getHeight()/20)*512;
     this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
     this.aniTop = this.spH/2 + (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
     this.aniLeft = this.spW/2 + (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
@@ -106,8 +106,8 @@ MoveAnimation.prototype.initEvent = function(s,t,m){
 MoveAnimation.prototype.excute = function(){ 
     this.spW = 1024;  //the width of the sprite
     this.spH = 512;
-    this.aniW = 204; // the width of the animation part
-    this.aniH = 168;
+    this.aniW = (this.source.getWidth()/40)*1024; // the width of the animation part
+    this.aniH = (this.source.getHeight()/20)*512;
     //change the animation position
     this.aniTop = this.spH/2 + (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
     this.aniLeft = this.spW/2 + (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
