@@ -41,11 +41,14 @@ MyGame.prototype.initialize = function () {
     sprite.getRenderable().setElementPixelPositions(0,1024,0,512);
     gManager.ObjectPool.addObject(sprite);
     
+    // borderline of the sprite
+    var border =new BorderLine(sprite,0.1);
+    gManager.ObjectPool.addObject(border);
+    
     // the moving box 
     var box = new BoundBox(this.kBoundBox_Path);
     gManager.ObjectPool.addObject(box.mBoundBox);
-    
-
+   
     // the animation
     var renderSprite = new AnimationBox(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(renderSprite);
@@ -140,6 +143,39 @@ MyGame.prototype.update = function () {
     // update animation
     MyScene.prototype.update.call(this);
 };
+
+function BorderLine(obj,width){
+    this.mBorderLine = new GameObjectSet();
+    this.target = obj;
+    this.mW = width;
+    this.color = [0.2,0.2,0.1,1];
+    
+    this.mLine1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mLine1.setColor(this.color);
+    this.mLine1.getXform().setPosition(0,10);
+    this.mLine1.getXform().setSize(40,this.mW);
+    this.mBorderLine.addToSet(this.mLine1);
+    
+    this.mLine2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mLine2.setColor(this.color);
+    this.mLine2.getXform().setPosition(0,-10);
+    this.mLine2.getXform().setSize(40,this.mW);
+    this.mBorderLine.addToSet(this.mLine2);
+    
+    this.mLine3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mLine3.setColor(this.color);
+    this.mLine3.getXform().setPosition(20,0);
+    this.mLine3.getXform().setSize(this.mW,20);
+    this.mBorderLine.addToSet(this.mLine3);
+    
+    this.mLine4 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mLine4.setColor(this.color);
+    this.mLine4.getXform().setPosition(-20,0);
+    this.mLine4.getXform().setSize(this.mW,20);
+    this.mBorderLine.addToSet(this.mLine4);
+
+    return this.mBorderLine;
+}
 
 
 

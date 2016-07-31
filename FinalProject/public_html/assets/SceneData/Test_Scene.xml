@@ -7,27 +7,27 @@
               Type="0"
               />
     <Camera_2 CenterX="30" CenterY="30" Width="10" 
-          Viewport="200 600 150 150"   
-          BgColor="0.8 0.8 0.8 1.0"
+          Viewport="150 540 250 250"   
+          BgColor="0.2 0.8 0.8 1.0"
           Type="0"
           />
     <Camera_3 CenterX="0" CenterY="0" Width="5" 
-          Viewport="200 370 150 150"   
+          Viewport="200 360 150 150"   
           BgColor="0.8 0.8 0.8 1.0"
           Type="1"
           />
     <Camera_4 CenterX="0" CenterY="0" Width="5" 
-          Viewport="40 210 150 150"   
+          Viewport="40 200 150 150"   
           BgColor="0.8 0.8 0.8 1.0"
           Type="1"
           />
     <Camera_5 CenterX="0" CenterY="0" Width="5" 
-          Viewport="360 210 150 150"   
+          Viewport="360 200 150 150"   
           BgColor="0.8 0.8 0.8 1.0"
           Type="1"
           />
     <Camera_6 CenterX="0" CenterY="0" Width="5" 
-              Viewport="200 50 150 150"   
+              Viewport="200 40 150 150"   
               BgColor="0.8 0.8 0.8 1.0"
               Type="1"
               />          

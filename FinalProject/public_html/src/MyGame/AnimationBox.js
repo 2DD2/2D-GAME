@@ -114,13 +114,5 @@ MoveAnimation.prototype.excute = function(){
     this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
     
     this.target.setSpriteSequence(this.aniTop,this.aniLeft,this.aniW,this.aniH,this.aniNum,0);                                 
-//    TODO 这里有待优化
-//   this.statusStr= "Status: Bound Pos = ("
-//           + (this.source.getXPos()+20).toFixed(2).toString() +" "
-//           + (this.source.getYPos()+10).toFixed(2).toString()
-//           + ") Size = (  " + this.source.getWidth().toFixed(2).toString() +" "
-//           + this.source.getHeight().toFixed(2).toString() + ")";
-//   
-//   this.msg.setText(this.statusStr);
 
 };
