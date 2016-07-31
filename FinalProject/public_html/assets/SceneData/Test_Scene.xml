@@ -6,7 +6,7 @@
               BgColor="0.8 0.8 0.8 1.0"
               Type="0"
               />
-    <Camera_2 CenterX="30" CenterY="20" Width="10" 
+    <Camera_2 CenterX="30" CenterY="30" Width="10" 
           Viewport="200 600 150 150"   
           BgColor="0.8 0.8 0.8 1.0"
           Type="0"

@@ -56,6 +56,27 @@ MyGame.prototype.initialize = function () {
     this.mMsg.getXform().setPosition(-20, -15);
     this.mMsg.setTextHeight(1);
     gManager.ObjectPool.addObject(this.mMsg);
+
+    // Square outside
+    var spriteSquare = new GameObjectSet();
+    var Sq1 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq1.setColor([0.1, 0.1, 1, 1]);
+    Sq1.getXform().setPosition(-20,10);
+    spriteSquare.addToSet(Sq1);
+    var Sq2 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq2.setColor([0.3, 0.2, 0.2, 1]);
+    Sq2.getXform().setPosition(20,10);
+    spriteSquare.addToSet(Sq2);
+    var Sq3 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq3.setColor([0.8, 0.6, 0.2, 1]);
+    Sq3.getXform().setPosition(-20,-10);
+    spriteSquare.addToSet(Sq3);
+    var Sq4 = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    Sq4.setColor([0.3, 0.2, 0.9, 1]);
+    Sq4.getXform().setPosition(20,-10);
+    spriteSquare.addToSet(Sq4);
+    gManager.ObjectPool.addObject(spriteSquare);
+    
     
     /*
      * 移动框事件
@@ -77,13 +98,14 @@ MyGame.prototype.initialize = function () {
     /*
      * 精灵动画更新事件
      */
-     var AnimateCommand = new MoveAnimation(this.renderSprite);
+     var AnimateCommand = new MoveAnimation();
      AnimateCommand.initEvent(box,renderSprite,this.mMsg);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.A, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand);
     
+
     var loader = new SceneDataLoader(this.kSceneData_Path);
     for(var i = 1; i <= loader.GetNumber("Camera_Num"); i++){
         var camera = loader.LoadCamera("Camera_" + i);
@@ -98,7 +120,11 @@ MyGame.prototype.initialize = function () {
     camera.setTarget(box.mSquare2);
     camera = gManager.CameraManager.getCamera(6);
     camera.setTarget(box.mSquare3);
-    
+
+    // box.setWidth(10);
+    // box.setHeight(10);
+    // console.log("w",box.getWidth());
+    // console.log("h",box.getHeight());
 };
 
 

@@ -17,7 +17,7 @@ function AnimationBox(spriteTexture,obj) {
     this.mAnimationBox = new SpriteAnimateRenderable(spriteTexture);
     this.bindBox = obj; //bind to position of a object
     this.mAnimationBox.setColor([0, 1, 1, 0]);
-    this.mAnimationBox.getXform().setPosition(30, 20);
+    this.mAnimationBox.getXform().setPosition(30, 30);
     
     //this.mAnimationBox.getXform().setSize(this.bindBox.getWidth(), this.bindBox.getHeight());
     this.mAnimationBox.getXform().setSize(10, 10);
@@ -77,7 +77,7 @@ AnimationBox.prototype.update = function () {
 
 // command implentation
 
-function MoveAnimation(obj){
+function MoveAnimation(){
     this.source = null;
     this.target = null;
     this.msg = null;
@@ -96,27 +96,30 @@ MoveAnimation.prototype.initEvent = function(s,t,m){
     this.spH = 512;
     this.aniW = 204; // the width of the animation part
     this.aniH = 168;
+    this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
+    this.aniTop = this.spH/2 + (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
+    this.aniLeft = this.spW/2 + (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
 };
 
 
 MoveAnimation.prototype.excute = function(){ 
+    this.spW = 1024;  //the width of the sprite
+    this.spH = 512;
+    this.aniW = 204; // the width of the animation part
+    this.aniH = 168;
     //change the animation position
-    this.aniTop = this.spH/2 +
-                 (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
-    this.aniLeft = this.spW/2 +
-                 (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
-    //this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
+    this.aniTop = this.spH/2 + (this.source.getYPos()+this.source.getHeight()/2)* ( 1024 / 40);
+    this.aniLeft = this.spW/2 + (this.source.getXPos()-this.source.getWidth()/2)* ( 512 / 20 ) ;
+    this.aniNum = parseInt( (this.spW-this.aniLeft) / this.aniW);
     
-    this.target.setSpriteSequence(this.aniTop,this.aniLeft,
-                                          this.aniW,this.aniH,
-                                          this.aniNum,0);
-                                          
-    // TODO 这里有待优化
-//    this.statusStr= "Status: Bound Pos = ("
-//            + (this.source.getXPos()+20).toFixed(2).toString() +" "
-//            + (this.source.getYPos()+10).toFixed(2).toString()
-//            + ") Size = (  " + this.source.getWidth().toFixed(2).toString() +" "
-//            + this.source.getHeight().toFixed(2).toString() + ")";
-//    
-//    this.msg.setText(this.statusStr);
+    this.target.setSpriteSequence(this.aniTop,this.aniLeft,this.aniW,this.aniH,this.aniNum,0);                                 
+//    TODO 这里有待优化
+//   this.statusStr= "Status: Bound Pos = ("
+//           + (this.source.getXPos()+20).toFixed(2).toString() +" "
+//           + (this.source.getYPos()+10).toFixed(2).toString()
+//           + ") Size = (  " + this.source.getWidth().toFixed(2).toString() +" "
+//           + this.source.getHeight().toFixed(2).toString() + ")";
+//   
+//   this.msg.setText(this.statusStr);
+
 };

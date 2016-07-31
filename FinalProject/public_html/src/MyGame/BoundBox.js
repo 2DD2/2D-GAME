@@ -122,7 +122,7 @@ BoundBox.prototype.setPos= function(X,Y){
  };
  
   BoundBox.prototype.setHeight= function(h){
-     this.mWidth = h;
+     this.mHeight = h;
      this.mBoarder.getXform().setHeight(h);
      this.changeSquare();
  };
