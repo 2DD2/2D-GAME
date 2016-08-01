@@ -8,13 +8,13 @@
  *  created by yangqihua 2016-08-01 15:13:45
  *  ========================================
  */
-function JumpCommand(hero) {
+function AntiCommand(hero) {
     this.mHero = hero;
 }
 
-gEngine.Core.inheritPrototype(Jump, Command);
+gEngine.Core.inheritPrototype(AntiCommand, Command);
 
-Jump.prototype.excute = function(){
+AntiCommand.prototype.excute = function(){
     console.log("hero is Jump");
     this.mHero.antiJump();
 }
