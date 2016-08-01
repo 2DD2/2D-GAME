@@ -13,8 +13,6 @@ function BeginningScene(){
     this.mTitleSprite = null;
     this.mStartSprite = null;
     this.mAboutUsSprite = null;
-    
-    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);
@@ -22,20 +20,20 @@ gEngine.Core.inheritPrototype(BeginningScene, MyScene);
 BeginningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mTitleSprite = new SpriteRenderable(this.kTitleSprite);
-    this.mTitleSprite.setColor([1, 1, 1, 0]);
-    this.mTitleSprite.getXform().setPosition(512, 384);
-    this.mTitleSprite.getXform().setSize(400, 100);
+    this.mTitleSprite = new GameObject(new SpriteRenderable(this.kTitleSprite));
+    this.mTitleSprite.getXform().setPosition(0, 20);
+    this.mTitleSprite.getXform().setSize(40, 20);
+    gManager.ObjectPool.addObject(this.mTitleSprite,1);
     
-    this.mStartSprite = new SpriteRenderable(this.kStartSprite);
-    this.mStartSprite.setColor([1, 1, 1, 0]);
-    this.mStartSprite.getXform().setPosition(256, 192);
-    this.mStartSprite.getXform().setSize(200, 100);
+    this.mStartSprite = new GameObject(new SpriteRenderable(this.kStartSprite));
+    this.mStartSprite.getXform().setPosition(0, 0);
+    this.mStartSprite.getXform().setSize(20, 10);
+    gManager.ObjectPool.addObject(this.mStartSprite,1);
     
-    this.mAboutUsSprite = new SpriteRenderable(this.kAboutUsSprite);
-    this.mAboutUsSprite.setColor([1, 1, 1, 0]);
-    this.mAboutUsSprite.getXform().setPosition(256, 576);
-    this.mAboutUsSprite.getXform().setSize(200, 100);
+    this.mAboutUsSprite = new GameObject(new SpriteRenderable(this.kAboutUsSprite));
+    this.mAboutUsSprite.getXform().setPosition(0, -10);
+    this.mAboutUsSprite.getXform().setSize(20, 10);
+    gManager.ObjectPool.addObject(this.mAboutUsSprite,1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              20,
@@ -66,7 +64,7 @@ BeginningScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
     //按 空格 键切换到RunningScene
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
-        unloadScene();
+        gEngine.GameLoop.stop();
     }
 };
 

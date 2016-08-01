@@ -5,6 +5,8 @@
  */
 
 
+/* global vec2 */
+
 var gManager = gManager || {};
 
 gManager.UIManager = (function(){
@@ -25,7 +27,10 @@ gManager.UIManager = (function(){
     var mRenderringCamera = null;
     
     var initManager = function(){
-
+        setRenderringCamera(new Camera(vec2.fromValues(0,0),
+                                40,
+                                [20,20,400,400]));
+                                
     };
     
     var draw = function(){

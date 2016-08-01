@@ -1,7 +1,7 @@
 <MyGameLevel>
 
     <Camera_Num Number="1"/>
-    <Camera_1 CenterX="0" CenterY="0" Width="40" 
+    <Camera_Main CenterX="0" CenterY="0" Width="40" 
               Viewport="0 0 1200 600"   
               BgColor="0.8 0.8 0.8 1.0"
               Type="0"
