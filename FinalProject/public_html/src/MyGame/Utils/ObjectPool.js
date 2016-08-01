@@ -41,7 +41,7 @@ gManager.ObjectPool = (function () {
         }else{
             console.log("The objectPool can only have "+MAX_SIZE+" obj and overflowed!!!");
         }
-         console.log("add");
+
      };
 
      //remove the obj

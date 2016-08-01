@@ -27,19 +27,21 @@ TestScene.prototype.initialize = function(){
     gManager.ObjectPool.addObject(controller,0);
 
     var camera = new Camera(vec2.fromValues(0,0),
-                             20,
-                             [20,20,400,400]);
+                             40,
+                             [0,0,1200,600]);
     camera.setBackgroundColor([0.8,0.8,0.8,1]);
     gManager.CameraManager.registerCamera(camera,0);
     
     var UICamera = new Camera(vec2.fromValues(0,0),
-                                20,
+                                40,
                                 [20,20,400,400]);
     gManager.UIManager.setRenderringCamera(UICamera);
+
 };
 
 TestScene.prototype.draw = function(){
     MyScene.prototype.draw.call(this);
+    
 };
 
 TestScene.prototype.update = function(){

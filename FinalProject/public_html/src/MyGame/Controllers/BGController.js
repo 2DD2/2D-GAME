@@ -14,17 +14,28 @@ function BGController(BgPath){
      */
     this.mBackgrounds = [];
     
-    var bg = new GameObject(new TextureRenderable(BgPath));
-    bg.getXform().setPosition(0,0);
-    bg.getXform().setSize(20,20);
+    var bg1 = new GameObject(new TextureRenderable(BgPath));
+    bg1.getXform().setPosition(0,0);
+    bg1.getXform().setSize(80,20);
     
-    this.mBackgrounds.push(bg);
+    this.mBackgrounds.push(bg1);
+    
+    var bg2 = new GameObject(new TextureRenderable(BgPath));
+    bg2.getXform().setPosition(80,0);
+    bg2.getXform().setSize(80,20);
+    
+    this.mBackgrounds.push(bg2);
 }
 
 
 BGController.prototype.update = function(){
     
-    this.mBackgrounds[0].getXform().setXPos(this.mBackgrounds[0].getXform().getXPos() - 0.01);
+    if(this.mBackgrounds[0].getXform().getXPos() < -80) this.mBackgrounds[0].getXform().setXPos(79.5);
+    if(this.mBackgrounds[1].getXform().getXPos() < -80) this.mBackgrounds[1].getXform().setXPos(79.5);
+    this.mBackgrounds[0].getXform().setXPos(this.mBackgrounds[0].getXform().getXPos() - 0.1);
+    this.mBackgrounds[1].getXform().setXPos(this.mBackgrounds[1].getXform().getXPos() - 0.1);
+    
+
     
     for(var i = 0 ; i < this.mBackgrounds.length ; i++){
         if(this.mBackgrounds[i])

@@ -5,8 +5,7 @@
 
 function DefaultOptions() {
     //BackGround
-    this.kBgSprite = "";            //背景图地址
-    this.mSpeed = 0.0;              //背景移动速度
+    this.mSpeed = 0.1;              //背景移动速度
     this.mBgColor = [1, 1, 1, 0.0]; //背景渲染颜色
     
     //Hero

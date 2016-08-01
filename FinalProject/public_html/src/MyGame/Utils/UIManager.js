@@ -25,7 +25,7 @@ gManager.UIManager = (function(){
     var mRenderringCamera = null;
     
     var initManager = function(){
-        setUIRoot("asd");
+
     };
     
     var draw = function(){
