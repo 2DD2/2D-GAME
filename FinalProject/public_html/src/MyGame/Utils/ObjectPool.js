@@ -35,13 +35,14 @@ gManager.ObjectPool = (function () {
      var addObject = function(obj,layer) {
           // add new project into this pool
           // and layer number of this obj
-         if(mSize < MAX_SIZE){ 
-           mObjectArray[layer].addToSet(obj);
-           mSize ++ ;
-        }else{
-            console.log("The objectPool can only have "+MAX_SIZE+" obj and overflowed!!!");
-        }
-
+           if(layer){
+               this.mLayer=layer;
+           }else{
+               this.mLayer=1;
+           }
+          mObjectArray[this.mLayer].addToSet(obj);
+          mSize ++ ;
+            // console.log("The objectPool can only have "+MAX_SIZE+" obj and overflowed!!!");
      };
 
      //remove the obj
