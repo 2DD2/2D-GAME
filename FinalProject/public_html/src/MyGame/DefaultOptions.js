@@ -14,4 +14,7 @@ function DefaultOptions() {
     
     //Obstacle
     this.mFrequency = 1.0;          //障碍物刷新频率，1s 刷新 1个
+    
+    
+    
 }

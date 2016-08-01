@@ -1,36 +1,23 @@
 <MyGameLevel>
 
-    <Camera_Num Number="6"/>
-    <Camera_1 CenterX="0" CenterY="0" Width="50" 
-              Viewport="550 -100 900 900"   
+    <Camera_Num Number="1"/>
+    <Camera_1 CenterX="0" CenterY="0" Width="40" 
+              Viewport="0 0 1200 600"   
               BgColor="0.8 0.8 0.8 1.0"
               Type="0"
               />
-    <Camera_2 CenterX="30" CenterY="30" Width="10" 
-          Viewport="150 540 250 250"   
-          BgColor="0.2 0.8 0.8 1.0"
-          Type="0"
-          />
-    <Camera_3 CenterX="0" CenterY="0" Width="5" 
-          Viewport="200 360 150 150"   
-          BgColor="0.8 0.8 0.8 1.0"
-          Type="1"
-          />
-    <Camera_4 CenterX="0" CenterY="0" Width="5" 
-          Viewport="40 200 150 150"   
-          BgColor="0.8 0.8 0.8 1.0"
-          Type="1"
-          />
-    <Camera_5 CenterX="0" CenterY="0" Width="5" 
-          Viewport="360 200 150 150"   
-          BgColor="0.8 0.8 0.8 1.0"
-          Type="1"
-          />
-    <Camera_6 CenterX="0" CenterY="0" Width="5" 
-              Viewport="200 40 150 150"   
-              BgColor="0.8 0.8 0.8 1.0"
-              Type="1"
-              />          
+    
+    <Object_Num Number = ""/>
+    <Object_1 X="" Y=""
+          Type = ""
+          SizeX="" SizeY=""
+          Rp = ""/>
+    
+    <BG_Num Number="1"/>
+    <BG_1 SizeX="80" SizeY="20"
+          Layer = "1"
+          Rp = "assets/BG_1.jpg"/>
+
               
    
 </MyGameLevel>

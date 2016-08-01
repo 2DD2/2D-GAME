@@ -7,9 +7,17 @@
 /* global gEngine, vec2 */
 
 function SceneDataLoader(sceneFilePath) {
-    
     this.mSceneXml = gEngine.ResourceMap.retrieveAsset(sceneFilePath);
 }
+
+SceneDataLoader.prototype.LoadBG = function(number){
+    var elm = this._getElm(number);
+    var path = elm[0].getAttribute("Rp");
+    var bg = new GameObject(new TextureRenderable(path));
+    bg.getXform().setSize(Number(elm[0].getAttribute("SizeX")),
+                          Number(elm[0].getAttribute("SizeY")));
+    return bg;
+};
 
 SceneDataLoader.prototype._getElm = function (tagElm) {
     var theElm = this.mSceneXml.getElementsByTagName(tagElm);
