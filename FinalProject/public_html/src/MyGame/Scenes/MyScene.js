@@ -11,11 +11,6 @@ function MyScene(){
 
 gEngine.Core.inheritPrototype(MyScene,Scene);
 
-<<<<<<< HEAD
-MyScene.prototype.initialize = function(){
-    gManager.CameraManager.initManager();
-    gManager.InputManager.initManager();
-=======
 MyScene.prototype.loadScene = function(){
     
 };
@@ -23,7 +18,6 @@ MyScene.prototype.loadScene = function(){
 MyScene.prototype.unloadScene = function(){
     
 };
->>>>>>> 4d02e6d71618f106002c3bf5502675dc66071a87
 
 MyScene.prototype.initialize = function(){
     gManager.CameraManager.initManager();
