@@ -3,7 +3,7 @@
  * BeginningScene是开始场景
  */
 
-/* global gEngine, Scene, MyScene */
+/* global gEngine, Scene, MyScene, vec2, gManager */
 
 function BeginningScene(){
     this.kTitleSprite = "";
@@ -36,6 +36,13 @@ BeginningScene.prototype.initialize = function(){
     this.mAboutUsSprite.setColor([1, 1, 1, 0]);
     this.mAboutUsSprite.getXform().setPosition(256, 576);
     this.mAboutUsSprite.getXform().setSize(200, 100);
+    
+    var camera = new Camera(vec2.fromValues(0,0),
+                             20,
+                             [20,20,400,400]);
+    camera.setBackgroundColor([0.8,0.8,0.8,1]);
+    
+    gManager.CameraManager.registerCamera(camera,0);
 };
 
 BeginningScene.prototype.loadScene = function () {
@@ -50,6 +57,9 @@ BeginningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kTitleSprite);
     gEngine.Textures.unloadTexture(this.kStartSprite);
     gEngine.Textures.unloadTexture(this.kAboutUsSprite);
+    
+    var nextScene = new RunningScene();
+    gEngine.Core.startScene(nextScene);
 };
 
 BeginningScene.prototype.update = function(){
@@ -57,8 +67,6 @@ BeginningScene.prototype.update = function(){
     //按 空格 键切换到RunningScene
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
         unloadScene();
-        var nextScene = new RunningScene();
-        gEngine.Core.startScene(nextScene);
     }
 };
 

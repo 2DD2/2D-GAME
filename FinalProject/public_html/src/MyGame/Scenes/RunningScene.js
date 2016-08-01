@@ -3,7 +3,7 @@
  * RunningScene是游戏进行场景
  */
 
-/* global gEngine, Scene, MyScene, DefaultOptions */
+/* global gEngine, Scene, MyScene, DefaultOptions, vec2, gManager */
 
 function RunningScene(){
     this.kBg = "";                  //背景图片
@@ -27,23 +27,30 @@ RunningScene.prototype.initialize = function(){
     
     this.mBgSprite = new SpriteRenderable(this.kBg);
     this.mBgSprite.setColor([1, 1, 1, 0]);
-    this.mBgSprite.getXform().setPosition(512, 384);
+    this.mBgSprite.getXform().setPosition(0, 0);
     this.mBgSprite.getXform().setSize(1024, 768);
     
     this.mHeroSprite = new SpriteRenderable(this.kHeroSprite);
     this.mHeroSprite.setColor([1, 1, 1, 0]);
-    this.mHeroSprite.getXform().setPosition(512, 384);
+    this.mHeroSprite.getXform().setPosition(0, 0);
     this.mHeroSprite.getXform().setSize(400, 100);
     
     this.mObsSprite = new SpriteRenderable(this.kObsSprite);
     this.mObsSprite.setColor([1, 1, 1, 0]);
-    this.mObsSprite.getXform().setPosition(256, 192);
+    this.mObsSprite.getXform().setPosition(0, 0);
     this.mObsSprite.getXform().setSize(200, 100);
     
     this.mPlatFormSprite = new SpriteRenderable(this.kPlatFormSprite);
     this.mPlatFormSprite.setColor([1, 1, 1, 0]);
-    this.mPlatFormSprite.getXform().setPosition(256, 576);
+    this.mPlatFormSprite.getXform().setPosition(0, 0);
     this.mPlatFormSprite.getXform().setSize(200, 100);
+    
+    var camera = new Camera(vec2.fromValues(0,0),
+                             20,
+                             [20,20,400,400]);
+    camera.setBackgroundColor([0.8,0.8,0.8,1]);
+    
+    gManager.CameraManager.registerCamera(camera,0);
 };
 
 RunningScene.prototype.loadScene = function () {
@@ -60,6 +67,9 @@ RunningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kHeroSprite);
     gEngine.Textures.unloadTexture(this.kObsSprite);
     gEngine.Textures.unloadTexture(this.kPlatFormSprite);
+    
+    var nextScene = new GameOverScene();
+    gEngine.Core.startScene(nextScene);
 };
 
 RunningScene.prototype.update = function(){
@@ -72,8 +82,6 @@ RunningScene.prototype.update = function(){
     //按 空格 键切换到GameOverScene
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
         unloadScene();
-        var nextScene = new GameOverScene();
-        gEngine.Core.startScene(nextScene);
     }
 };
 

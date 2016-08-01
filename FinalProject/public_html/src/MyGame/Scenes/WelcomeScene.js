@@ -3,7 +3,7 @@
  * WelcomeScene用来加载开场动画
  */
 
-/* global gEngine, Scene, MyScene */
+/* global gEngine, Scene, MyScene, vec2, gManager */
 
 function WelcomeScene(){
     this.kWelScene = "";
@@ -20,8 +20,15 @@ WelcomeScene.prototype.initialize = function(){
     
     this.mWelSprite = new SpriteRenderable(this.kWelScene);
     this.mWelSprite.setColor([1, 1, 1, 0]);
-    this.mWelSprite.getXform().setPosition(512, 384);
+    this.mWelSprite.getXform().setPosition(0, 0);
     this.mWelSprite.getXform().setSize(1024, 768);
+    
+    var camera = new Camera(vec2.fromValues(0,0),
+                             20,
+                             [20,20,400,400]);
+    camera.setBackgroundColor([0.8,0.8,0.8,1]);
+    
+    gManager.CameraManager.registerCamera(camera,0);
 };
 
 WelcomeScene.prototype.loadScene = function () {
