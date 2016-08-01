@@ -13,9 +13,7 @@ gEngine.Core.inheritPrototype(MyScene,Scene);
 
 MyScene.prototype.initialize = function(){
     gManager.CameraManager.initManager();
-    
     gManager.InputManager.initManager();
-    
 
 };
 
