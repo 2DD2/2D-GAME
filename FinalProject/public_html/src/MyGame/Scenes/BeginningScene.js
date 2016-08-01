@@ -6,15 +6,15 @@
 /* global gEngine, Scene, MyScene, vec2, gManager */
 
 function BeginningScene(){
-    this.kTitleSprite = "";
-    this.kStartSprite = "";
-    this.kAboutUsSprite = "";
+    this.kTitleSprite = "assets/bg.png";
+    this.kStartSprite = "assets/bg.png";
+    this.kAboutUsSprite = "assets/bg.png";
     
     this.mTitleSprite = null;
     this.mStartSprite = null;
     this.mAboutUsSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);

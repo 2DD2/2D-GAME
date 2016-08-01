@@ -6,15 +6,15 @@
 /* global gEngine, Scene, MyScene, gManager, vec2 */
 
 function GameOverScene(){
-    this.kRank = "";            //排行榜图片
-    this.kMenu = "";            //主菜单图片
-    this.kRestart = "";         //重新开始图片
+    this.kRank = "assets/bg.png";            //排行榜图片
+    this.kMenu = "assets/bg.png";            //主菜单图片
+    this.kRestart = "assets/bg.png";         //重新开始图片
     
     this.mRankSprite = null;
     this.mRestartSprite = null;
     this.mMenuSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(GameOverScene, MyScene);
@@ -48,6 +48,7 @@ GameOverScene.prototype.initialize = function(){
 GameOverScene.prototype.loadScene = function () {
     // 加载场景
     gEngine.Textures.loadTexture(this.kTitleSprite);
+    console.log(gEngine);
 };
 
 GameOverScene.prototype.unloadScene = function () {

@@ -6,18 +6,18 @@
 /* global gEngine, Scene, MyScene, DefaultOptions, vec2, gManager */
 
 function RunningScene(){
-    this.kBg = "";                  //背景图片
+    this.kBg = "assets/bg.png";                  //背景图片
     
-    this.kHeroSprite = "";          //主角图片
-    this.kObsSprite = "";           //障碍物图片
-    this.kPlatFormSprite = "";      //跑道图片
+    this.kHeroSprite = "assets/bg.png";          //主角图片
+    this.kObsSprite = "assets/bg.png";           //障碍物图片
+    this.kPlatFormSprite = "assets/bg.png";      //跑道图片
     
     this.mBgSprite = null;
     this.mHeroSprite = null;
     this.mObsSprite = null;
     this.mPlatFormSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(RunningScene, MyScene);

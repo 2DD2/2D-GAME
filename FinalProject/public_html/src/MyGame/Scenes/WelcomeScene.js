@@ -6,11 +6,9 @@
 /* global gEngine, Scene, MyScene, vec2, gManager */
 
 function WelcomeScene(){
-    this.kWelScene = "";
     
+    this.kWelScene = "assets/minion_sprite.png";
     this.mWelSprite = null;
-    
-    initialize();
 }
 
 gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
@@ -18,17 +16,16 @@ gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
 WelcomeScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mWelSprite = new SpriteRenderable(this.kWelScene);
-    this.mWelSprite.setColor([1, 1, 1, 0]);
+    this.mWelSprite = new GameObject(new SpriteRenderable(this.kWelScene));
     this.mWelSprite.getXform().setPosition(0, 0);
-    this.mWelSprite.getXform().setSize(1024, 768);
-    
+    this.mWelSprite.getXform().setSize(40, 20);
+    gManager.ObjectPool.addObject(this.mWelSprite,1);
+
     var camera = new Camera(vec2.fromValues(0,0),
-                             20,
+                             40,
                              [20,20,400,400]);
     camera.setBackgroundColor([0.8,0.8,0.8,1]);
-    
-    gManager.CameraManager.registerCamera(camera,0);
+    gManager.CameraManager.registerCamera(camera, 1);
 };
 
 WelcomeScene.prototype.loadScene = function () {
