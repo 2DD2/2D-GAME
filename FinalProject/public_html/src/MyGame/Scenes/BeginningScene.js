@@ -64,7 +64,7 @@ BeginningScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
     //按 空格 键切换到RunningScene
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
-        unloadScene();
+        gEngine.GameLoop.stop();
     }
 };
 

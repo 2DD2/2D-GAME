@@ -5,14 +5,17 @@
 var gManager = gManager || {};
 
 gManager.DefaultOptions = (function(){
-    //BackGround
-    var mSpeed = 0.1;              //背景移动速度
-    var mBgColor = [1, 1, 1, 0.0]; //背景渲染颜色
-    
-    //Hero
-    var mGravity = 9.8;            //重力
-    var mJumpHeight = 5;           //跳跃高度
-    
-    //Obstacle
-    var mFrequency = 1.0;          //障碍物刷新频率，1s 刷新 1个
+    var mPublic = {
+        //BackGround
+        mSpeed:0.1,
+        mBgColor:[1, 1, 1, 0.0],
+        
+        //Hero
+        mGravity:9.8,
+        mJumpHeight:5,
+        
+        //Obstacle
+        mFrequency:1.0
+    };
+    return mPublic;
 }());

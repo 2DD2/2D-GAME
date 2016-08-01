@@ -75,11 +75,11 @@ RunningScene.prototype.update = function(){
     var x = this.mBgSprite.getXform().getXPos();
     var y = this.mBgSprite.getXform().getYPos();
     
-    this.mBgSprite.getXform().setPosition(x + DefaultOptions.mSpeed, y);
+    this.mBgSprite.getXform().setPosition(x - gManager.DefaultOptions.mSpeed, y);
     
     //按 空格 键切换到GameOverScene
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
-        unloadScene();
+        gEngine.GameLoop.stop();
     }
 };
 
