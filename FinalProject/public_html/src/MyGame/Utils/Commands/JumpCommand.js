@@ -3,9 +3,9 @@ function JumpCommand(hero) {
     this.mHero = hero;
 }
 
-gEngine.Core.inheritPrototype(Jump, Command);
+gEngine.Core.inheritPrototype(JumpCommand, Command);
 
-Jump.prototype.excute = function(){
+JumpCommand.prototype.excute = function(){
     console.log("hero is Jump");
     this.mHero.jump();
 }
