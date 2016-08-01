@@ -16,8 +16,6 @@ function RunningScene(){
     this.mHeroSprite = null;
     this.mObsSprite = null;
     this.mPlatFormSprite = null;
-    
-    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(RunningScene, MyScene);
@@ -25,25 +23,25 @@ gEngine.Core.inheritPrototype(RunningScene, MyScene);
 RunningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mBgSprite = new SpriteRenderable(this.kBg);
-    this.mBgSprite.setColor([1, 1, 1, 0]);
+    this.mBgSprite = new GameObject(new SpriteRenderable(this.kBg));
     this.mBgSprite.getXform().setPosition(0, 0);
-    this.mBgSprite.getXform().setSize(1024, 768);
-    
-    this.mHeroSprite = new SpriteRenderable(this.kHeroSprite);
-    this.mHeroSprite.setColor([1, 1, 1, 0]);
+    this.mBgSprite.getXform().setSize(40, 20);
+    gManager.ObjectPool.addObject(this.mBgSprite,1);
+
+    this.mHeroSprite = new GameObject(new SpriteRenderable(this.kHeroSprite));
     this.mHeroSprite.getXform().setPosition(0, 0);
-    this.mHeroSprite.getXform().setSize(400, 100);
-    
-    this.mObsSprite = new SpriteRenderable(this.kObsSprite);
-    this.mObsSprite.setColor([1, 1, 1, 0]);
+    this.mHeroSprite.getXform().setSize(10, 40);
+    gManager.ObjectPool.addObject(this.mHeroSprite,1);
+
+    this.mObsSprite = new GameObject(new SpriteRenderable(this.kObsSprite));
     this.mObsSprite.getXform().setPosition(0, 0);
-    this.mObsSprite.getXform().setSize(200, 100);
-    
-    this.mPlatFormSprite = new SpriteRenderable(this.kPlatFormSprite);
-    this.mPlatFormSprite.setColor([1, 1, 1, 0]);
+    this.mObsSprite.getXform().setSize(10, 10);
+    gManager.ObjectPool.addObject(this.mObsSprite,1);
+
+    this.mPlatFormSprite = new GameObject(new SpriteRenderable(this.kPlatFormSprite));
     this.mPlatFormSprite.getXform().setPosition(0, 0);
-    this.mPlatFormSprite.getXform().setSize(200, 100);
+    this.mPlatFormSprite.getXform().setSize(40, 10);
+    gManager.ObjectPool.addObject(this.mPlatFormSprite,1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              20,

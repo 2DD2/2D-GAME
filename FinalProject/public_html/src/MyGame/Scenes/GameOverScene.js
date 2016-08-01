@@ -13,8 +13,6 @@ function GameOverScene(){
     this.mRankSprite = null;
     this.mRestartSprite = null;
     this.mMenuSprite = null;
-    
-    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(GameOverScene, MyScene);
@@ -22,20 +20,20 @@ gEngine.Core.inheritPrototype(GameOverScene, MyScene);
 GameOverScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mRankSprite = new SpriteRenderable(this.kRank);
-    this.mRankSprite.setColor([1, 1, 1, 0]);
-    this.mRankSprite.getXform().setPosition(0, 0);
-    this.mRankSprite.getXform().setSize(400, 100);
+    this.mRankSprite = new GameObject(new SpriteRenderable(this.kRank));
+    this.mRankSprite.getXform().setPosition(0, 10);
+    this.mRankSprite.getXform().setSize(40, 40);
+    gManager.ObjectPool.addObject(this.mRankSprite,1);
     
-    this.mMenuSprite = new SpriteRenderable(this.kMenu);
-    this.mMenuSprite.setColor([1, 1, 1, 0]);
-    this.mMenuSprite.getXform().setPosition(0, 0);
-    this.mMenuSprite.getXform().setSize(200, 100);
+    this.mMenuSprite = new GameObject(new SpriteRenderable(this.kMenu));
+    this.mMenuSprite.getXform().setPosition(-10, -10);
+    this.mMenuSprite.getXform().setSize(20, 10);
+    gManager.ObjectPool.addObject(this.mMenuSprite,1);
     
-    this.mRestartSprite = new SpriteRenderable(this.kRestart);
-    this.mRestartSprite.setColor([1, 1, 1, 0]);
-    this.mRestartSprite.getXform().setPosition(0, 0);
-    this.mRestartSprite.getXform().setSize(200, 100);
+    this.mRestartSprite = new GameObject(new SpriteRenderable(this.kRestart));
+    this.mRestartSprite.getXform().setPosition(10, -10);
+    this.mRestartSprite.getXform().setSize(20, 10);
+    gManager.ObjectPool.addObject(this.mRestartSprite,1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              20,
@@ -47,13 +45,16 @@ GameOverScene.prototype.initialize = function(){
 
 GameOverScene.prototype.loadScene = function () {
     // 加载场景
-    gEngine.Textures.loadTexture(this.kTitleSprite);
-    console.log(gEngine);
+    gEngine.Textures.loadTexture(this.kRank);
+    gEngine.Textures.loadTexture(this.kMenu);
+    gEngine.Textures.loadTexture(this.kRestart);
 };
 
 GameOverScene.prototype.unloadScene = function () {
     // 卸载场景
-    gEngine.Textures.unloadTexture(this.kTitleSprite);
+    gEngine.Textures.unloadTexture(this.kRank);
+    gEngine.Textures.unloadTexture(this.kMenu);
+    gEngine.Textures.unloadTexture(this.kRestart);
     
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
