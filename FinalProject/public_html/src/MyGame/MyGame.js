@@ -16,6 +16,7 @@ function MyGame() {
     this.kBoundBox_Path = "assets/Bound.png";
     // this is the path of the sprite
     this.kSpritesSheet_Path = "assets/minion_sprite.png";
+    this.kSpritesSheet2_Path = "assets/Consolas-72.png";
     // the setting of camera
     this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
 }
@@ -24,12 +25,14 @@ gEngine.Core.inheritPrototype(MyGame, MyScene);
 
 MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kSpritesSheet_Path);
+    gEngine.Textures.loadTexture(this.kSpritesSheet2_Path);
     gEngine.Textures.loadTexture(this.kBoundBox_Path);
     gEngine.TextFileLoader.loadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kSpritesSheet_Path);
+    gEngine.Textures.unloadTexture(this.kSpritesSheet2_Path);
     gEngine.Textures.unloadTexture(this.kBoundBox_Path);
     gEngine.TextFileLoader.unloadTextFile(this.kSceneData_Path, gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
@@ -55,6 +58,15 @@ MyGame.prototype.initialize = function () {
     // 3:the animation
     var renderSprite = new AnimationBox(this.kSpritesSheet_Path,box);
     gManager.ObjectPool.addObject(renderSprite);
+    
+    var renderSprite2 = new AnimationBox(this.kSpritesSheet2_Path,box);
+    
+    var renderSprite1 = new GameObject(new SpriteRenderable(this.kSpritesSheet2_Path));
+    renderSprite1.getXform().setPosition(-15,-5);
+    renderSprite1.getXform().setSize(10,10);
+    renderSprite1.getRenderable().setElementPixelPositions(0,256,0,265);
+
+    //gManager.ObjectPool.addObject(renderSprite);
 
     // 4:For echoing status
     this.mMsg = new FontRenderable("Status Message");
@@ -69,8 +81,8 @@ MyGame.prototype.initialize = function () {
 
     // 6: Press Q and some box will show
     //resetState to false
-    var frame = new FrameBox(this.kBoundBox_Path)
-    gManager.ObjectPool.addObject(frame.mFrameBox); 
+//    var frame = new FrameBox(this.kBoundBox_Path)
+//    gManager.ObjectPool.addObject(frame.mFrameBox); 
    
     /*
      * 移动框事件
@@ -102,9 +114,21 @@ MyGame.prototype.initialize = function () {
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Down, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right, AnimateCommand);
      gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left, AnimateCommand);
+     
+     var AnimateCommand2 = new MoveAnimation();
+     AnimateCommand2.initEvent(box,renderSprite2,this.mMsg);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.A, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.D, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.W, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.S, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Up, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Down, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Right, AnimateCommand2);
+     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Left, AnimateCommand2);
+     
     
-    var FrameShow = new Show(frame);
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Q, FrameShow);
+    var FrameShow = new Show(renderSprite1,sprite,renderSprite2,renderSprite);
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Q, FrameShow);
   
   
   

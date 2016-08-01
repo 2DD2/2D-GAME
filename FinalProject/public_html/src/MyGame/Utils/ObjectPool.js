@@ -37,13 +37,13 @@ gManager.ObjectPool = (function () {
      var removeObject = function(ob){
           var index = mObjectArray.indexOf(ob);
                if (index > -1){
-                    this.mObjectArray.splice(index, 1);
-                    this.mObjectState.splice(index,1);
+                    mObjectArray.splice(index, 1);
+                    mObjectState.splice(index,1);
                }
      };
      var removeObjectAt = function(index){
-          this.mObjectArray.splice(index, 1);
-          this.mObjectState.splice(index,1);
+          mObjectArray.splice(index, 1);
+          mObjectState.splice(index,1);
      };
 
      // get the obj through id
