@@ -21,7 +21,7 @@ WelcomeScene.prototype.initialize = function(){
     this.mWelSprite = new SpriteRenderable(this.kWelScene);
     this.mWelSprite.setColor([1, 1, 1, 0.0]);
     this.mWelSprite.getXform().setPosition(0, 0);
-    this.mWelSprite.getXform().setSize(1024, 768);
+    this.mWelSprite.getXform().setSize(1024, 512);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              1024,
