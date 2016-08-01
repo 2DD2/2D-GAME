@@ -14,7 +14,6 @@ gManager.ObjectPool = (function () {
      var mObjectArray = [];
      for (var i =0; i<10 ; i++){
         mObjectArray[i] = new GameObjectSet() ;
-        console.log("ini");
      }
                            
      // define the initial size

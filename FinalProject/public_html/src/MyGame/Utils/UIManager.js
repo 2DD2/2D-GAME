@@ -69,10 +69,7 @@ gManager.UIManager = (function(){
     var setUIRoot = function(name){
         mCurrentUIRootName = name;
         
-        var haha = new GameObject(new FontRenderable("yes"));
-        haha.getXform().setSize(4,4);
-        haha.getXform().setPosition(-2,0);
-        mElementMapping[1] = haha;
+        // 读取UI
         
     };
     

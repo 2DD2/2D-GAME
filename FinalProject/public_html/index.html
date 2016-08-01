@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>EX04 FORM GROUP2</title>
+        <title>Final FORM T-Rex</title>
         <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
 
         <!-- the following says there are javascript source code contained in 
@@ -105,6 +105,7 @@
         <script type="text/javascript" src="src/MyGame/Utils/Commands/EventList.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/InputManager.js"></script>
         
+
         <!-- 场景 -->
         <script type="text/javascript" src="src/MyGame/Scenes/MyScene.js"></script>
         <script type="text/javascript" src="src/MyGame/Scenes/WelcomeScene.js"></script>
@@ -112,8 +113,13 @@
         <script type="text/javascript" src="src/MyGame/Scenes/RunningScene.js"></script>
         <script type="text/javascript" src="src/MyGame/Scenes/GameOverScene.js"></script>
        
-        <script type="text/javascript" src="src/MyGame/Controller/BGController.js"></script>
-        <script type="text/javascript" src="src/MyGame/Scenes/TestScene.js"></script>
+
+        
+        <script type="text/javascript" src="src/MyGame/Controllers/BGController.js"></script>
+        
+        <script type="text/javascript" src="src/MyGame/Scenes/MyScene.js"></script>
+        <script type="text/javascript" src="src/MyGame/Test/TestScene.js"></script>
+
     </head>
 
     <body onload="
@@ -126,14 +132,10 @@
             Your browser does not support the HTML5 canvas.
             <!-- this message will show only if WebGL clearing failed -->
         </canvas>
+
         </div>
         <!-- 操作提示 -->
-        <div><h3>HINT:</h3>
-            <ul>
-                <li> W A S D : Move the small box
-                <li> Up  Down: Scale the Hight
-                <li> Left Right:Scale the Width
-            </ul>
-        </div>
+     
+
     </body>
 </html>
