@@ -14,7 +14,7 @@ function GameOverScene(){
     this.mRestartSprite = null;
     this.mMenuSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(GameOverScene, MyScene);

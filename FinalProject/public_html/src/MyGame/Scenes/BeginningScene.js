@@ -14,7 +14,7 @@ function BeginningScene(){
     this.mStartSprite = null;
     this.mAboutUsSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);

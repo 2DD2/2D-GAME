@@ -10,7 +10,7 @@ function WelcomeScene(){
     
     this.mWelSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(WelcomeScene, MyScene);

@@ -17,7 +17,7 @@ function RunningScene(){
     this.mObsSprite = null;
     this.mPlatFormSprite = null;
     
-    initialize();
+    this.initialize();
 }
 
 gEngine.Core.inheritPrototype(RunningScene, MyScene);
