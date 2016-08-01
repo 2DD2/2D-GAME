@@ -11,10 +11,24 @@ function MyScene(){
 
 gEngine.Core.inheritPrototype(MyScene,Scene);
 
+<<<<<<< HEAD
 MyScene.prototype.initialize = function(){
     gManager.CameraManager.initManager();
     gManager.InputManager.initManager();
+=======
+MyScene.prototype.loadScene = function(){
+    
+};
 
+MyScene.prototype.unloadScene = function(){
+    
+};
+>>>>>>> 4d02e6d71618f106002c3bf5502675dc66071a87
+
+MyScene.prototype.initialize = function(){
+    gManager.CameraManager.initManager();
+    gManager.InputManager.initManager();
+    gManager.UIManager.initManager();
 };
 
 MyScene.prototype.draw = function(){
@@ -28,6 +42,10 @@ MyScene.prototype.draw = function(){
         }
         // 这一帧渲染结束
         else {
+            // 在结束时画UI
+            gManager.UIManager.draw();
+            
+            // 重置渲染序列
             gManager.CameraManager.moveIndexToHead();
             return;
         }
@@ -44,4 +62,7 @@ MyScene.prototype.update = function(){
 
     // 更新相机
     gManager.CameraManager.update();
+    
+    // 更新UI
+    gManager.UIManager.update();
 };

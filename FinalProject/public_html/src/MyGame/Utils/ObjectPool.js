@@ -1,6 +1,6 @@
 /* global addProject */
-
 //  Global variable ObjectPool
+//  By lijilan
 //  the following syntax enforces there can only be one instance of ObjectPool
 "use strict"; 
 // Operate in Strict mode such that variables must be declared before used!
@@ -8,90 +8,72 @@
 var gManager = gManager || {};
 
 gManager.ObjectPool = (function () {
+    
+     // define pool  mObjectArray[layer][index]
      // Initialize the object set
      var mObjectArray = [];
-     var mObjectState = []; //To define each object if it can be draw
+     for (var i =0; i<10 ; i++){
+        mObjectArray[i] = new GameObjectSet() ;
+        console.log("ini");
+     }
                            
      // define the initial size
-     var MAX_POOLSIZE = 10; 
+     var MAX_SIZE = 60; 
+     // the current number of obj
+     var mSize = 0;
 
      // set the max size if needed
      var setMaxSize =function(size){
-          MAX_POOLSIZE = size;
+          MAX_SIZE = size;
      };
 
      // get the size of current object Array
      var getSize = function() {
-          return mObjectArray.length;
+          return mSize;
      };
      
      // add obj and set the initial state
-     var addObject = function(ob) {
+     var addObject = function(obj,layer) {
           // add new project into this pool
-          // and the project is not in use
-          mObjectArray.push(ob);
-          mObjectState.push(true);
+          // and layer number of this obj
+         if(mSize < MAX_SIZE){ 
+           mObjectArray[layer].addToSet(obj);
+           mSize ++ ;
+        }else{
+            console.log("The objectPool can only have "+MAX_SIZE+" obj and overflowed!!!");
+        }
+         console.log("add");
      };
 
-     //remove it
-     var removeObject = function(ob){
-          var index = mObjectArray.indexOf(ob);
-               if (index > -1){
-                    mObjectArray.splice(index, 1);
-                    mObjectState.splice(index,1);
-               }
+     //remove the obj
+     var removeObject = function(ob,layer){
+         mObjectArray[layer].removeObject(ob);  
      };
-     var removeObjectAt = function(index){
-          mObjectArray.splice(index, 1);
-          mObjectState.splice(index,1);
-     };
-
-     // get the obj through id
-     var getObjectAt = function (index) {
-          return mObjectArray[index];
-     };
-
-     // use the obj
-     var activeState = function(id){
-          mObjectState[id] = true; // it is in use
-     };
-
-     // reset it
-     var resetState = function(id){
-          mObjectState[id] = false; // it can't be draw
-     };
-
-     var resetAll =function(){
-        for(var i = 0;i < this.mObjectArray.length; i++){
-            resetState(i);
-          }
-     };
-
+     
+     // fist layer 0 to last layer 10 
      var renderAll = function(camera){
-        for(var i = 0 ; i < mObjectArray.length; i++){
-            if(mObjectState){
-                mObjectArray[i].draw(camera);
+        for(var j = 0 ; j <10 ; j++){
+            if(mObjectArray[j].size){
+                mObjectArray[j].draw(camera);
             }
         }
      };   
     var updateAll = function(){
-        for(var i =0;i < mObjectArray.length ; i++){
-            if(mObjectState[i]){
-                mObjectArray[i].update();
+        for(var j = 0 ; j <10 ; j++){
+            if(mObjectArray[j].size){
+                mObjectArray[j].update();
             }
         }
     };
 
     var mPubulic={
           setMaxSize:setMaxSize,   //set the largest size of this pool
-          resetState:resetState,   //reset some state of the obj
-          activeState:activeState, //active some state of the obj
-          getSize:getSize,        //get the current size
-          addObject : addObject,   //add
-          getObjectAt:getObjectAt, //get one obj by id
-          removeObjectAt:removeObjectAt,
-          removeObject: removeObject,//remove
-          resetAll:resetAll,       //reset all obj to state true
+        
+          getSize:getSize,        //get the current size of this pool
+          addObject : addObject,   //add obj with (obj,layer)
+         
+          removeObject: removeObject,//remove (obj,layer)
+        
           renderAll:renderAll,     //render all obj
           updateAll: updateAll
      };    

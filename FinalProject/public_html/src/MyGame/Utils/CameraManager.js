@@ -81,7 +81,7 @@ gManager.CameraManager = (function(){
 
         // 找到了启动这个相机
         var camera = mCameraRenderArray[mCurrentCameraIndex];
-        camera.setupViewProjection();
+        camera.setupViewProjection(true);
 
         // 移动到下个位置
         mCurrentCameraIndex++;
@@ -89,6 +89,7 @@ gManager.CameraManager = (function(){
         // 返回相机
         return camera;
     };
+    
     var update = function(){
         for(var i = 0; i < kMaxCameraNumber;i++){
             if(mCameraRenderArray[i])
@@ -105,7 +106,7 @@ gManager.CameraManager = (function(){
 
     var getMaxCameraNumber = function(){
         return kMaxCameraNumber;
-    }
+    };
     var getCurrentCameraIndex = function(){
         return mCurrentCameraIndex;
     };
@@ -120,7 +121,7 @@ gManager.CameraManager = (function(){
         // 没有则返回null
         if(mCameraRenderArray[indexNumber]) return mCameraRenderArray[indexNumber];
         else return null;
-    }
+    };
 
     var mPublic = {
         initManager : initManager,
