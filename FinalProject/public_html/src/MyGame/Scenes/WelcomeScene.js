@@ -1,0 +1,43 @@
+/* 
+ * Created by 周玮皓 on 2016/8/1.
+ * WelcomeScene用来加载开场动画
+ */
+
+/* global gEngine, Scene, MyScene */
+
+function WelcomeScene(){
+    this.kWelScene = "";
+    
+    this.mWelSprite = null;
+    
+    initialize();
+}
+
+gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
+
+WelcomeScene.prototype.initialize = function(){
+    MyScene.prototype.initialize.call(this);
+    
+    this.mWelSprite = new SpriteRenderable(this.kWelScene);
+    this.mWelSprite.setColor([1, 1, 1, 0]);
+    this.mWelSprite.getXform().setPosition(512, 384);
+    this.mWelSprite.getXform().setSize(1024, 768);
+};
+
+WelcomeScene.prototype.loadScene = function () {
+    // 加载场景
+    gEngine.Textures.loadTexture(this.kWelScene);
+};
+
+WelcomeScene.prototype.unloadScene = function () {
+    // 卸载场景
+    gEngine.Textures.unloadTexture(this.kWelScene);
+};
+
+WelcomeScene.prototype.update = function(){
+    MyScene.prototype.update.call(this);
+};
+
+WelcomeScene.prototype.draw = function(){
+    MyScene.prototype.draw.call(this);
+};
