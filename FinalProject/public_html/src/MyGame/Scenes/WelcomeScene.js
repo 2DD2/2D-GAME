@@ -20,7 +20,7 @@ WelcomeScene.prototype.initialize = function(){
     this.mWelSprite.getXform().setPosition(0, 0);
     this.mWelSprite.getXform().setSize(40, 20);
     gManager.ObjectPool.addObject(this.mWelSprite,1);
-    
+
     var camera = new Camera(vec2.fromValues(0,0),
                              40,
                              [20,20,400,400]);

@@ -48,6 +48,7 @@ GameOverScene.prototype.initialize = function(){
 GameOverScene.prototype.loadScene = function () {
     // 加载场景
     gEngine.Textures.loadTexture(this.kTitleSprite);
+    console.log(gEngine);
 };
 
 GameOverScene.prototype.unloadScene = function () {
