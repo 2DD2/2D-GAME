@@ -7,12 +7,7 @@
         <!-- the following says there are javascript source code contained in 
              the external source files
         -->
-        <style>
-            .GLCanvas{
-                text-align: center;
-                margin-left: 200px;
-            }
-        </style>
+
         <!-- external library -->
         <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
 
@@ -124,12 +119,14 @@
     <body onload="
         var mMain = new TestScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
-     ">
-        <canvas class="GLCanvas" id="GLCanvas" width="1400" height="800">
+     "> 
+        <div style="width:1400px;margin:0 auto;">
+        <canvas class="GLCanvas" id="GLCanvas" width="1400" height="800" style="line-height: 800px">
             <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
             Your browser does not support the HTML5 canvas.
             <!-- this message will show only if WebGL clearing failed -->
         </canvas>
+        </div>
         <!-- 操作提示 -->
         <div><h3>HINT:</h3>
             <ul>

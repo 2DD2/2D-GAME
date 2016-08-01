@@ -13,13 +13,14 @@ gManager.ObjectPool = (function () {
      // Initialize the object set
      var mObjectArray = [];
      for (var i =0; i<10 ; i++){
-        mObjectArray[i] = [] ;
+        mObjectArray[i] = new GameObjectSet() ;
+        console.log("ini");
      }
                            
      // define the initial size
      var MAX_SIZE = 60; 
      // the current number of obj
-     var CURRENT_SIZE = 0;
+     var mSize = 0;
 
      // set the max size if needed
      var setMaxSize =function(size){
@@ -28,45 +29,39 @@ gManager.ObjectPool = (function () {
 
      // get the size of current object Array
      var getSize = function() {
-          return CURRENT_SIZE;
+          return mSize;
      };
      
      // add obj and set the initial state
      var addObject = function(obj,layer) {
           // add new project into this pool
           // and layer number of this obj
-         if(CURRENT_SIZE < MAX_SIZE){ 
-           mObjectArray[layer].push(obj);
-           CURRENT_SIZE ++ ;
+         if(mSize < MAX_SIZE){ 
+           mObjectArray[layer].addToSet(obj);
+           mSize ++ ;
         }else{
             console.log("The objectPool can only have "+MAX_SIZE+" obj and overflowed!!!");
         }
+         console.log("add");
      };
 
      //remove the obj
      var removeObject = function(ob,layer){
-          var index = mObjectArray[layer].indexOf(ob);
-          if (index > -1){
-              mObjectArray[layer].splice(index, 1);
-          }
-     };
-     // remove the obj and if you know the index
-     var removeObjectAt = function(index,layer){
-          mObjectArray[layer].splice(index, 1);
+         mObjectArray[layer].removeObject(ob);  
      };
      
      // fist layer 0 to last layer 10 
      var renderAll = function(camera){
-        for(var j = 0 ; j <10 ; i++){
-            for(var i = 0 ; i < mObjectArray[j].length; i++){
-                mObjectArray[j][i].draw(camera);     
+        for(var j = 0 ; j <10 ; j++){
+            if(mObjectArray[j].size){
+                mObjectArray[j].draw(camera);
             }
         }
      };   
     var updateAll = function(){
-        for(var j = 0 ; j <10 ; i++){
-            for(var i = 0 ; i < mObjectArray[j].length; i++){
-              mObjectArray[j][i].update();
+        for(var j = 0 ; j <10 ; j++){
+            if(mObjectArray[j].size){
+                mObjectArray[j].update();
             }
         }
     };
@@ -77,7 +72,6 @@ gManager.ObjectPool = (function () {
           getSize:getSize,        //get the current size of this pool
           addObject : addObject,   //add obj with (obj,layer)
          
-          removeObjectAt:removeObjectAt,//(index,layer)
           removeObject: removeObject,//remove (obj,layer)
         
           renderAll:renderAll,     //render all obj
