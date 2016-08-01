@@ -121,7 +121,7 @@ Camera.prototype.getVPMatrix = function () {
 // </editor-fold>
 
 // Initializes the camera to begin drawing
-Camera.prototype.setupViewProjection = function () {
+Camera.prototype.setupViewProjection = function (clearFlag) {
     var gl = gEngine.Core.getGL();
     //<editor-fold desc="Step A: Set up and clear the Viewport">
     // Step A1: Set up the viewport: area on canvas to be drawn
@@ -135,12 +135,15 @@ Camera.prototype.setupViewProjection = function () {
                this.mScissorBound[2], // width of the area to be drawn
                this.mScissorBound[3]);// height of the area to be drawn
     // Step A3: set the color to be clear
-    gl.clearColor(this.mBgColor[0], this.mBgColor[1], this.mBgColor[2], this.mBgColor[3]);  // set the color to be cleared
-    // Step A4: enable the scissor area, clear, and then disable the scissor area
-    gl.enable(gl.SCISSOR_TEST);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.disable(gl.SCISSOR_TEST);
-    //</editor-fold>
+    if(clearFlag){
+        gl.clearColor(this.mBgColor[0], this.mBgColor[1], this.mBgColor[2], this.mBgColor[3]);  // set the color to be cleared
+        // Step A4: enable the scissor area, clear, and then disable the scissor area
+        gl.enable(gl.SCISSOR_TEST);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.disable(gl.SCISSOR_TEST);
+        //</editor-fold>
+    }
+        
 
     //<editor-fold desc="Step  B: Set up the View-Projection transform operator"> 
     // Step B1: define the view matrix

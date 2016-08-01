@@ -95,6 +95,8 @@
         <script type="text/javascript" src="src/MyGame/Beans/Cameras/CameraChase.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/SceneDataLoader.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/CameraManager.js"></script>  
+        <script type="text/javascript" src="src/MyGame/Utils/ObjectPool.js"></script>
+        <script type="text/javascript" src="src/MyGame/Utils/UIManager.js"></script>
         
         <!-- 命令 -->
         <script type="text/javascript" src="src/MyGame/Utils/Commands/Command.js"></script>
@@ -103,13 +105,15 @@
         <script type="text/javascript" src="src/MyGame/Utils/InputManager.js"></script>
         
         
-        <script type="text/javascript" src="src/MyGame/Utils/ObjectPool.js"></script>
-        <script type="text/javascript" src="src/MyGame/MyScene.js"></script>
+
+        
+        <script type="text/javascript" src="src/MyGame/Scenes/MyScene.js"></script>
+        <script type="text/javascript" src="src/MyGame/Scenes/TestScene.js"></script>
     </head>
 
     <body onload="
-//        var mMain = new MyGame();
-//        gEngine.Core.initializeEngineCore('GLCanvas', mMain);
+        var mMain = new TestScene();
+        gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      ">
         <canvas id="GLCanvas" width="1400" height="800">
             <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
