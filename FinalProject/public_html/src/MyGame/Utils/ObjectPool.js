@@ -54,13 +54,12 @@ gManager.ObjectPool = (function () {
      var removeObjectAt = function(index,layer){
           mObjectArray[layer].splice(index, 1);
      };
-
+     
+     // fist layer 0 to last layer 10 
      var renderAll = function(camera){
         for(var j = 0 ; j <10 ; i++){
             for(var i = 0 ; i < mObjectArray[j].length; i++){
-                if(mObjectState){
-                    mObjectArray[j][i].draw(camera);
-                }
+                mObjectArray[j][i].draw(camera);     
             }
         }
      };   
