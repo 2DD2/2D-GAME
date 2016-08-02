@@ -9,7 +9,7 @@
 
 function Score(renderableObj) {
     this.mFontRender = renderableObj;
-    this._initText(this.mFontRender, 120, -30, [1, 1, 1, 1], 30);
+    this._initText(this.mFontRender, 77, -27, [1, 1, 1, 1], 50);
     
 
     GameObject.call(this,this.mFontRender);
