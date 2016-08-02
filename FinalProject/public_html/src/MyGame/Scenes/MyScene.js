@@ -20,6 +20,7 @@ MyScene.prototype.unloadScene = function(){
 };
 
 MyScene.prototype.initialize = function(){
+    gManager.ObjectPool.initPool();
     gManager.CameraManager.initManager();
     gManager.InputManager.initManager();
 };

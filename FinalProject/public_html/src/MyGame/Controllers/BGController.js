@@ -24,7 +24,6 @@ function BGController(sceneLoader){
             this.mBackgrounds.push(bg);
         }
     }
-
 }
 
 
@@ -34,7 +33,7 @@ BGController.prototype.update = function(){
         for(var k = 0; k < 2; k++){
             if(this.mBackgrounds[i + k].getXform().getXPos() < -this.mBackgrounds[i + k].getXform().getWidth()) this.mBackgrounds[i+k].getXform().setXPos(this.mBackgrounds[i + k].getXform().getWidth() - 0.5);
             
-            this.mBackgrounds[i + k].getXform().setXPos(this.mBackgrounds[i+k].getXform().getXPos() - 0.05 * (i + 1));
+            this.mBackgrounds[i + k].getXform().setXPos(this.mBackgrounds[i+k].getXform().getXPos() - 0.02 * (i + 1));
         }
     }
 

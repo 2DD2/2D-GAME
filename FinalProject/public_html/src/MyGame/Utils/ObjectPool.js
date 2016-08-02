@@ -77,7 +77,16 @@ gManager.ObjectPool = (function () {
         }
         return null;
     };
-     
+    
+    var getObjectsByLayer = function(layer){
+        return mObjectArray[layer];
+    };
+    
+    var initPool = function(){
+        mReusePools = [];
+        mObjectArray = [];
+    }
+    
     // fist layer 0 to last layer 10 
     var renderAll = function(camera){
        for(var j = 0 ; j <10 ; j++){
@@ -104,6 +113,7 @@ gManager.ObjectPool = (function () {
           addtoReusePool : addtoReusePool,
           addtoReusePoolandRemove : addtoReusePoolandRemove,
           getReuseObject : getReuseObject,
+          initPool : initPool,
           
           renderAll:renderAll,     //render all obj
           updateAll: updateAll

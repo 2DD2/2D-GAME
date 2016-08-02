@@ -10,7 +10,7 @@ function TestScene(){
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";
     this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
-    
+    this.kParticleTexture = "assets/particle.png";
     this.kUIBanner_Path = "assets/UIBanner.png";
 }
 
@@ -20,6 +20,7 @@ TestScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kBgPath);
     gEngine.Textures.loadTexture(this.kFgPath);
     gEngine.Textures.loadTexture(this.kUIBanner_Path);
+    gEngine.Textures.loadTexture(this.kParticleTexture);
     gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
@@ -27,6 +28,7 @@ TestScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kBgPath);
     gEngine.Textures.unloadTexture(this.kFgPath);
     gEngine.TextFileLoader.unloadTextFile(this.kSceneDataFile);
+    gEngine.Textures.unloadTexture(this.kParticleTexture);
 };
 
 TestScene.prototype.initialize = function(){
@@ -34,10 +36,12 @@ TestScene.prototype.initialize = function(){
     
     var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
     
-    gManager.UIManager.initManager(sceneLoader);
+    //gManager.UIManager.initManager(sceneLoader);
     
     var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,0);
+    controller = new FGController(sceneLoader);
+    gManager.ObjectPool.addObject(controller,3);
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
