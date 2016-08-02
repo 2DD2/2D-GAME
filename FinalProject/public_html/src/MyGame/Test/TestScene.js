@@ -8,31 +8,38 @@
 
 function TestScene(){
     this.kBgPath = "assets/BG_1.jpg";
-    this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
+    this.kFgPath = "assets/FG_1.png";
+    this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
+    
+    this.kUIBanner_Path = "assets/UIBanner.png";
 }
 
 gEngine.Core.inheritPrototype(TestScene,MyScene);
 
 TestScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kBgPath);
-    gEngine.TextFileLoader.loadTextFile(this.kSceneData_Path,gEngine.TextFileLoader.eTextFileType.eXMLFile);
+    gEngine.Textures.loadTexture(this.kFgPath);
+    gEngine.Textures.loadTexture(this.kUIBanner_Path);
+    gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 TestScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kBgPath);
-    gEngine.TextFileLoader.unloadTextFile(this.kSceneData_Path);
+    gEngine.Textures.unloadTexture(this.kFgPath);
+    gEngine.TextFileLoader.unloadTextFile(this.kSceneDataFile);
 };
 
 TestScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    var sceneLoader = new SceneDataLoader(this.kSceneData_Path);
-    // 加载背景
+    var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
+    
+    gManager.UIManager.initManager(sceneLoader);
+    
     var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,0);
     
-    // 加载相机
-    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),0);
+    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
 
 TestScene.prototype.draw = function(){

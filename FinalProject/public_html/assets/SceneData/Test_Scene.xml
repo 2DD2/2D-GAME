@@ -13,10 +13,31 @@
           SizeX="" SizeY=""
           Rp = ""/>
     
-    <BG_Num Number="1"/>
+    <BG_Num Number="2"/>
     <BG_1 SizeX="80" SizeY="20"
           Layer = "1"
           Rp = "assets/BG_1.jpg"/>
+
+    <BG_2 SizeX="40" SizeY="20"
+          Layer = "1"
+          Rp = "assets/FG_1.png"/>
+    
+    <GUI_Num Number="2">
+    <GUI_1 SizeX="40" SizeY="1.5"
+           X="0" Y="9.25"
+           Rp = "assets/UIBanner.png"
+           Type = "square"/>
+    
+    <GUI_2 SizeX="40" SizeY="-1.5"
+           X="0" Y="-9.25"
+           Rp = "assets/UIBanner.png"
+           Type = "square"/>
+        
+
+    <LAND_Num Number="1"/>
+    <LAND_1 SizeX="20" SizeY="20"
+          Layer = "1"
+          Rp = "assets/LAND_01.jpg"/>
 
               
    

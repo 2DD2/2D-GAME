@@ -7,6 +7,11 @@
 
 /* global vec2 */
 
+
+/*
+ * By GCH
+ * 
+ */
 var gManager = gManager || {};
 
 gManager.UIManager = (function(){
@@ -26,11 +31,22 @@ gManager.UIManager = (function(){
      */
     var mRenderringCamera = null;
     
-    var initManager = function(){
+    var initManager = function(sceneLoader){
+        
+        mElementMapping = [];
+        
+        /*
+         * init Camera
+         */
         setRenderringCamera(new Camera(vec2.fromValues(0,0),
-                                40,
-                                [20,20,400,400]));
+                                gManager.DefaultOptions.FULL_SCREEN_WCWIDTH,
+                                [0,0,gManager.DefaultOptions.SCREEN_WIDTH,gManager.DefaultOptions.SCREEN_HEIGHT]));
                                 
+        var loader = sceneLoader;
+        for(var i = 1;i <= loader.GetNumber("GUI_Num");i++){
+            var ui = loader.LoadUI("GUI_"+i);
+            mElementMapping.push(ui);
+        }
     };
     
     var draw = function(){
