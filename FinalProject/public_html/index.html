@@ -124,6 +124,7 @@
         <script type="text/javascript" src="src/MyGame/Controllers/BGController.js"></script>
         <script type="text/javascript" src="src/MyGame/Controllers/FGController.js"></script>
         <script type="text/javascript" src="src/MyGame/Controllers/LandController.js"></script>
+        <script type="text/javascript" src="src/MyGame/Controllers/SimpleEmitter.js"></script>
         
         <script type="text/javascript" src="src/MyGame/Test/TestScene.js"></script>
 
@@ -135,11 +136,12 @@
         <script type="text/javascript" src="src/MyGame/Beans/UIButton.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/Score.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/Particle/Snow.js"></script>
+        <script type="text/javascript" src="src/MyGame/Beans/Particle/RandomColorSq.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/ReusePool.js"></script>
     </head>
     
     <body onload="
-        var mMain = new GameOverScene();
+        var mMain = new WelcomeScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
         <div style="width:1200px;margin:0 auto;">
