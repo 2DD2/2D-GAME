@@ -49,7 +49,7 @@ gManager.ObjectPool = (function () {
 
     //remove the obj
     var removeObject = function(ob,layer){
-        mObjectArray[layer].removeObject(ob);  
+        mObjectArray[layer].removeFromSet(ob);  
     };
 
     var addtoReusePoolandRemove = function(ob,type,layer){
@@ -57,7 +57,6 @@ gManager.ObjectPool = (function () {
         removeObject(ob,layer);
     };
     var addtoReusePool = function(ob,type){
-
         for(var i = 0; i < mReusePools.length;i++){
             if(mReusePools[i].getName() === type){
                 mReusePools[i].add(ob);
@@ -67,11 +66,11 @@ gManager.ObjectPool = (function () {
 
         var newPool = new ReusePool(type);
         newPool.add(ob);
-        mReusePools.push(ob);
+        mReusePools.push(newPool);
     };
     var getReuseObject = function(type){
         for(var i = 0; i < mReusePools.length;i++){
-            if(mReusePools[i].getName() === type){
+            if(mReusePools[i] && mReusePools[i].getName() === type){
                 return mReusePools[i].getObject();
             }
         }
@@ -85,10 +84,11 @@ gManager.ObjectPool = (function () {
     var initPool = function(){
         mReusePools = [];
         mObjectArray = [];
+
         for (var i =0; i<10 ; i++)
             mObjectArray[i] = new GameObjectSet() ;
     };
-    
+
     
     // fist layer 0 to last layer 10 
     var renderAll = function(camera){

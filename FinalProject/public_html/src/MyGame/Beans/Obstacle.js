@@ -8,32 +8,30 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Obstacle(spriteTexture) {
+function Obstacle(spriteTexture,flag) {
     this.mRender = new SpriteRenderable(spriteTexture);
-    this.mSize = [10,10];
-    //this.Speed = Math.random(0,1)*0.2+0.2;
-    this.Speed = 0.1;
-    this.XPos = Math.random(5,15)+10;
-    this.YPos = function(){
-        var flag= Math.random(0,1);
-        if(flag -0.5 > 0){
-            return gManager.DefaultOptions.up;
+    //this.mSize = [10,10];
+    this.XPos = Math.random(5,15)+20;
+        
+    if(flag > 0){
+           this.YPos =3.2;
         }else{
-            return gManager.DefaultOptions.down;
-        }
-    };
-    
+          this.YPos = -3.2;
+    }
+
     GameObject.call(this,this.mRender);
-    
-    this.mRender.getXform().setPosition(10,-5);
+    this.setSpeed(0.05);
+    this.setCurrentFrontDir(vec2.fromValues(-1, 0));
+    this.getXform().setPosition(this.XPos,this.YPos);
+    this.getXform().setSize(1,1);
 }
 gEngine.Core.inheritPrototype(Obstacle, GameObject);
 
 Obstacle.prototype.update = function () {
-    //随背景向左移动
-    this.getXform().setXPos(this.getXform().getXPos()-this.Speed);
     GameObject.prototype.update.call(this);
-    if(this.getXform().getXPos()<-20){
+    //随背景向左移动
+    GameObject.prototype.update.call(this);
+    if(this.getXform().getXPos()<-25){
         this.getXform().setXPos(Math.random(0,1)*20+20);
     }
 };

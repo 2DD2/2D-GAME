@@ -6,50 +6,67 @@
 
 /* global gEngine, MyScene, gManager, vec2 */
 
-function TestScene(){
+function ObstacleScene(){
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";
     this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
-    this.kParticleTexture = "assets/FGP_1.png";
+    
     this.kUIBanner_Path = "assets/UIBanner.png";
+    
+    this.mWayImg = "assets/platform.png";
+    this.mWay = null;
 }
 
-gEngine.Core.inheritPrototype(TestScene,MyScene);
+gEngine.Core.inheritPrototype(ObstacleScene,MyScene);
 
-TestScene.prototype.loadScene = function(){
+ObstacleScene.prototype.loadScene = function(){
+    gEngine.Textures.loadTexture(this.mWayImg);
+    
     gEngine.Textures.loadTexture(this.kBgPath);
     gEngine.Textures.loadTexture(this.kFgPath);
     gEngine.Textures.loadTexture(this.kUIBanner_Path);
-    gEngine.Textures.loadTexture(this.kParticleTexture);
     gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
-TestScene.prototype.unloadScene = function(){
+ObstacleScene.prototype.unloadScene = function(){
+    gEngine.Textures.unloadTexture(this.mWayImg);
+    
     gEngine.Textures.unloadTexture(this.kBgPath);
     gEngine.Textures.unloadTexture(this.kFgPath);
     gEngine.TextFileLoader.unloadTextFile(this.kSceneDataFile);
-    gEngine.Textures.unloadTexture(this.kParticleTexture);
 };
 
-TestScene.prototype.initialize = function(){
+ObstacleScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
+    
+    
+    this.mWay = new Way(this.mWayImg,-15);
+    this.mWay1 = new Way(this.mWayImg,-5);
+    this.mWay2 = new Way(this.mWayImg,5);
+    this.mWay3 = new Way(this.mWayImg,15);
+    this.mWay4 = new Way(this.mWayImg,25);
+    
     
     var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
     
-    //gManager.UIManager.initManager(sceneLoader);
+    gManager.UIManager.initManager(sceneLoader);
     
     var controller = new BGController(sceneLoader);
-    gManager.ObjectPool.addObject(controller,1);
-    controller = new FGController(sceneLoader);
-    gManager.ObjectPool.addObject(controller,8);
+    gManager.ObjectPool.addObject(controller,0);
+    
+    gManager.ObjectPool.addObject(this.mWay,2);
+    gManager.ObjectPool.addObject(this.mWay1,2);
+    gManager.ObjectPool.addObject(this.mWay2,2);
+    gManager.ObjectPool.addObject(this.mWay3,2);
+    gManager.ObjectPool.addObject(this.mWay4,2);
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
 
-TestScene.prototype.draw = function(){
+ObstacleScene.prototype.draw = function(){
     MyScene.prototype.draw.call(this);
 };
 
-TestScene.prototype.update = function(){
-    MyScene.prototype.update.call(this);
+ObstacleScene.prototype.update = function(){
+    MyScene.prototype.update.call(this);  //updateAll();
 };
