@@ -8,6 +8,7 @@
 
 function DemoScene(){
     this.kBgPath = "assets/BG_1.jpg";
+    this.kSceneData_Path = "assets/SceneData/Test_Scene.xml";
     this.kHero = "assets/hero.png";
     this.kObj = "assets/minion_sprite.png";
 }
@@ -16,6 +17,8 @@ gEngine.Core.inheritPrototype(DemoScene,MyScene);
 
 DemoScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kBgPath);
+    gEngine.TextFileLoader.loadTextFile(this.kSceneData_Path,gEngine.TextFileLoader.eTextFileType.eXMLFile);
+      
     gEngine.Textures.loadTexture(this.kHero);
     gEngine.Textures.loadTexture(this.kObj);
 };
@@ -24,12 +27,15 @@ DemoScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kBgPath);
     gEngine.Textures.unloadTexture(this.kHero);
     gEngine.Textures.unloadTexture(this.kObj);
+    gEngine.TextFileLoader.unloadTextFile(this.kSceneData_Path);
 };
 
 DemoScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    var controller = new BGController(this.kBgPath);
+    var sceneLoader = new SceneDataLoader(this.kSceneData_Path);
+    // 加载背景
+    var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,0);
 
     var mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
@@ -38,13 +44,13 @@ DemoScene.prototype.initialize = function(){
 //    var mObs = new Obstacle(this.kObj);
 //    gManager.ObjectPool.addObject(mObjs,0);
     
-//    var mBox = new GameObject(new Renderable());
-//    mBox.getXform().setPosition(5,-25);
-//    mBox.setCurrentFrontDir(-1,0);
-//    console.log(mBox);
-//    mBox.setSpeed(1);
-//    gManager.ObjectPool.addObject(mBox,0);
+    this.mBox = new GameObject(new Renderable());
+    this.mBox.getXform().setPosition(10,0);
+    gManager.ObjectPool.addObject(this.mBox,0);
 
+    // 加载相机
+    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),0);
+    
     var camera = new Camera(vec2.fromValues(0,0),
                              40,
                              [0,0,1200,600]);
@@ -68,5 +74,10 @@ DemoScene.prototype.draw = function(){
 };
 
 DemoScene.prototype.update = function(){
+     console.log(this.mBox.getXform().getPosition());
+    this.mBox.getXform().setPosition(this.mBox.getXform().getXPos()-0.3 , -5);
+  //  if(this.mBox.getXform().getPosition() < -20)
     MyScene.prototype.update.call(this);
 };
+
+
