@@ -10,26 +10,18 @@
 
 function Obstacle(spriteTexture) {
     this.mRender = new SpriteRenderable(spriteTexture);
-    this.mPos = [0,0];
+    this.mPos = [15,-5];
     this.mSize = (10,10);
-    this.mSpeed = DefaultOptions.mSpeed;
-    
-    GameObject.call(this, this.mRender);
+    this.Speed = Math.random(0.2,0.5);
+    GameObject.call(this,this.mRender);
 }
 gEngine.Core.inheritPrototype(Obstacle, GameObject);
 
 Obstacle.prototype.update = function () {
     //随背景向左移动
-    this.mPos[0] -= this.mSpeed; 
+    this.getXform().setPosition(this.getXform().getXPos()-this.Speed , -5);
+    GameObject.prototype.update.call(this);
 };
 Obstacle.prototype.draw = function(camera){
-    
-};
-
-Obstacle.prototype.getPos = function(){
-    return this.mPos;
-};
-
-Obstacle.prototype.setPos = function(x,y){
-    this.mPos = [x,y];
+    GameObject.prototype.draw(this,camera);
 };

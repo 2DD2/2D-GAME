@@ -9,6 +9,7 @@ function GameOverScene(){
     this.kRank = "assets/bg.png";            //排行榜图片
     this.kMenu = "assets/bg.png";            //主菜单图片
     this.kRestart = "assets/bg.png";         //重新开始图片
+    this.kGameOver = "assets/gameover.png";
     
     this.mRankSprite = null;
     this.mRestartSprite = null;
@@ -35,6 +36,12 @@ GameOverScene.prototype.initialize = function(){
     this.mRestartSprite.getXform().setSize(200, 100);
     gManager.ObjectPool.addObject(this.mRestartSprite,1);
     
+    
+    this.mGameOver = new GameObject(new SpriteRenderable(this.kGameOver));
+    this.mRestartSprite.getXform().setPosition(100, -100);
+    this.mRestartSprite.getXform().setSize(200, 100);
+    gManager.ObjectPool.addObject(this.mGameOver,1);
+    
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
                              [0,0,1200,600]);
@@ -52,6 +59,7 @@ GameOverScene.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kRank);
     gEngine.Textures.loadTexture(this.kMenu);
     gEngine.Textures.loadTexture(this.kRestart);
+    gEngine.Textures.loadTexture(this.kGameOver);
 };
 
 GameOverScene.prototype.unloadScene = function () {
@@ -59,6 +67,7 @@ GameOverScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kRank);
     gEngine.Textures.unloadTexture(this.kMenu);
     gEngine.Textures.unloadTexture(this.kRestart);
+    gEngine.Textures.unloadTexture(this.kGameOver);
     
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);

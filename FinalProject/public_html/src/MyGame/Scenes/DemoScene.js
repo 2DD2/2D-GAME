@@ -53,11 +53,11 @@ DemoScene.prototype.initialize = function(){
     var lander = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(lander,0);
 
-    var mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
-    gManager.ObjectPool.addObject(mHero,0);
+    this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
+    gManager.ObjectPool.addObject(this.mHero,0);
 
-//    var mObs = new Obstacle(this.kObj);
-//    gManager.ObjectPool.addObject(mObjs,0);
+    this.mObjs = new Obstacle(this.kObj);
+    gManager.ObjectPool.addObject(this.mObjs,0);
     
     this.mBox = new GameObject(new Renderable());
     this.mBox.getXform().setPosition(10,0);
@@ -79,11 +79,11 @@ DemoScene.prototype.initialize = function(){
 
     gManager.InputManager.initManager();
    
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(mHero));
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(mHero));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(this.mHero));
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     //gManager.InputManager.bindCommand("release",gEngine.Input.keys.Space, new JumpCommand(mHero));
    
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(mHero));
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
 
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
@@ -98,6 +98,15 @@ DemoScene.prototype.update = function(){
     if(this.mBox.getXform().getXPos() < -8){
         this.mBox.getXform().setXPos(8);
     }
+    
+//    var hBbox = this.mHero.getBBox();
+//    var sBbox = this.mObjs.getBBox();
+//    
+//    if (hBbox.intersectsBound(sBbox)) {
+//    
+//    //    this.mHero.getXform().setXPos(this.mObjs.getXform().getXPos()-0.3);
+//    }
+    
     MyScene.prototype.update.call(this);
 };
 
