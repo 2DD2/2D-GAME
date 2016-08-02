@@ -45,6 +45,7 @@ WelcomeScene.prototype.loadScene = function () {
 WelcomeScene.prototype.unloadScene = function () {
     // 卸载场景
     gEngine.Textures.unloadTexture(this.kLogo);
+    //gManager.ObjectPool.initPool();
     
     var nextScene = new BeginningScene();
     gEngine.Core.startScene(nextScene);

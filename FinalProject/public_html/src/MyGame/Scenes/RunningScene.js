@@ -70,6 +70,8 @@ RunningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kObsSprite);
     gEngine.Textures.unloadTexture(this.kPlatFormSprite);
     
+    //gManager.ObjectPool.initPool();
+    
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 };

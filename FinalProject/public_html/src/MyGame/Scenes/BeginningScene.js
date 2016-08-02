@@ -78,6 +78,8 @@ BeginningScene.prototype.unloadScene = function () {
     
     gEngine.Fonts.unloadFont(this.kFont);
     
+    //gManager.ObjectPool.initPool();
+    
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
 };
