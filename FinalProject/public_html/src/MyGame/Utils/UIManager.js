@@ -9,7 +9,19 @@
 
 
 /*
- * By GCH
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  */
 var gManager = gManager || {};

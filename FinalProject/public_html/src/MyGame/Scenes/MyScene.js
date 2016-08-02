@@ -6,6 +6,23 @@
 
 /* global gEngine, Scene, gManager, vec2 */
 
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 function MyScene(){
 }
 

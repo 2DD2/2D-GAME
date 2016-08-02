@@ -7,6 +7,23 @@
 
 /* global gEngine, GameObjectSet */
 
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 function BGController(sceneLoader){    
     
     /*
