@@ -8,34 +8,38 @@
 
 function TestScene(){
     this.kBgPath = "assets/BG_1.jpg";
+    this.kFgPath = "assets/FG_1.png";
+    this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
+    
+    this.kUIBanner_Path = "assets/UIBanner.png";
 }
 
 gEngine.Core.inheritPrototype(TestScene,MyScene);
 
 TestScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kBgPath);
+    gEngine.Textures.loadTexture(this.kFgPath);
+    gEngine.Textures.loadTexture(this.kUIBanner_Path);
+    gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
 };
 
 TestScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kBgPath);
+    gEngine.Textures.unloadTexture(this.kFgPath);
+    gEngine.TextFileLoader.unloadTextFile(this.kSceneDataFile);
 };
 
 TestScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    var controller = new BGController(this.kBgPath);
-    gManager.ObjectPool.addObject(controller,0);
-
-    var camera = new Camera(vec2.fromValues(0,0),
-                             20,
-                             [20,20,400,400]);
-    camera.setBackgroundColor([0.8,0.8,0.8,1]);
-    gManager.CameraManager.registerCamera(camera,0);
+    var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
     
-    var UICamera = new Camera(vec2.fromValues(0,0),
-                                20,
-                                [20,20,400,400]);
-    gManager.UIManager.setRenderringCamera(UICamera);
+    gManager.UIManager.initManager(sceneLoader);
+    
+    var controller = new BGController(sceneLoader);
+    gManager.ObjectPool.addObject(controller,0);
+    
+    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
 
 TestScene.prototype.draw = function(){
