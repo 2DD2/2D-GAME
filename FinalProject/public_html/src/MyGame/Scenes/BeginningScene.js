@@ -6,9 +6,9 @@
 /* global gEngine, Scene, MyScene, vec2, gManager */
 
 function BeginningScene(){
-    this.kTitleSprite = "assets/logo.jpg";
-    this.kStartSprite = "assets/logo.jpg";
-    this.kAboutUsSprite = "assets/logo.jpg";
+    this.kTitleSprite = "assets/logo.png";
+    this.kStartSprite = "assets/logo.png";
+    this.kAboutUsSprite = "assets/logo.png";
     //字体
     this.kFont = "assets/fonts/system-default-font";
     
