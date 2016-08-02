@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* global gMananger, gManager */
+/* global gMananger, gManager, vec2 */
 
 function FGController(sceneLoader){    
     
@@ -30,34 +30,27 @@ function FGController(sceneLoader){
 
 FGController.prototype.update = function(){
     
-    var parSet = gMananger.ObjectPool.getObjectsByLayer(this.mParticleLayer);
-    
-    if(mInterval === 5 && mMaxParticleNumber > parSet.size()){
+    var parSet = gManager.ObjectPool.getObjectsByLayer(this.mParticleLayer);
+    if(this.mInterval === 5 && this.mMaxParticleNumber > parSet.size()){
         
-        var par = gMananger.ObjectPool.getReuseObject(this.mReusePoolName);
+        var par = gManager.ObjectPool.getReuseObject(this.mReusePoolName);
         
-        if(!par) par = new GameObject(new TextureRenderable(this.mParticlePath));
+        if(!par) par = new Snow(new TextureRenderable(this.mParticlePath));
         
-        par.getXform().setPosition(gManager.DefaultOptions.SCREEN_HEIGHT / 2 * Math.random() - gManager.DefaultOptions.SCREEN_HEIGHT * Math.random());
-        par.getSpeed(3 * Math.random(),Math.random());
-        gMananger.ObjectPool.addObject(par,this.mParticleLayer);
-
+        par.getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2,
+                                   5 + gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 4 * Math.random() - gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 * Math.random());
+        par.setspeed([-0.3 * Math.random(),-0.1 * Math.random()]);
+        gManager.ObjectPool.addObject(par,this.mParticleLayer);
+        console.log(par.getXform().getYPos());
     }
-    
     
     for(var i = 0 ; i < parSet.size();i++){
         var par = parSet.getObjectAt(i);
-        if(par.getXform().getXPos() < gManager.DefaultOptions.SCREEN_WIDTH / 2 || par.getXform().getXPos() < gManager.DefaultOptions.SCREEN_HEIGHT / 2)
-            gMananger.ObjectPool.addtoReusePoolandRemove(par,this.mReusePoolName,this.mParticleLayer);
+        if(par.getXform().getXPos() < -gManager.DefaultOptions.SCREEN_WIDTH / 2 || par.getXform().getXPos() < -gManager.DefaultOptions.SCREEN_HEIGHT / 2)
+            gManager.ObjectPool.addtoReusePoolandRemove(par,this.mReusePoolName,this.mParticleLayer);
     }
-    
-    
-    
-    
-    
-    
 };
 
 FGController.prototype.draw = function (aCamera) {
-
+    
 };

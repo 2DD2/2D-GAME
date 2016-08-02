@@ -37,7 +37,6 @@ BGController.prototype.update = function(){
         }
     }
 
-
     for(var i = 0 ; i < this.mBackgrounds.length ; i++){
         if(this.mBackgrounds[i])
             this.mBackgrounds[i].update();
