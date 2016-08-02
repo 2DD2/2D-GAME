@@ -8,8 +8,14 @@
 function GameOverScene(){
 
     this.kGameOver = "assets/gameover.png";
+    this.kRestart = "assets/logo.png";
     
     this.mScore = null;
+    this.mRestartButton = null;
+    this.mTextRestart =null;
+    
+    this.mTurn = 15;            //闪烁帧数
+    this.mFrame = 0;            //帧计数
 }
 
 gEngine.Core.inheritPrototype(GameOverScene, MyScene);
@@ -33,7 +39,11 @@ GameOverScene.prototype.initialize = function(){
 //    this.mRank3 = new FontRenderable("3.    100");
 //    this._initText(this.mRank3, -100, -120, [1, 1, 1, 1], 30);
 //    gManager.ObjectPool.addObject(new GameObject(this.mRank3), 1);
-    
+    this.mRestartButton = new UIButton(new SpriteRenderable(this.kRestart), 0, -230, 200, 100);
+    gManager.ObjectPool.addObject(this.mRestartButton,1);
+    this.mTextRestart = new FontRenderable("Press \"Space\" to Restart");
+    this._initText(this.mTextRestart, -210, -190, [1, 1, 1, 1.0], 30);
+    gManager.ObjectPool.addObject(new GameObject(this.mTextRestart), 1);
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
                              [0,0,1200,600]);
@@ -49,11 +59,13 @@ GameOverScene.prototype.initialize = function(){
 GameOverScene.prototype.loadScene = function () {
     // 加载场景
     gEngine.Textures.loadTexture(this.kGameOver);
+    gEngine.Textures.loadTexture(this.kRestart);
 };
 
 GameOverScene.prototype.unloadScene = function () {
     // 卸载场景
     gEngine.Textures.unloadTexture(this.kGameOver);
+    gEngine.Textures.unloadTexture(this.kRestart);
 
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
@@ -62,6 +74,19 @@ GameOverScene.prototype.unloadScene = function () {
 GameOverScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
     gManager.DefaultOptions.score += 1;
+    if(this.mFrame >= 0){
+        this.mFrame++;
+        this.mRestartButton.setVisibility(false);
+        if(this.mFrame === this.mTurn){
+            this.mFrame = -1;
+        }
+    }else if (this.mFrame < 0){
+        this.mFrame--;
+        this.mRestartButton.setVisibility(true);
+        if(this.mFrame === -this.mTurn){
+            this.mFrame = 0;
+        }
+    }
     //按 空格 键切换到RunningScene
     if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
         gEngine.GameLoop.stop();

@@ -9,8 +9,6 @@ function BeginningScene(){
     this.kTitleSprite = "assets/logo.png";
     this.kStartSprite = "assets/logo.png";
     this.kAboutUsSprite = "assets/logo.png";
-    //字体
-    this.kFont = "assets/fonts/system-default-font";
     
     this.mTitleSprite = null;
     this.mStartSprite = null;
@@ -28,7 +26,7 @@ BeginningScene.prototype.initialize = function(){
     this.mTitleSprite.getXform().setSize(400, 200);
     gManager.ObjectPool.addObject(this.mTitleSprite,1);
     
-    this.mStartSprite = new UIButton(new SpriteRenderable(this.kStartSprite), this.kFont, 0, 0, 200, 100);
+    this.mStartSprite = new UIButton(new SpriteRenderable(this.kStartSprite), 0, 0, 200, 100);
     gManager.ObjectPool.addObject(this.mStartSprite,1);
     this.mTextStart = new FontRenderable("Start");
     this._initText(this.mTextStart, -60, 10, [0, 0, 0, 1.0], 50);
@@ -37,7 +35,7 @@ BeginningScene.prototype.initialize = function(){
     this._initText(this.mTextStartHint, -120, -30, [0, 0, 0, 1.0], 20);
     gManager.ObjectPool.addObject(new GameObject(this.mTextStartHint), 1);
     
-    this.mAboutUsSprite = new UIButton(new SpriteRenderable(this.kAboutUsSprite), this.kFont, 0, -200, 200, 100);
+    this.mAboutUsSprite = new UIButton(new SpriteRenderable(this.kAboutUsSprite), 0, -200, 200, 100);
     gManager.ObjectPool.addObject(this.mAboutUsSprite,1);
     this.mTextCredit = new FontRenderable("Credits");
     this._initText(this.mTextCredit, -90, -190, [0, 0, 0, 1.0], 50);
