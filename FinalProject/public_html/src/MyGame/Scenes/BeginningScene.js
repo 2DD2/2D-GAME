@@ -30,24 +30,18 @@ BeginningScene.prototype.initialize = function(){
     
     this.mStartSprite = new UIButton(new SpriteRenderable(this.kStartSprite), this.kFont, 0, 0, 200, 100);
     gManager.ObjectPool.addObject(this.mStartSprite,1);
-    this.mTextSysFont = new FontRenderable("Start");
-    this.mTextSysFont.setColor([0, 0, 0, 1.0]);
-    this.mTextSysFont.getXform().setPosition(-60, 10);
-    this.mTextSysFont.setTextHeight(50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
-    this.mTextSysFont = new FontRenderable("Press \"Space\" to start");
-    this.mTextSysFont.setColor([0, 0, 0, 1.0]);
-    this.mTextSysFont.getXform().setPosition(-120, -30);
-    this.mTextSysFont.setTextHeight(20);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
+    this.mTextStart = new FontRenderable("Start");
+    this._initText(this.mTextStart, -60, 10, [0, 0, 0, 1.0], 50);
+    gManager.ObjectPool.addObject(new GameObject(this.mTextStart), 1);
+    this.mTextStartHint = new FontRenderable("Press \"Space\" to start");
+    this._initText(this.mTextStartHint, -120, -30, [0, 0, 0, 1.0], 20);
+    gManager.ObjectPool.addObject(new GameObject(this.mTextStartHint), 1);
     
     this.mAboutUsSprite = new UIButton(new SpriteRenderable(this.kAboutUsSprite), this.kFont, 0, -200, 200, 100);
     gManager.ObjectPool.addObject(this.mAboutUsSprite,1);
-    this.mTextSysFont = new FontRenderable("Credits");
-    this.mTextSysFont.setColor([0, 0, 0, 1.0]);
-    this.mTextSysFont.getXform().setPosition(-90, -190);
-    this.mTextSysFont.setTextHeight(50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
+    this.mTextCredit = new FontRenderable("Credits");
+    this._initText(this.mTextCredit, -90, -190, [0, 0, 0, 1.0], 50);
+    gManager.ObjectPool.addObject(new GameObject(this.mTextCredit), 1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
@@ -66,8 +60,6 @@ BeginningScene.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kTitleSprite);
     gEngine.Textures.loadTexture(this.kStartSprite);
     gEngine.Textures.loadTexture(this.kAboutUsSprite);
-    
-    gEngine.Fonts.loadFont(this.kFont);
 };
 
 BeginningScene.prototype.unloadScene = function () {
@@ -75,10 +67,6 @@ BeginningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kTitleSprite);
     gEngine.Textures.unloadTexture(this.kStartSprite);
     gEngine.Textures.unloadTexture(this.kAboutUsSprite);
-    
-    gEngine.Fonts.unloadFont(this.kFont);
-    
-    //gManager.ObjectPool.initPool();
     
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
@@ -95,3 +83,10 @@ BeginningScene.prototype.update = function(){
 BeginningScene.prototype.draw = function(){
     MyScene.prototype.draw.call(this);
 };
+
+BeginningScene.prototype._initText = function (font, posX, posY, color, textH) {
+    font.setColor(color);
+    font.getXform().setPosition(posX, posY);
+    font.setTextHeight(textH);
+};
+
