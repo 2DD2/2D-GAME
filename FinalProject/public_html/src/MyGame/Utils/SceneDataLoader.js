@@ -63,6 +63,11 @@ SceneDataLoader.prototype.GetNumber = function (nodeName){
     return Number(elm[0].getAttribute("Number"));
 };
 
+SceneDataLoader.prototype.GetNode = function (nodeName,attrName){
+    var elm = this._getElm(nodeName);
+    return elm[0].getAttribute(attrName);
+};
+
 SceneDataLoader.prototype.LoadUI = function(name){
     var elm = this._getElm(name);
     var path = elm[0].getAttribute("Rp");
