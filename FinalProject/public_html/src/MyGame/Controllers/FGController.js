@@ -47,6 +47,7 @@ FGController.prototype.update = function(){
         var par = this.mReusePool[i];
         var trans  = par.getXform();
         trans.setPosition(trans.getXPos() - par.getspeed()[0],trans.getYPos() - par.getspeed()[1]);
+        trans.incRotationByRad(par.getrotation());
         if(trans.getXPos() < -gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 || trans.getYPos() < -gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2){
             this._reset(par);
         }
@@ -68,4 +69,7 @@ FGController.prototype._reset = function(par){
     var size = 0.2 + 0.8 * Math.random();
     par.getXform().setSize(size,size);          
     par.setspeed([0.15 + 0.15 * Math.random(),0.1 * Math.random()]);
+    
+    var rotation = 0.15 - 0.3 * Math.random();
+    par.setrotation(rotation);
 };

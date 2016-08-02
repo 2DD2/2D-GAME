@@ -9,6 +9,7 @@
 function Snow(renderable){
     GameObject.call(this,renderable);
     this.mSpeed = [0,0];
+    this.mRotation = 0;
 }
 gEngine.Core.inheritPrototype(Snow,GameObject);
 
@@ -17,6 +18,13 @@ Snow.prototype.setspeed = function(speed){
 };
 Snow.prototype.getspeed = function(){
     return this.mSpeed;
+};
+
+Snow.prototype.setrotation = function(rotation){
+    this.mRotation = rotation;
+};
+Snow.prototype.getrotation = function(){
+    return this.mRotation;
 };
 
 Snow.prototype.getXform = function(){
