@@ -84,10 +84,11 @@ gManager.ObjectPool = (function () {
     var initPool = function(){
         mReusePools = [];
         mObjectArray = [];
+
         for (var i =0; i<10 ; i++)
             mObjectArray[i] = new GameObjectSet() ;
     };
-    
+
     
     // fist layer 0 to last layer 10 
     var renderAll = function(camera){

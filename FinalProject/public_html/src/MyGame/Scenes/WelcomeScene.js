@@ -7,10 +7,9 @@
 
 function WelcomeScene(){
     
-    this.kWelScene = "assets/logo.jpg";
+    this.kLogo = "assets/logo.png";
     this.mWelSprite = null;
     
-    this.myTimer = 1800;
     this.mColor = null;
 }
 
@@ -19,7 +18,7 @@ gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
 WelcomeScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mWelSprite = new GameObject(new SpriteRenderable(this.kWelScene));
+    this.mWelSprite = new GameObject(new SpriteRenderable(this.kLogo));
     this.mWelSprite.getXform().setPosition(0, 0);
     this.mWelSprite.getXform().setSize(512, 256);
     gManager.ObjectPool.addObject(this.mWelSprite,1);
@@ -40,12 +39,13 @@ WelcomeScene.prototype.initialize = function(){
 
 WelcomeScene.prototype.loadScene = function () {
     // 加载场景
-    gEngine.Textures.loadTexture(this.kWelScene);
+    gEngine.Textures.loadTexture(this.kLogo);
 };
 
 WelcomeScene.prototype.unloadScene = function () {
     // 卸载场景
-    gEngine.Textures.unloadTexture(this.kWelScene);
+    gEngine.Textures.unloadTexture(this.kLogo);
+    //gManager.ObjectPool.initPool();
     
     var nextScene = new BeginningScene();
     gEngine.Core.startScene(nextScene);
@@ -53,11 +53,13 @@ WelcomeScene.prototype.unloadScene = function () {
 
 WelcomeScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
-    this.myTimer -= 10;
-    if(this.myTimer > 0 || this.myTimer <1800){
-        if(this.mColor[3]>=0 && this.mColor[3]<=255){
-            this.mColor[3] += 1;
-        }
+    
+    if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
+        this.mColor[3] = 1;
+        gEngine.GameLoop.stop();
+    }
+    if(this.mColor[3]>=0 && this.mColor[3]<=1){
+        this.mColor[3] += 0.01;
     }
 };
 

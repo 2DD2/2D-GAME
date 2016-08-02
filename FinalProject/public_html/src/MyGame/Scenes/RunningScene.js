@@ -6,11 +6,11 @@
 /* global gEngine, Scene, MyScene, DefaultOptions, vec2, gManager */
 
 function RunningScene(){
-    this.kBg = "assets/logo.jpg";                  //背景图片
+    this.kBg = "assets/logo.png";                  //背景图片
     
-    this.kHeroSprite = "assets/logo.jpg";          //主角图片
-    this.kObsSprite = "assets/logo.jpg";           //障碍物图片
-    this.kPlatFormSprite = "assets/logo.jpg";      //跑道图片
+    this.kHeroSprite = "assets/logo.png";          //主角图片
+    this.kObsSprite = "assets/logo.png";           //障碍物图片
+    this.kPlatFormSprite = "assets/logo.png";      //跑道图片
     
     this.mBgSprite = null;
     this.mHeroSprite = null;
@@ -70,6 +70,8 @@ RunningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kObsSprite);
     gEngine.Textures.unloadTexture(this.kPlatFormSprite);
     
+    //gManager.ObjectPool.initPool();
+    
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 };
@@ -79,7 +81,7 @@ RunningScene.prototype.update = function(){
     var x = this.mBgSprite.getXform().getXPos();
     var y = this.mBgSprite.getXform().getYPos();
     
-    this.mBgSprite.getXform().setPosition(x - gManager.DefaultOptions.mSpeed, y);
+    this.mBgSprite.getXform().setPosition(x - 10 * gManager.DefaultOptions.mSpeed, y);
     
     //按 空格 键切换到GameOverScene
     if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
