@@ -114,6 +114,7 @@ gManager.ObjectPool = (function () {
           addtoReusePoolandRemove : addtoReusePoolandRemove,
           getReuseObject : getReuseObject,
           initPool : initPool,
+          getObjectsByLayer : getObjectsByLayer,
           
           renderAll:renderAll,     //render all obj
           updateAll: updateAll
