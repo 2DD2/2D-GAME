@@ -4,6 +4,7 @@
  */
 var gManager = gManager || {};
 
+
 gManager.DefaultOptions = (function(){
     var mPublic = {
         //BackGround
@@ -19,3 +20,4 @@ gManager.DefaultOptions = (function(){
     };
     return mPublic;
 }());
+
