@@ -1,10 +1,10 @@
 
-function JumpCommand(hero) {
+function JumpPressCom(hero) {
     this.mHero = hero;
 }
 
-gEngine.Core.inheritPrototype(JumpCommand, Command);
+gEngine.Core.inheritPrototype(JumpPressCom, Command);
 
-JumpCommand.prototype.excute = function(){
+JumpPressCom.prototype.excute = function(){
     this.mHero.IncFirstSpeed();
 }

@@ -63,7 +63,11 @@ DemoScene.prototype.initialize = function(){
     gManager.UIManager.setRenderringCamera(UICamera);
 
     gManager.InputManager.initManager();
+   
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(mHero));
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(mHero));
+    //gManager.InputManager.bindCommand("release",gEngine.Input.keys.Space, new JumpCommand(mHero));
+   
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(mHero));
 
 };
@@ -74,9 +78,10 @@ DemoScene.prototype.draw = function(){
 };
 
 DemoScene.prototype.update = function(){
-     console.log(this.mBox.getXform().getPosition());
     this.mBox.getXform().setPosition(this.mBox.getXform().getXPos()-0.3 , -5);
-  //  if(this.mBox.getXform().getPosition() < -20)
+    if(this.mBox.getXform().getXPos() < -8){
+        this.mBox.getXform().setXPos(8);
+    }
     MyScene.prototype.update.call(this);
 };
 

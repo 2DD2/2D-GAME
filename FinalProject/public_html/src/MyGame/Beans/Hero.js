@@ -7,7 +7,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable, x: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -16,7 +16,7 @@ function Hero(renderableObj) {
     this.mRender = renderableObj;
     this.mGravity = -0.02;
 
-    this.mFirst = 0.5;
+    this.mFirst = 0.2;
     this.mOnGround = true;
 //    this.mRender.setElementPixelPositions(0, 10, 0, 10);    
     this.setCurrentFrontDir(0,1);
@@ -44,6 +44,10 @@ Hero.prototype.update = function () {
     } else {
         this.mSpeed += this.mGravity;
     } 
+    
+    if (this.getXform().getXPos() < -10.0){
+        this.Die();
+    }
     
 };
 Hero.prototype.draw = function (camera) {
@@ -77,15 +81,23 @@ Hero.prototype.antiJump= function () {
 };
 
 Hero.prototype.Die = function () {
-
+    
 };
 
 Hero.prototype.setOnGround = function (bool) {
     this.mOnGround = bool;
 };
-
+Hero.prototype.resetFirstSpeed = function(){
+    this.mFirst = 0.2;
+};
 Hero.prototype.IncFirstSpeed = function(){
-    this.mFirst = this.mFirst + 0.05;
+   
+    if( this.mFirst < 0.35){
+         this.mFirst = this.mFirst + 0.05;
+    }
 };
 
+Hero.prototype.moveX =Hero.prototype.IncFirstSpeed = function(){
+    this.getXform.setXPos(x);
+};
 
