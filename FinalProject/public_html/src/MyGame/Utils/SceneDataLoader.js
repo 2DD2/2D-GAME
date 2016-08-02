@@ -62,3 +62,29 @@ SceneDataLoader.prototype.GetNumber = function (nodeName){
     var elm = this._getElm(nodeName);
     return Number(elm[0].getAttribute("Number"));
 };
+
+SceneDataLoader.prototype.LoadUI = function(name){
+    var elm = this._getElm(name);
+    var path = elm[0].getAttribute("Rp");
+    var type = elm[0].getAttribute("Type");
+    var posX = Number(elm[0].getAttribute("X"));
+    var posY = Number(elm[0].getAttribute("Y"));
+    var scaleX = Number(elm[0].getAttribute("SizeX"));
+    var scaleY = Number(elm[0].getAttribute("SizeY"));
+    
+    var ui;
+    if(type === "label"){
+        //ui = new GameObject();
+    }else if(type === "button"){
+        //ui = new GameObject();
+    }else if(type === "score"){
+        //ui = new GameObject();
+    }else if(type === "square"){
+        ui = new GameObject(new TextureRenderable(path));
+    }
+    
+    ui.getXform().setPosition(posX,posY);
+    ui.getXform().setSize(scaleX,scaleY);
+    
+    return ui;
+};

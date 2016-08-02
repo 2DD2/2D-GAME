@@ -22,7 +22,6 @@ MyScene.prototype.unloadScene = function(){
 MyScene.prototype.initialize = function(){
     gManager.CameraManager.initManager();
     gManager.InputManager.initManager();
-    gManager.UIManager.initManager();
 };
 
 MyScene.prototype.draw = function(){
