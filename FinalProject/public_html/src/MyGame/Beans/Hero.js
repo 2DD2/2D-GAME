@@ -82,7 +82,7 @@ Hero.prototype.antiJump= function () {
 };
 
 Hero.prototype.Die = function () {
-    
+    alert("你死了！！！！！！！！！！！！！！！！！！！！");
 };
 
 Hero.prototype.setOnGround = function (bool) {
