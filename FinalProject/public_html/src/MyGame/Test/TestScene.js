@@ -6,6 +6,23 @@
 
 /* global gEngine, MyScene, gManager, vec2 */
 
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 function TestScene(){
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";

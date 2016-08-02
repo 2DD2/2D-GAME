@@ -3,8 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/* global gEngine */
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
-/* global gEngine, vec2 */
 
 function SceneDataLoader(sceneFilePath) {
     this.mSceneXml = gEngine.ResourceMap.retrieveAsset(sceneFilePath);

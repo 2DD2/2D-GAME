@@ -6,6 +6,23 @@
 
 /* global GameObject, gEngine */
 
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 function Snow(renderable){
     GameObject.call(this,renderable);
     this.mSpeed = [0,0];

@@ -6,6 +6,23 @@
 
 /* global MyCamera, gEngine, Camera */
 
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 function CameraChase(wcCenter, wcWidth, viewportArray, bound){
     Camera.call(this,wcCenter, wcWidth, viewportArray, bound);
     this.mTarget = null;
