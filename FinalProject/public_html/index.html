@@ -3,6 +3,8 @@
     <head>
         <title>Final FORM T-Rex</title>
         <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+
 
         <!-- the following says there are javascript source code contained in 
              the external source files
@@ -124,10 +126,9 @@
         <script type="text/javascript" src="src/MyGame/Test/TestScene.js"></script>
 
     </head>
-
+    
     <body onload="
-        var mMain = new RunningScene();
-
+        var mMain = new TestScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
         <div style="width:1200px;margin:0 auto;">
