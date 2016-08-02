@@ -7,9 +7,6 @@
 
 function GameOverScene(){
 
-    this.kRank = "assets/logo.png";            //排行榜图片
-    this.kMenu = "assets/logo.png";            //主菜单图片
-    this.kRestart = "assets/logo.png";         //重新开始图片
     this.kGameOver = "assets/gameover.png";
     
     this.mRankSprite = null;
@@ -21,38 +18,21 @@ gEngine.Core.inheritPrototype(GameOverScene, MyScene);
 
 GameOverScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
-    
-    this.mRankSprite = new GameObject(new SpriteRenderable(this.kRank));
-    this.mRankSprite.getXform().setPosition(0, 10);
-    this.mRankSprite.getXform().setSize(800, 800);
-    gManager.ObjectPool.addObject(this.mRankSprite,1);
-    this.mTextSysFont = new FontRenderable("Rank");
-    this.mTextSysFont.setColor([1, 1, 1, 1.0]);
-    this.mTextSysFont.getXform().setPosition(0, 240);
-    this.mTextSysFont.setTextHeight(50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
-    
-    this.mMenuSprite = new UIButton(new SpriteRenderable(this.kMenu), this.kFont, -400, -200, 200, 100);
-    gManager.ObjectPool.addObject(this.mMenuSprite,1);
-    this.mTextSysFont = new FontRenderable("MainMenu");
-    this.mTextSysFont.setColor([1, 1, 1, 1.0]);
-    this.mTextSysFont.getXform().setPosition(-400, -200);
-    this.mTextSysFont.setTextHeight(50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
-    
-    this.mRestartSprite = new UIButton(new SpriteRenderable(this.kMenu), this.kFont, 300, -200, 200, 100);
-    gManager.ObjectPool.addObject(this.mRestartSprite,1);
-    this.mTextSysFont = new FontRenderable("Restart");
-    this.mTextSysFont.setColor([1, 1, 1, 1.0]);
-    this.mTextSysFont.getXform().setPosition(300, -200);
-    this.mTextSysFont.setTextHeight(50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextSysFont), 1);
-    
-    
+
     this.mGameOver = new GameObject(new SpriteRenderable(this.kGameOver));
-    this.mRestartSprite.getXform().setPosition(100, -100);
-    this.mRestartSprite.getXform().setSize(200, 100);
+    this.mGameOver.getXform().setPosition(0, 0);
+    this.mGameOver.getXform().setSize(600, 600);
     gManager.ObjectPool.addObject(this.mGameOver,1);
+    
+    this.mRank1 = new FontRenderable("1.    300");
+    this._initText(this.mRank1, -100, 0, [1, 1, 1, 1], 30);
+    gManager.ObjectPool.addObject(new GameObject(this.mRank1), 1);
+    this.mRank2 = new FontRenderable("2.    200");
+    this._initText(this.mRank2, -100, -60, [1, 1, 1, 1], 30);
+    gManager.ObjectPool.addObject(new GameObject(this.mRank2), 1);
+    this.mRank3 = new FontRenderable("3.    100");
+    this._initText(this.mRank3, -100, -120, [1, 1, 1, 1], 30);
+    gManager.ObjectPool.addObject(new GameObject(this.mRank3), 1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
@@ -68,23 +48,13 @@ GameOverScene.prototype.initialize = function(){
 
 GameOverScene.prototype.loadScene = function () {
     // 加载场景
-    gEngine.Textures.loadTexture(this.kRank);
-    gEngine.Textures.loadTexture(this.kMenu);
-    gEngine.Textures.loadTexture(this.kRestart);
-
     gEngine.Textures.loadTexture(this.kGameOver);
-
 };
 
 GameOverScene.prototype.unloadScene = function () {
     // 卸载场景
-    gEngine.Textures.unloadTexture(this.kRank);
-    gEngine.Textures.unloadTexture(this.kMenu);
-    gEngine.Textures.unloadTexture(this.kRestart);
     gEngine.Textures.unloadTexture(this.kGameOver);
-    
-    //gManager.ObjectPool.initPool();
-    
+
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
 };
@@ -99,4 +69,10 @@ GameOverScene.prototype.update = function(){
 
 GameOverScene.prototype.draw = function(){
     MyScene.prototype.draw.call(this);
+};
+
+GameOverScene.prototype._initText = function (font, posX, posY, color, textH) {
+    font.setColor(color);
+    font.getXform().setPosition(posX, posY);
+    font.setTextHeight(textH);
 };
