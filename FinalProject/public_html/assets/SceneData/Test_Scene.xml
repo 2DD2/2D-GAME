@@ -17,6 +17,7 @@
     <BG_1 SizeX="80" SizeY="20"
           Layer = "1"
           Rp = "assets/BG_1.jpg"/>
+
     <BG_2 SizeX="40" SizeY="20"
           Layer = "1"
           Rp = "assets/FG_1.png"/>
@@ -32,5 +33,12 @@
            Rp = "assets/UIBanner.png"
            Type = "square"/>
         
+
+    <LAND_Num Number="1"/>
+    <LAND_1 SizeX="20" SizeY="20"
+          Layer = "1"
+          Rp = "assets/LAND_01.jpg"/>
+
+              
    
 </MyGameLevel>
