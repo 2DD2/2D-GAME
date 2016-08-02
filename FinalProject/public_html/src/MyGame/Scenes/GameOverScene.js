@@ -22,25 +22,29 @@ GameOverScene.prototype.initialize = function(){
     
     this.mRankSprite = new GameObject(new SpriteRenderable(this.kRank));
     this.mRankSprite.getXform().setPosition(0, 10);
-    this.mRankSprite.getXform().setSize(40, 40);
+    this.mRankSprite.getXform().setSize(800, 800);
     gManager.ObjectPool.addObject(this.mRankSprite,1);
     
     this.mMenuSprite = new GameObject(new SpriteRenderable(this.kMenu));
-    this.mMenuSprite.getXform().setPosition(-10, -10);
-    this.mMenuSprite.getXform().setSize(20, 10);
+    this.mMenuSprite.getXform().setPosition(-100, -100);
+    this.mMenuSprite.getXform().setSize(200, 100);
     gManager.ObjectPool.addObject(this.mMenuSprite,1);
     
     this.mRestartSprite = new GameObject(new SpriteRenderable(this.kRestart));
-    this.mRestartSprite.getXform().setPosition(10, -10);
-    this.mRestartSprite.getXform().setSize(20, 10);
+    this.mRestartSprite.getXform().setPosition(100, -100);
+    this.mRestartSprite.getXform().setSize(200, 100);
     gManager.ObjectPool.addObject(this.mRestartSprite,1);
     
     var camera = new Camera(vec2.fromValues(0,0),
-                             20,
-                             [20,20,400,400]);
-    camera.setBackgroundColor([0.8,0.8,0.8,1]);
-    
+                             1200,
+                             [0,0,1200,600]);
+    camera.setBackgroundColor([0.1, 0.1, 0.1, 1.0]);
     gManager.CameraManager.registerCamera(camera,0);
+    
+    var UICamera = new Camera(vec2.fromValues(0,0),
+                                40,
+                                [20,20,400,400]);
+    gManager.UIManager.setRenderringCamera(UICamera);
 };
 
 GameOverScene.prototype.loadScene = function () {
@@ -63,7 +67,7 @@ GameOverScene.prototype.unloadScene = function () {
 GameOverScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
     //按 空格 键切换到RunningScene
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
+    if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
         gEngine.GameLoop.stop();
     }
 };
