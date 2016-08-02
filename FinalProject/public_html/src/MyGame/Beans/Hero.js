@@ -7,7 +7,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable, x: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -15,6 +15,9 @@ function Hero(renderableObj) {
  
     this.mRender = renderableObj;
     this.mGravity = -0.02;
+    
+    this.Top = 5;
+    this.Bot = -5;
 
     this.mFirst = 0.2;
     this.mOnGround = true;
@@ -32,11 +35,11 @@ gEngine.Core.inheritPrototype(Hero, GameObject);
 
 Hero.prototype.update = function () {
     GameObject.prototype.update.call(this);
-    if (this.getXform().getYPos() < -5.0){
-        this.getXform().setYPos(-5);
+    if (this.getXform().getYPos() < this.Bot){
+        this.getXform().setYPos(this.Bot);
         this.mOnGround = true;
-    }else if(this.getXform().getYPos()>5.0){
-         this.getXform().setYPos(5);
+    }else if(this.getXform().getYPos()> this.Top){
+         this.getXform().setYPos(this.Top);
         this.mOnGround = true;
     }
     if (this.mOnGround) {
@@ -44,10 +47,6 @@ Hero.prototype.update = function () {
     } else {
         this.mSpeed += this.mGravity;
     } 
-    
-    if (this.getXform().getXPos() < -10.0){
-        this.Die();
-    }
     
 };
 Hero.prototype.draw = function (camera) {
@@ -63,6 +62,7 @@ Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
            }   
     }
    this.mOnGround = false;
+    this.resetFirstSpeed();
 };
 
 Hero.prototype.antiJump= function () {  
@@ -92,12 +92,16 @@ Hero.prototype.resetFirstSpeed = function(){
 };
 Hero.prototype.IncFirstSpeed = function(){
    
-    if( this.mFirst < 0.35){
-         this.mFirst = this.mFirst + 0.05;
+    if( this.mFirst < 0.50){
+         this.mFirst = this.mFirst + 0.01;
     }
 };
 
-Hero.prototype.moveX =Hero.prototype.IncFirstSpeed = function(){
-    this.getXform.setXPos(x);
+Hero.prototype.moveX=function (x){
+    this.getXform().setXPos(x);
 };
 
+//Hero.protype.setLand = function(up,down){
+//    this.Top = up;
+//    this.Bot = down;
+//};

@@ -37,6 +37,10 @@ DemoScene.prototype.initialize = function(){
     // 加载背景
     var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,0);
+    
+    // 加载场景
+    var controller = new BGController(sceneLoader);
+    gManager.ObjectPool.addObject(controller,0);
 
     var mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(mHero,0);

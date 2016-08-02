@@ -17,6 +17,11 @@
     <BG_1 SizeX="80" SizeY="20"
           Layer = "1"
           Rp = "assets/BG_1.jpg"/>
+    
+    <LAND_Num Number="1"/>
+    <LAND_1 SizeX="20" SizeY="20"
+          Layer = "1"
+          Rp = "assets/LAND_01.jpg"/>
 
               
    
