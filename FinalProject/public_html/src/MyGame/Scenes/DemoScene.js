@@ -13,7 +13,7 @@ function DemoScene(){
     
     this.kUIBanner_Path = "assets/UIBanner.png";
     this.kHero = "assets/hero.png";
-    this.kObj = "assets/minion_sprite.png";
+    this.kObj = "assets/logo.jpg";
 }
 
 gEngine.Core.inheritPrototype(DemoScene,MyScene);
@@ -48,41 +48,22 @@ DemoScene.prototype.initialize = function(){
     gManager.ObjectPool.addObject(controller,0);
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
-    
-    // 加载场景
-    var lander = new BGController(sceneLoader);
-    gManager.ObjectPool.addObject(lander,0);
+
 
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,0);
 
-    this.mObjs = new Obstacle(this.kObj);
-    gManager.ObjectPool.addObject(this.mObjs,0);
+//    this.mObjs = new Obstacle(this.kObj);
+//    gManager.ObjectPool.addObject(this.mObjs,0);
     
-    this.mBox = new GameObject(new Renderable());
-    this.mBox.getXform().setPosition(10,0);
-    gManager.ObjectPool.addObject(this.mBox,0);
-
-//    // 加载相机
-//    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),0);
-//    
-//    var camera = new Camera(vec2.fromValues(0,0),
-//                             40,
-//                             [0,0,1200,600]);
-//    camera.setBackgroundColor([0.8,0.8,0.8,1]);
-//    gManager.CameraManager.registerCamera(camera,0);
-//    
-//    var UICamera = new Camera(vec2.fromValues(0,0),
-//                                40,
-//                                [20,20,400,400]);
-//    gManager.UIManager.setRenderringCamera(UICamera);
-
+    this.mOb1 = new Obstacle(this.kObj);
+    gManager.ObjectPool.addObject(this.mOb1,3);
+  
     gManager.InputManager.initManager();
    
     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(this.mHero));
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
-    //gManager.InputManager.bindCommand("release",gEngine.Input.keys.Space, new JumpCommand(mHero));
-   
+    
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
 
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
@@ -94,19 +75,16 @@ DemoScene.prototype.draw = function(){
 };
 
 DemoScene.prototype.update = function(){
-    this.mBox.getXform().setPosition(this.mBox.getXform().getXPos()-0.3 , -5);
-    if(this.mBox.getXform().getXPos() < -8){
-        this.mBox.getXform().setXPos(8);
-    }
     
-//    var hBbox = this.mHero.getBBox();
-//    var sBbox = this.mObjs.getBBox();
-//    
-//    if (hBbox.intersectsBound(sBbox)) {
-//    
-//    //    this.mHero.getXform().setXPos(this.mObjs.getXform().getXPos()-0.3);
-//    }
-    
+    var hBbox = this.mHero.getBBox();
+    var check = gManager.ObjectPool.getObjectsByLayer(3).mSet;
+    for(var i =0 ;i < check.length; i++){
+         if(hBbox.intersectsBound(check[i].getBBox())&& hBbox.boundCollideStatus(check[i].getBBox()) == 2){
+            console.log(hBbox.boundCollideStatus(check[i].getBBox()));
+             this.mHero.getXform().setXPos(check[i].getXform().getXPos()- check[i].getXform().getWidth());
+         }
+     }
+
     MyScene.prototype.update.call(this);
 };
 
