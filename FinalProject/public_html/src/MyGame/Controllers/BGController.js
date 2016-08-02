@@ -24,6 +24,7 @@ function BGController(sceneLoader){
             this.mBackgrounds.push(bg);
         }
     }
+
 }
 
 
@@ -36,6 +37,7 @@ BGController.prototype.update = function(){
             this.mBackgrounds[i + k].getXform().setXPos(this.mBackgrounds[i+k].getXform().getXPos() - 0.05 * (i + 1));
         }
     }
+
 
     for(var i = 0 ; i < this.mBackgrounds.length ; i++){
         if(this.mBackgrounds[i])
