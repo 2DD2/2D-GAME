@@ -39,9 +39,9 @@ TestScene.prototype.initialize = function(){
     //gManager.UIManager.initManager(sceneLoader);
     
     var controller = new BGController(sceneLoader);
-    gManager.ObjectPool.addObject(controller,0);
+    gManager.ObjectPool.addObject(controller,1);
     controller = new FGController(sceneLoader);
-    gManager.ObjectPool.addObject(controller,3);
+    gManager.ObjectPool.addObject(controller,8);
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };

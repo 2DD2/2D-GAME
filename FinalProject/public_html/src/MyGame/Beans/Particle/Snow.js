@@ -15,14 +15,17 @@ gEngine.Core.inheritPrototype(Snow,GameObject);
 Snow.prototype.setspeed = function(speed){
     this.mSpeed = speed;
 };
+Snow.prototype.getspeed = function(){
+    return this.mSpeed;
+};
+
+Snow.prototype.getXform = function(){
+    return GameObject.prototype.getXform.call(this);
+};
 
 Snow.prototype.update = function(){
-    
-    var trans = GameObject.prototype.getXform.call(this);
-    trans.incXPosBy(this,this.mSpeed[0]);
-    trans.incYPosBy(this,this.mSpeed[1]);
-    
     GameObject.prototype.update.call(this);
+    
 };
 
 Snow.prototype.draw = function(aCamera){
