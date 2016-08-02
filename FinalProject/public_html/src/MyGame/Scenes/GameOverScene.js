@@ -7,9 +7,9 @@
 
 function GameOverScene(){
 
-    this.kRank = "assets/bg.png";            //排行榜图片
-    this.kMenu = "assets/bg.png";            //主菜单图片
-    this.kRestart = "assets/bg.png";         //重新开始图片
+    this.kRank = "assets/logo.png";            //排行榜图片
+    this.kMenu = "assets/logo.png";            //主菜单图片
+    this.kRestart = "assets/logo.png";         //重新开始图片
     this.kGameOver = "assets/gameover.png";
     
     this.mRankSprite = null;
@@ -82,8 +82,6 @@ GameOverScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kMenu);
     gEngine.Textures.unloadTexture(this.kRestart);
     gEngine.Textures.unloadTexture(this.kGameOver);
-    
-    gEngine.Fonts.unloadFont(this.kFont);
     
     //gManager.ObjectPool.initPool();
     
