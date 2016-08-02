@@ -3,26 +3,34 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable: false */
+/*global gEngine: false, GameObject: false, gManager: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-
 function Score(renderableObj) {
- 
-    this.mRender = renderableObj;
-    this.mRender.getXform().setSize(1.5,3);
-    this.mRender.getXform().setPosition(0, -5);
+    this.mFontRender = renderableObj;
+    this._initText(this.mFontRender, 120, -30, [1, 1, 1, 1], 30);
+    
 
-    GameObject.call(this,this.mRender);
+    GameObject.call(this,this.mFontRender);
 }
-
 gEngine.Core.inheritPrototype(Score, GameObject);
-
 
 Score.prototype.update = function () {
     GameObject.prototype.update.call(this);
+    this.mFontRender.setText(String(gManager.DefaultOptions.score));
 };
+
 Score.prototype.draw = function (camera) {
     GameObject.prototype.draw.call(this,camera);
+};
+
+Score.prototype._initText = function (font, posX, posY, color, textH) {
+    font.setColor(color);
+    font.getXform().setPosition(posX, posY);
+    font.setTextHeight(textH);
+};
+
+Score.prototype.getScore = function () {
+    return this.mScore;
 };

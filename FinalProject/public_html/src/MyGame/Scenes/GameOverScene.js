@@ -3,15 +3,13 @@
  * GameOverScene是游戏结束场景
  */
 
-/* global gEngine, Scene, MyScene, gManager, vec2 */
+/* global gEngine, Scene, MyScene, gManager, vec2, Score */
 
 function GameOverScene(){
 
     this.kGameOver = "assets/gameover.png";
     
-    this.mRankSprite = null;
-    this.mRestartSprite = null;
-    this.mMenuSprite = null;
+    this.mScore = null;
 }
 
 gEngine.Core.inheritPrototype(GameOverScene, MyScene);
@@ -24,15 +22,17 @@ GameOverScene.prototype.initialize = function(){
     this.mGameOver.getXform().setSize(600, 600);
     gManager.ObjectPool.addObject(this.mGameOver,1);
     
-    this.mRank1 = new FontRenderable("1.    300");
-    this._initText(this.mRank1, -100, 0, [1, 1, 1, 1], 30);
-    gManager.ObjectPool.addObject(new GameObject(this.mRank1), 1);
-    this.mRank2 = new FontRenderable("2.    200");
-    this._initText(this.mRank2, -100, -60, [1, 1, 1, 1], 30);
-    gManager.ObjectPool.addObject(new GameObject(this.mRank2), 1);
-    this.mRank3 = new FontRenderable("3.    100");
-    this._initText(this.mRank3, -100, -120, [1, 1, 1, 1], 30);
-    gManager.ObjectPool.addObject(new GameObject(this.mRank3), 1);
+    this.mScore = new Score(new FontRenderable(String(this.mScore)));
+    gManager.ObjectPool.addObject(this.mScore, 1);
+//    this.mRank1 = new FontRenderable("1.    300");
+//    this._initText(this.mRank1, -100, 0, [1, 1, 1, 1], 30);
+//    gManager.ObjectPool.addObject(new GameObject(this.mRank1), 1);
+//    this.mRank2 = new FontRenderable("2.    200");
+//    this._initText(this.mRank2, -100, -60, [1, 1, 1, 1], 30);
+//    gManager.ObjectPool.addObject(new GameObject(this.mRank2), 1);
+//    this.mRank3 = new FontRenderable("3.    100");
+//    this._initText(this.mRank3, -100, -120, [1, 1, 1, 1], 30);
+//    gManager.ObjectPool.addObject(new GameObject(this.mRank3), 1);
     
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
@@ -61,6 +61,7 @@ GameOverScene.prototype.unloadScene = function () {
 
 GameOverScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
+    gManager.DefaultOptions.score += 1;
     //按 空格 键切换到RunningScene
     if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
         gEngine.GameLoop.stop();
