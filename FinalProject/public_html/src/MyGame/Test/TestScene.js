@@ -10,7 +10,7 @@ function TestScene(){
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";
     this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
-    this.kParticleTexture = "assets/particle.png";
+    this.kParticleTexture = "assets/FGP_1.png";
     this.kUIBanner_Path = "assets/UIBanner.png";
 }
 

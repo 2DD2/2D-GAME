@@ -22,7 +22,7 @@
           Layer = "1"
           Rp = "assets/FG_1.png"/>
     
-    <FGP_1 Rp = "assets/particle.png">
+    <FGP_1 Rp = "assets/FGP_1.png">
     
     <GUI_Num Number="2">
     <GUI_1 SizeX="40" SizeY="1.5"

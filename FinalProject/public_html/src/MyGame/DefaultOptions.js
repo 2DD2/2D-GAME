@@ -6,17 +6,23 @@ var gManager = gManager || {};
 
 
 gManager.DefaultOptions = (function(){
-    
+    var up =5;
+    var down = -5;
     var eObjectType = {
         Hero : "Hero",
         BG : "BG",
         Obstacle : "Obstacle",
         Land : "Land"
     };
-
+    function setUp(x){
+        up = x;
+    }
+    function setDown(y){
+        down= y;
+    }
     var mPublic = {
         //BackGround
-        mSpeed:0.1,
+        mSpeed:0.3,
         mBgColor:[1, 1, 1, 0.0],
         
         //Hero
@@ -29,7 +35,13 @@ gManager.DefaultOptions = (function(){
         SCREEN_HEIGHT:600,
         FULL_SCREEN_WCWIDTH:40,
         
-        eObjectType : eObjectType
+        eObjectType : eObjectType,
+        
+        //LAND
+        up:up,
+        down:down,
+        setUp:setUp,
+        setDown:setDown
     };
     return mPublic;
 }());
