@@ -147,11 +147,18 @@ DemoScene.prototype.initialize = function(){
     gManager.ObjectPool.addObject(controller,8);
     
     
-       this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
+    this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,0);
 
-//    this.mObjs = new Obstacle(this.kObj);
-//    gManager.ObjectPool.addObject(this.mObjs,0);
+    // 加载场景
+    var lander = new BGController(sceneLoader);
+    gManager.ObjectPool.addObject(lander,0);
+
+    this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
+    gManager.ObjectPool.addObject(this.mHero,0);
+
+    this.mObjs = new Obstacle(this.kObj);
+    gManager.ObjectPool.addObject(this.mObjs,0);
     
     this.mOb1 = new Obstacle(this.kObj);
     gManager.ObjectPool.addObject(this.mOb1,3);
@@ -172,6 +179,7 @@ DemoScene.prototype.draw = function(){
 };
 
 DemoScene.prototype.update = function(){
+
      var hBbox = this.mHero.getBBox();
     var check = gManager.ObjectPool.getObjectsByLayer(3).mSet;
     for(var i =0 ;i < check.length; i++){

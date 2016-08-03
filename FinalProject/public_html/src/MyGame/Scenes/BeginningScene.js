@@ -23,11 +23,12 @@ gEngine.Core.inheritPrototype(BeginningScene, MyScene);
 
 BeginningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
-    
+
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
 
     gManager.UIManager.initManager(sceneLoader);
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"));
+
     
     var uiAboutUs = new ShowAboutUsCommand();
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.A,uiAboutUs);
@@ -37,15 +38,18 @@ BeginningScene.prototype.initialize = function(){
     ui.setState(true);
     ui = gManager.UIManager.getElementbyNum(2);
     ui.setState(true);
+
 };
 
 BeginningScene.prototype.loadScene = function () {
     // 加载场景
+
     gEngine.TextFileLoader.loadTextFile(this.kSceneFile_Path,gEngine.TextFileLoader.eTextFileType.eXMLFile);
     gEngine.Textures.loadTexture(this.kUIRes_1);
     gEngine.Textures.loadTexture(this.kUIRes_2);
     gEngine.Textures.loadTexture(this.kUIRes_3);
     gEngine.Textures.loadTexture(this.kUIRes_4);
+
 
 };
 
@@ -58,6 +62,7 @@ BeginningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kUIRes_4);
     
     gEngine.Core.startScene(new RunningScene());
+
 };
 
 BeginningScene.prototype.update = function(){
@@ -79,7 +84,6 @@ BeginningScene.prototype.update = function(){
     }else if(this.mIsQuit){
         this.mTimeCount++;
     }
-    
 };
 
 BeginningScene.prototype.draw = function(){
