@@ -20,7 +20,8 @@ function RunningScene(){
     this.kSock = "assets/Sock.png";
 
     
-    this.mWayImg = "assets/land.png";
+    this.mWayImg = "assets/landup.png";
+    this.mWayImg1 = "assets/landdown.png";
     
     this.mScore =null;
 }
@@ -39,6 +40,7 @@ RunningScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kBlock);
     gEngine.Textures.loadTexture(this.kSock);    
     gEngine.Textures.loadTexture(this.mWayImg);
+    gEngine.Textures.loadTexture(this.mWayImg1);
 };
 
 
@@ -54,9 +56,9 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kSock);
     
     gEngine.Textures.unloadTexture(this.mWayImg);
-     
-       var nextScene = new GameOverScene();
-       gEngine.Core.startScene(nextScene);
+    gEngine.Textures.unloadTexture(this.mWayImg1);
+    var nextScene = new GameOverScene();
+    gEngine.Core.startScene(nextScene);
 
 };
 
