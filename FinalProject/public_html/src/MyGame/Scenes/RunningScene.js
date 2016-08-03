@@ -15,7 +15,7 @@ function RunningScene(){
     this.kUIBanner_Path = "assets/UIBanner.png";
     
     // Hero 和障碍物
-    this.kHero = "assets/hero.png";
+    this.kHero = "assets/herosheet.png";
     this.kBlock = "assets/Block.png";
     this.kSock = "assets/Sock.png";
 
