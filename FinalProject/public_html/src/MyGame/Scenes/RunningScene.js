@@ -66,8 +66,7 @@ RunningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
     var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
-    
-   // gManager.UIManager.initManager(sceneLoader);
+    gManager.UIManager.initManager(sceneLoader);
     
     var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,1);
