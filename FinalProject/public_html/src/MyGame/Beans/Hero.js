@@ -59,8 +59,12 @@ Hero.prototype.draw = function (camera) {
 };
 
 Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
-    var v = this.getPhysicsComponent().getVelocity();
-    v[1] = 20 *( -this.mGravity );
+    var v = this.getPhysicsComponent().getVelocity(); 
+    console.log(v[1])  
+    if(Math.abs(v[1]) < 3){
+        v[1] = 20 ;
+    }
+
 };
      
 Hero.prototype.antiJump= function () {  
