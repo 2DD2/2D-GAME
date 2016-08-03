@@ -75,6 +75,7 @@ WelcomeScene.prototype.unloadScene = function () {
 
 WelcomeScene.prototype.update = function(){
     
+    
     this.mTimeNow++;
     if(this.mTimeShow > this.mTimeNow){
         this.mColor[3] = 1 - (this.mTimeNow / this.mTimeShow);
@@ -84,13 +85,6 @@ WelcomeScene.prototype.update = function(){
         this.mEmitter.setAlpha(1 - (this.mTimeNow - this.mTimeShow) / (this.mTimeOff - this.mTimeShow));
     }else if(this.mTimeTurn < this.mTimeNow){
         gEngine.GameLoop.stop();
-    }
-    
-    this.myTimer -= 10;
-    if(this.myTimer > 0 || this.myTimer <1800){
-        if(this.mColor[3]>=0 && this.mColor[3]<=255){
-            this.mColor[3] += 1;
-        }
     }
     
     MyScene.prototype.update.call(this);

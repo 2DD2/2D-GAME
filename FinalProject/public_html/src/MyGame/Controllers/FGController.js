@@ -83,7 +83,7 @@ FGController.prototype.draw = function (aCamera) {
 FGController.prototype._reset = function(par){
     par.getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2,
                                    8 + gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 4 * Math.random() - gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 * Math.random());
-    var size = 0.2 + 0.8 * Math.random();
+    var size = 0.2 + 0.5 * Math.random();
     par.getXform().setSize(size,size);          
     par.setspeed([0.15 + 0.15 * Math.random(),0.1 * Math.random()]);
     
