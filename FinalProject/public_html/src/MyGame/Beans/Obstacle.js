@@ -104,3 +104,8 @@ function DangerA(blockTexture,n){
     
    return mSet;
 }
+
+
+function BlockController(){
+    
+}

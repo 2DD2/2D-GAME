@@ -16,7 +16,7 @@ function Hero(renderableObj) {
  
     this.mRender = renderableObj;
   
-    this.kXDelta = 1;
+    this.kXDelta = 0.2;
     this.kYDelta = 2.0;
     
     this.mGravity = -1;
