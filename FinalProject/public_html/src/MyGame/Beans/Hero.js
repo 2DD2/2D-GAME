@@ -21,12 +21,19 @@ function Hero(renderableObj) {
     
     this.mGravity = -1;
     
-    this.mRender.getXform().setSize(1.5,3);
+    this.mRender.setColor([1, 1, 1, 0]);
+    this.mRender.getXform().setSize(3,3);
     this.mRender.getXform().setYPos(4);
+    this.mRender.setSpriteSequence(128, 0,
+                                102.4, 102,
+                                4,
+                                0);
+    this.mRender.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+    this.mRender.setAnimationSpeed(50);
     
     GameObject.call(this,this.mRender);
         
-    this.mRigid = new RigidRectangle(this.mRender.getXform(), 1.5, 3);
+    this.mRigid = new RigidRectangle(this.mRender.getXform(), 3, 3);
     this.mRigid.setMass(0.7);  // less dense than Minions
     this.mRigid.setRestitution(0.3);
     //this.getPhysicsComponent().setAcceleration([0,-10]);
@@ -43,8 +50,12 @@ Hero.prototype.update = function () {
     if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)){
         v[0] = -2;
     }
-    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right && this.getXform().getXPos <15 )) {
-        v[0] = 2;
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right )) {
+        if(this.getXform().getXPos() <15){
+           v[0] = 2;
+      }else{
+           v[0]  = 0;
+        }
     }
 
     GameObject.prototype.update.call(this);
@@ -60,7 +71,6 @@ Hero.prototype.draw = function (camera) {
 
 Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
     var v = this.getPhysicsComponent().getVelocity(); 
-    console.log(v[1])  
     if(Math.abs(v[1]) < 3){
         v[1] = 20 ;
     }

@@ -15,13 +15,16 @@ function RunningScene(){
     this.kUIBanner_Path = "assets/UIBanner.png";
     
     // Hero 和障碍物
-    this.kHero = "assets/hero.png";
+    this.kHero = "assets/herosheet.png";
     this.kBlock = "assets/Block.png";
     this.kSock = "assets/Sock.png";
+    this.kTarget = "assets/Target.png";
 
     
     this.mWayImg = "assets/landup.png";
     this.mWayImg1 = "assets/landdown.png";
+    this.mWayImg2 = "assets/landupnormal.png";
+    this.mWayImg3 = "assets/landdownnormal.png";
     
     this.mScore =null;
 }
@@ -38,9 +41,13 @@ RunningScene.prototype.loadScene = function(){
 
     gEngine.Textures.loadTexture(this.kHero);
     gEngine.Textures.loadTexture(this.kBlock);
-    gEngine.Textures.loadTexture(this.kSock);    
+    gEngine.Textures.loadTexture(this.kSock);   
+    gEngine.Textures.loadTexture(this.kTarget); 
+    
     gEngine.Textures.loadTexture(this.mWayImg);
     gEngine.Textures.loadTexture(this.mWayImg1);
+    gEngine.Textures.loadTexture(this.mWayImg2);
+    gEngine.Textures.loadTexture(this.mWayImg3);
 };
 
 
@@ -54,10 +61,14 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kHero);
     gEngine.Textures.unloadTexture(this.kBlock);
     gEngine.Textures.unloadTexture(this.kSock);
+    gEngine.Textures.unloadTexture(this.kTarget);
     
     gEngine.Textures.unloadTexture(this.mWayImg);
     gEngine.Textures.unloadTexture(this.mWayImg1);
-    
+
+    gEngine.Textures.unloadTexture(this.mWayImg2);
+    gEngine.Textures.unloadTexture(this.mWayImg3);
+
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 
@@ -84,16 +95,19 @@ RunningScene.prototype.initialize = function(){
     var landController = new LandController();
     gManager.ObjectPool.addObject(landController,1);
     
-    this.mBlock = new BlockA(this.kBlock);
-    for(var i = 0 ;i< this.mBlock.length ; i++){
-        gManager.ObjectPool.addObject(this.mBlock[i],4);
-    }
-    
-    this.mDanger = new DangerA(this.kSock);
-    for(var i = 0 ;i< this.mDanger.length ; i++){
-         gManager.ObjectPool.addObject(this.mDanger[i],5);
-    }
-    
+//    this.mBlock = new BlockA(this.kBlock);
+//    for(var i = 0 ;i< this.mBlock.length ; i++){
+//        gManager.ObjectPool.addObject(this.mBlock[i],4);
+//    }
+//    
+//    this.mDanger = new DangerA(this.kSock);
+//    for(var i = 0 ;i< this.mDanger.length ; i++){
+//         gManager.ObjectPool.addObject(this.mDanger[i],5);
+//    }
+//    
+
+    this.block = new Block(this.kTarget);
+    gManager.ObjectPool.addObject(this.block,4);
     
     
     gManager.InputManager.initManager();
@@ -115,7 +129,7 @@ RunningScene.prototype.update = function(){
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
-     if( gManager.DefaultOptions.score % 1024 < 1){
+     if( gManager.DefaultOptions.score % 2000 < 1){
           gManager.DefaultOptions.mLevel +=1;
      }
      
@@ -123,7 +137,11 @@ RunningScene.prototype.update = function(){
    // physics simulation
     this._physicsSimulation();
     
-    
+//    console.log(this.block);
+//    if(gManager.DefaultOptions.score %20 <1){
+//       this.block.update();
+//    }
+
     MyScene.prototype.update.call(this);
     
 };

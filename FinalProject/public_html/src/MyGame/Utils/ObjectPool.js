@@ -59,7 +59,7 @@ gManager.ObjectPool = (function () {
     var addtoReusePool = function(ob,type){
         for(var i = 0; i < mReusePools.length;i++){
             if(mReusePools[i].getName() === type){
-                mReusePools[i].add(ob);
+                mReusePools.add(ob);
                 return;
             }
         }

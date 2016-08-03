@@ -22,11 +22,16 @@
  * 
  */
 function LandController(){
-    //list of lands
+    
+    /*
+     * 参数
+     */
     this.mUpLands = [];
     this.mDownLands = [];
     this.kLandResdown = "assets/landdown.png";
+    this.kLandResdownNormal = "assets/landdownnormal.png";
     this.kLandResup = "assets/landup.png";
+    this.kLandResupNormal = "assets/landupnormal.png";
     
     this.kPerLandLength = 10;
     this.kPerLandHeight = 6;
@@ -38,13 +43,36 @@ function LandController(){
     this.mLandSpeed = -0.2;
     
     
+    
+    
+    
+    
+    
+    
+    
+    /*
+     * 初始化灯光
+     */
+    this.mLight = new Light();;
+    this.mLight.setColor([0.8,0.6,0.0,1.0]);
+    this.mLight.setXPos(-23);
+    this.mLight.setYPos(0);
+    this.mLight.setZPos(0);
+    this.mLight.setNear(20);
+    this.mLight.setFar(40);
+    this.mLight.setIntensity(10);
+
+   
+    /*
+     * 初始化地面
+     */
     for(var i = 0 ; i < this.mMaxLandNum; i++){
-        this.mUpLands[i] = new Way(new TextureRenderable(this.kLandResup));
+        this.mUpLands[i] = new Way(new IllumRenderable(this.kLandResup,this.kLandResupNormal),this.mLight);
         this.mUpLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kUpPosY);
         this.mUpLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mUpLands[i],3);
         
-        this.mDownLands[i] = new Way(new TextureRenderable(this.kLandResdown));
+        this.mDownLands[i] = new Way(new IllumRenderable(this.kLandResdown,this.kLandResdown),this.mLight);
         this.mDownLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kDownPosY);
         this.mDownLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mDownLands[i],3);
@@ -65,3 +93,4 @@ LandController.prototype.update = function(){
 
 LandController.prototype.draw = function (aCamera) {
 };
+
