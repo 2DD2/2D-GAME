@@ -7,7 +7,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable, gManager: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -17,98 +17,45 @@ function Hero(renderableObj) {
     this.mRender = renderableObj;
     this.mGravity = -0.02;
     
-    this.Top = 2.5;
-    this.Bot = -2.5;
-
-    this.mFirst = 0.2;
-    this.mOnGround = true;
-//    this.mRender.setElementPixelPositions(0, 10, 0, 10);    
-    this.setCurrentFrontDir(0,1);
-  //  this.incSpeedBy(3);
+    this.kXDelta = 1;
+    this.kYDelta = 2.0;
+    
     this.mRender.getXform().setSize(1.5,3);
-    this.mRender.getXform().setPosition(0, -5);
-
+    this.mRender.getXform().setYPos(4);
+    
     GameObject.call(this,this.mRender);
+        
+    this.mRigid = new RigidRectangle(this.mRender.getXform(), 1.5, 3);
+    this.mRigid.setMass(0.7);  // less dense than Minions
+    this.mRigid.setRestitution(0.3);
+    this.mRigid.setColor([1, 1, 1, 1]);
+    this.mRigid.setDrawBounds(true);
+    this.setPhysicsComponent(this.mRigid);   
 }
 
 gEngine.Core.inheritPrototype(Hero, GameObject);
-
-
 Hero.prototype.update = function () {
-    
-    if (this.getXform().getYPos() < this.Bot){
-        this.getXform().setYPos(this.Bot);
-        this.mOnGround = true;
-    }else if(this.getXform().getYPos()> this.Top){
-         this.getXform().setYPos(this.Top);
-        this.mOnGround = true;
-    }
-    if (this.mOnGround) {
-        this.mSpeed = 0;
-    } else {
-        this.mSpeed += this.mGravity;
-    } 
-    if(this.getXform().getXPos()< -20 ){
+     if(this.getXform().getXPos()< -20 ){
         this.Die();
     }
     GameObject.prototype.update.call(this);
 };
 Hero.prototype.draw = function (camera) {
+    
     GameObject.prototype.draw.call(this,camera);
 };
-
-Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
-    if(this.mOnGround){
-        if(this.mGravity > 0){
-                this.setSpeed(-this.mFirst);
-           }else{
-                this.setSpeed(this.mFirst);
-           }   
-    }
-   this.mOnGround = false;
-   this.resetFirstSpeed();
-};
-
-Hero.prototype.antiJump= function () {  
-    if(this.mGravity < 0){
-     this.getXform().setRotationInDegree(180);    
-    }else{
-     this.getXform().setRotationInDegree(0);
-    }
-
-    if(this.mOnGround){
-        if(this.mGravity > 0){
-                this.setSpeed(-this.mFirst);
-           }else{
-                this.setSpeed(this.mFirst);
-           }   
-    }
-   this.mOnGround = false;
-    
-    this.mGravity = - this.mGravity;
-};
-
-Hero.prototype.Die = function () {
+ Hero.prototype.Die = function () {
+     
    gEngine.GameLoop.stop();
 };
 
-Hero.prototype.setOnGround = function (bool) {
-    this.mOnGround = bool;
+Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
+    var v = this.getPhysicsComponent().getVelocity();
+        v[1] += this.kYDelta;
 };
-Hero.prototype.resetFirstSpeed = function(){
-    this.mFirst = 0.2;
+     
+Hero.prototype.antiJump= function () {  
+   var g = this.getPhysicsComponent().getAcceleration();
+   var g1 = [g[0], -g[1]];
+   this.getPhysicsComponent().setAcceleration(g1);
 };
-Hero.prototype.IncFirstSpeed = function(){
-    if( this.mFirst < 0.40){
-         this.mFirst = this.mFirst + 0.01;
-    }
-};
-
-Hero.prototype.moveX=function (x){
-    this.getXform().setXPos(x);
-};
-
-//Hero.protype.setLand = function(up,down){
-//    this.Top = up;
-//    this.Bot = down;
-//};

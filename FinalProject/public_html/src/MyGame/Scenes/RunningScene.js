@@ -73,12 +73,11 @@ RunningScene.prototype.initialize = function(){
     
     
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
-    gManager.ObjectPool.addObject(this.mHero,4);
+    gManager.ObjectPool.addObject(this.mHero,3);
     
     
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
-        console.log(this.mBlock[i],i);
         gManager.ObjectPool.addObject(this.mBlock[i],3);
     }
     
@@ -96,19 +95,18 @@ RunningScene.prototype.initialize = function(){
     this.mScore = new Score(new FontRenderable(""), 0, -7, [1, 1, 1, 1], 1);
     gManager.ObjectPool.addObject(this.mScore, 6);
     
-    gManager.ObjectPool.addObject(this.mWay,1);
-    gManager.ObjectPool.addObject(this.mWay1,1);
-    gManager.ObjectPool.addObject(this.mWay2,1);
-    gManager.ObjectPool.addObject(this.mWay3,1);
-    gManager.ObjectPool.addObject(this.mWay4,1);  
+    gManager.ObjectPool.addObject(this.mWay,2);
+    gManager.ObjectPool.addObject(this.mWay1,2);
+    gManager.ObjectPool.addObject(this.mWay2,2);
+    gManager.ObjectPool.addObject(this.mWay3,2);
+    gManager.ObjectPool.addObject(this.mWay4,2);  
   
     gManager.InputManager.initManager();
    
     // 跳
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(this.mHero));
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     
-    //反重力
+//    //反重力
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
     
     
@@ -120,29 +118,18 @@ RunningScene.prototype.draw = function(){
 };
 
 RunningScene.prototype.update = function(){
-    var hBbox = this.mHero.getBBox();
-    var block = gManager.ObjectPool.getObjectsByLayer(3).mSet;
     
-    for(var i =0 ;i < block.length; i++){
-         if(hBbox.intersectsBound(block[i].getBBox())){
-             var offsetX = block[i].getXform().getWidth() ;
-             this.mHero.getXform().setXPos(block[i].getXform().getXPos() -  offsetX);
-         }
-     }
-     var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
-     var h =[];
-      for(var i =0 ;i < danger.length; i++){
-         if(this.mHero.pixelTouches(danger[i],h)){
-             this.mHero.Die();
-         }
-     }
-     
      // 分数显示
      gManager.DefaultOptions.score += 1;
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
-
+     
+     
+   // physics simulation
+    this._physicsSimulation();
+    
+    
     MyScene.prototype.update.call(this);
     
 };
