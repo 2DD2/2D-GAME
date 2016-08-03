@@ -119,7 +119,9 @@ RunningScene.prototype.update = function(){
           var offsetX =  block[i].getXform().getWidth();
           var offsetY =  block[i].getXform().getHeight();
          if(hBbox.boundCollideStatus(block[i].getBBox())=== 2){
-             this.mHero.getXform().setXPos(block[i].getXform().getXPos() - offset);
+             this.mHero.getXform().setXPos(block[i].getXform().getXPos() - offsetX);
+         }else if(hBbox.boundCollideStatus(block[i].getBBox())=== 4){
+              this.mHero.getXform().setPosistion(block[i].getXform().getXPos(),block[i].getXform().getYPos()+offsetY);
          }
      }
      var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
