@@ -79,15 +79,16 @@ RunningScene.prototype.initialize = function(){
     controller = new FGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,8);
     
-    
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,2);
     
     /*
      * 这个landController随便加哪个层都行
      */
-    var landController = new LandController();
+    var light = new MyLight(this.mHero);
+    var landController = new LandController(light);
     gManager.ObjectPool.addObject(landController,1);
+    gManager.ObjectPool.addObject(light,7);
     
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){

@@ -21,7 +21,7 @@
  * 
  * 
  */
-function LandController(){
+function LandController(light){
     
     /*
      * 参数
@@ -53,27 +53,18 @@ function LandController(){
     /*
      * 初始化灯光
      */
-    this.mLight = new Light();;
-    this.mLight.setColor([0.8,0.6,0.0,1.0]);
-    this.mLight.setXPos(-23);
-    this.mLight.setYPos(0);
-    this.mLight.setZPos(0);
-    this.mLight.setNear(20);
-    this.mLight.setFar(40);
-    this.mLight.setIntensity(10);
+    this.mLight = light;
 
-    
-    
     /*
      * 初始化地面
      */
     for(var i = 0 ; i < this.mMaxLandNum; i++){
-        this.mUpLands[i] = new Way(new IllumRenderable(this.kLandResup,this.kLandResupNormal),this.mLight);
+        this.mUpLands[i] = new Way(new IllumRenderable(this.kLandResup,this.kLandResupNormal),this.mLight.getLight());
         this.mUpLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kUpPosY);
         this.mUpLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mUpLands[i],3);
         
-        this.mDownLands[i] = new Way(new IllumRenderable(this.kLandResdown,this.kLandResdown),this.mLight);
+        this.mDownLands[i] = new Way(new IllumRenderable(this.kLandResdown,this.kLandResdown),this.mLight.getLight());
         this.mDownLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kDownPosY);
         this.mDownLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mDownLands[i],3);
