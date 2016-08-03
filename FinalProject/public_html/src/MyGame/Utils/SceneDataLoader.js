@@ -92,19 +92,24 @@ SceneDataLoader.prototype.LoadUI = function(name){
     var posY = Number(elm[0].getAttribute("Y"));
     var scaleX = Number(elm[0].getAttribute("SizeX"));
     var scaleY = Number(elm[0].getAttribute("SizeY"));
-    
+    var hideX;
+    var hideY;
     var ui;
     if(type === "label"){
         //ui = new GameObject();
     }else if(type === "button"){
         //ui = new GameObject();
     }else if(type === "score"){
-        //ui = new GameObject();
+        hideX = Number(elm[0].getAttribute("hX"));
+        hideY = Number(elm[0].getAttribute("hY"));
+        ui = new UIScore(new FontRenderable(""),[posX,posY],[hideX,hideY]);
+        ui.getXform().setSize(scaleX,scaleY);
+        return ui;
     }else if(type === "square"){
         ui = new GameObject(new TextureRenderable(path));
     }else if(type === "animUI"){
-        var hideX = Number(elm[0].getAttribute("hX"));
-        var hideY = Number(elm[0].getAttribute("hY"));
+        hideX = Number(elm[0].getAttribute("hX"));
+        hideY = Number(elm[0].getAttribute("hY"));
         ui = new BaseUI(new TextureRenderable(path),[posX,posY],[hideX,hideY]);
         ui.getXform().setSize(scaleX,scaleY);
         return ui;

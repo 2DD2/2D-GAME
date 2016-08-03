@@ -31,6 +31,8 @@ GameOverScene.prototype.initialize = function(){
     ui.setState(true);
     ui = gManager.UIManager.getElementbyNum(2);
     ui.setState(true);
+    ui = gManager.UIManager.getElementbyNum(3);
+    ui.setState(true);
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
     

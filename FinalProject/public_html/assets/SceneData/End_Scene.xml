@@ -7,7 +7,7 @@
               Type="0"
               />
     
-    <GUI_Num Number="3">
+    <GUI_Num Number="4">
     <GUI_1 SizeX="40" SizeY="20"
             X="0" Y="0"
             Rp = "assets/gameover.jpg"
@@ -24,5 +24,11 @@
             hY = "-11"
             Rp = "assets/restartbtn.png"
             Type = "animUI"/>
+   <GUI_4 SizeX="4" SizeY="1.5"
+            X="-0.5" Y="0"
+            hX = "0"
+            hY = "15"
+            Rp = ""
+            Type = "score"/>
            
 </MyGameLevel>

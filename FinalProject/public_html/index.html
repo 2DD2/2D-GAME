@@ -137,12 +137,12 @@
 
         <script type="text/javascript" src="src/MyGame/Beans/Hero.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/Obstacle.js"></script>
-        <script type="text/javascript" src="src/MyGame/Beans/UIButton.js"></script>
 
-        <script type="text/javascript" src="src/MyGame/Beans/Score.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/Particle/Snow.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/Particle/RandomColorSq.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/UI/BaseUI.js"></script>
+        <script type="text/javascript" src="src/MyGame/Beans/UI/UIScore.js"></script>
+        
         <script type="text/javascript" src="src/MyGame/Utils/ReusePool.js"></script>
 
         <script type="text/javascript" src="src/MyGame/Beans/Way.js"></script>
@@ -155,7 +155,7 @@
     
     
     <body onload="
-        var mMain = new WelcomeScene();
+        var mMain = new RunningScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
         <div style="width:1200px;margin:0 auto;">
