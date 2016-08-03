@@ -11,7 +11,7 @@
 function Obstacle(spriteTexture,flag) {
     this.mRender = new SpriteRenderable(spriteTexture);
     //this.mSize = [10,10];
-    this.XPos = Math.random(5,15)+20;
+    this.XPos = 25;
         
     if(flag > 0){
            this.YPos =3.2;
@@ -39,11 +39,13 @@ Obstacle.prototype.draw = function(camera){
     GameObject.prototype.draw.call(this,camera);
 };
 
-function ObstacleSet(spriteTexture,n){
+function SetA(spriteTexture,n){
     var mSet = [];
     for(var i =0 ;i<n;i++){
-        var temp = new ObstacleSet(spriteTexture);
+        var temp = new Obstacle(spriteTexture);
         mSet.push(temp);
+        
+       // mSet[i].getXform().setXPos
     }
    return mSet;
 }

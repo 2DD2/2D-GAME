@@ -18,7 +18,7 @@ function RunningScene(){
     this.kHero = "assets/hero.png";
     this.kObj = "assets/logo.jpg";
     
-    this.mWayImg = "assets/LAND_01.png";
+    this.mWayImg = "assets/land.png";
 
 }
 
@@ -215,3 +215,9 @@ RunningScene.prototype.update = function(){
 //RunningScene.prototype.draw = function(){
 //    MyScene.prototype.draw.call(this);
 //};
+
+RunningScene.prototype._initText = function (font, posX, posY, color, textH) {
+    font.setColor(color);
+    font.getXform().setPosition(posX, posY);
+    font.setTextHeight(textH);
+};

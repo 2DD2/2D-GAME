@@ -1,5 +1,18 @@
-/**
- * Created by SmirkinDino on 2016/7/29.
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 
 

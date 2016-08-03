@@ -5,7 +5,20 @@
  */
 
 /*
- * by GCH
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * By 龚楚涵 (Dino) in Singapore
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 function ReusePool(name){
     
