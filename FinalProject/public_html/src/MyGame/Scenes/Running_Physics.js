@@ -20,10 +20,16 @@ RunningScene.prototype._physicsSimulation = function() {
     var hero = this.mHero;
     var land = gManager.ObjectPool.getObjectsByLayer(3);
     var block = gManager.ObjectPool.getObjectsByLayer(4);
+    var target = gManager.ObjectPool.getObjectsByLayer(5);
     
     gEngine.Physics.processObjSet(hero, land);
+    gEngine.Physics.processObjSet(hero, target);
     gEngine.Physics.processObjSet(hero, block);
-    gEngine.Physics.processSetSet(block,land);
+    
+    gEngine.Physics.processSetSet(block,land);       
+    gEngine.Physics.processSetSet(block,target);
+    gEngine.Physics.processSetSet(target,land);
+    
    
 };
 

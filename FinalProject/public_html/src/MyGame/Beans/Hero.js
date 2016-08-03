@@ -1,7 +1,7 @@
-// By lijilan
+
 
 /* File: Hero.js 
- *
+ * Created By Camixxx
  * Creates and initializes the Hero ()
  * overrides the update function of GameObject to define
  */
@@ -45,18 +45,23 @@ Hero.prototype.update = function () {
     if(this.getXform().getXPos()< -20 || this.getXform().getYPos()< -10 || this.getXform().getYPos()> 10){
         this.Die();
     }
-    
+    for( var i =0 ;i < gManager.ObjectPool.getObjectsByLayer(5).length;i++){
+        var ob=gManager.ObjectPool.getObjectsByLayer(5)[i];
+        if(this.getBBox().intersectsBound(ob.getBBox())) {
+            this.Die();
+        }
+    }
     var v = this.getPhysicsComponent().getVelocity();
     if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.A)){
         v[0] = -10;
     }
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D )) {
-        if(this.getXform().getXPos() < 7){
+        if(this.getXform().getXPos() < 10){
            v[0] = 15;
-      }else{
-          
-           v[0] = -5;
-        }
+       }
+    }
+    if(this.getXform().getXPos() > 10){
+        v[0] = -5;
     }
     this.mRender.updateAnimation();
     GameObject.prototype.update.call(this);

@@ -28,7 +28,7 @@ function RunningScene(){
     this.mWayImg4 = "assets/control.png";
     
     this.mScore =null;
-
+    gManager.DefaultOptions.mLevel=0;
 }
 
 gEngine.Core.inheritPrototype(RunningScene,MyScene);
@@ -74,6 +74,7 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.mWayImg4);
     
     this.mScore =null;
+    gManager.DefaultOptions.mLevel=0;
     
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
@@ -127,16 +128,17 @@ RunningScene.prototype.initialize = function(){
 //        gManager.ObjectPool.addObject(this.mBlock[i],4);
 //    }
 //    
-//    this.mDanger = new DangerA(this.kSock);
-//    for(var i = 0 ;i< this.mDanger.length ; i++){
-//         gManager.ObjectPool.addObject(this.mDanger[i],5);
-//    }
-//    
+    this.mDanger = new DangerB(this.kSock);
+    for(var i = 0 ;i< this.mDanger.length ; i++){
+         gManager.ObjectPool.addObject(this.mDanger[i],5);
+    }
+    
 
-    this.block = new Block(this.kTarget);
-    gManager.ObjectPool.addObject(this.block,4);
-    
-    
+    this.blockmgr = new BlockController(this.kTarget);
+    gManager.ObjectPool.addObject(this.blockmgr,1);
+//    this.targetmgr = new TargetController(this.kSock);
+//    gManager.ObjectPool.addObject(this.targetmgr,1);
+//    
     gManager.InputManager.initManager();
     
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.W, new JumpCommand(this.mHero));
@@ -157,18 +159,11 @@ RunningScene.prototype.update = function(){
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
-     if( gManager.DefaultOptions.score % 2000 < 1){
-          gManager.DefaultOptions.mLevel +=1;
-     }
-     
+
      
    // physics simulation
     this._physicsSimulation();
     
-//    console.log(this.block);
-//    if(gManager.DefaultOptions.score %20 <1){
-//       this.block.update();
-//    }
 
     MyScene.prototype.update.call(this);
     
