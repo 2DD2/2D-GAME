@@ -75,9 +75,9 @@ Hero.prototype.antiJump= function () {
     }else{
      this.getXform().setRotationInDegree(0);
     }
-    var w=this.getXform().getWidth();
-    var h=this.getXform().getHeight();
-    this.getXform().setSize(-w,h);
+//    var w=this.getXform().getWidth();
+//    var h=this.getXform().getHeight();
+//    this.getXform().setSize(-w,h);
 
     this.Jump();
     

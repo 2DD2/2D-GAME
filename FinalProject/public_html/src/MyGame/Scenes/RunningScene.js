@@ -16,7 +16,8 @@ function RunningScene(){
        
     this.kUIBanner_Path = "assets/UIBanner.png";
     this.kHero = "assets/hero.png";
-    this.kObj = "assets/logo.jpg";
+    this.kBlock = "assets/Block.png";
+    this.kSock = "assets/Sock.png";
     
     this.mWayImg = "assets/land.png";
 
@@ -32,8 +33,8 @@ RunningScene.prototype.loadScene = function(){
     gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
     
     gEngine.Textures.loadTexture(this.kHero);
-    gEngine.Textures.loadTexture(this.kObj);
-    
+    gEngine.Textures.loadTexture(this.kBlock);
+    gEngine.Textures.loadTexture(this.kSock);    
     gEngine.Textures.loadTexture(this.mWayImg);
 };
 
@@ -44,9 +45,10 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kParticleTexture);
     
     gEngine.Textures.unloadTexture(this.kHero);
-    gEngine.Textures.unloadTexture(this.kObj);
+    gEngine.Textures.unloadTexture(this.kBlock);
+    gEngine.Textures.unloadTexture(this.kSock);
     
-     gEngine.Textures.unloadTexture(this.mWayImg);
+    gEngine.Textures.unloadTexture(this.mWayImg);
      
        var nextScene = new GameOverScene();
        gEngine.Core.startScene(nextScene);
@@ -68,15 +70,18 @@ RunningScene.prototype.initialize = function(){
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,4);
     
-    this.mOb1 = new Obstacle(this.kObj,1);
-    gManager.ObjectPool.addObject(this.mOb1,3);
-    this.mOb2 = new Obstacle(this.kObj,1);
-    gManager.ObjectPool.addObject(this.mOb2,3);
-    this.mOb3 = new Obstacle(this.kObj,-1);
-    gManager.ObjectPool.addObject(this.mOb3,3);
-    this.mOb4 = new Obstacle(this.kObj,-1);
-    gManager.ObjectPool.addObject(this.mOb4,3);
-     
+    
+    this.mBlock = new BlockA(this.kBlock);
+    for(var i = 0 ;i< this.mBlock.length ; i++){
+        console.log(this.mBlock[i],i);
+         gManager.ObjectPool.addObject(this.mBlock[i],3);
+    }
+    
+    this.mDanger = new DangerA(this.kSock);
+    for(var i = 0 ;i< this.mDanger.length ; i++){
+         gManager.ObjectPool.addObject(this.mDanger[i],5);
+    }
+   
     this.mWay = new Way(this.mWayImg,-15);
     this.mWay1 = new Way(this.mWayImg,-5);
     this.mWay2 = new Way(this.mWayImg,5);
@@ -106,11 +111,21 @@ RunningScene.prototype.draw = function(){
 
 RunningScene.prototype.update = function(){
     var hBbox = this.mHero.getBBox();
-    var check = gManager.ObjectPool.getObjectsByLayer(3).mSet;
-    for(var i =0 ;i < check.length; i++){
-         if(hBbox.intersectsBound(check[i].getBBox())){
-             console.log(hBbox.boundCollideStatus(check[i].getBBox()));
-             this.mHero.getXform().setXPos(check[i].getXform().getXPos()- check[i].getXform().getWidth());
+    var block = gManager.ObjectPool.getObjectsByLayer(3).mSet;
+    for(var i =0 ;i < block.length; i++){
+         if(hBbox.intersectsBound(block[i].getBBox())){
+            
+             this.mHero.getXform().setXPos(block[i].getXform().getXPos()- block[i].getXform().getWidth());
+         }
+     }
+     var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
+     
+      for(var i =0 ;i < danger.length; i++){
+           console.log(hBbox.boundCollideStatus(danger[i].getBBox()));
+         if(hBbox.intersectsBound(danger[i].getBBox())){
+             alert("You are died");
+             this.mHero.Die();
+            
          }
      }
 
