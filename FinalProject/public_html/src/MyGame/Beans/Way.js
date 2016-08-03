@@ -13,7 +13,7 @@ function Way(spriteTexture,light) {
     spriteTexture.addLight(light);
     var rigidShape = new RigidRectangle(this.getXform(), 30, 6);
     rigidShape.setMass(0);  // ensures no movements!
-    rigidShape.setFriction(0.1);
+    rigidShape.setFriction(0.5);
     this.setPhysicsComponent(rigidShape);
 
 }

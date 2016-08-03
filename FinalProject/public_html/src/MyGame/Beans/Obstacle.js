@@ -92,6 +92,7 @@ function Block(spriteTexture,name) {
     r.setMass(1);  // less dense than Minions
     r.setRestitution(20);
     r.setVelocity([-20,-10]);
+    r.setAcceleration([-10,-10]);
     this.setPhysicsComponent(r);
     
 }

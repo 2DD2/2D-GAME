@@ -139,8 +139,8 @@ RunningScene.prototype.initialize = function(){
     
     gManager.InputManager.initManager();
     
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));    //反重力
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.W, new JumpCommand(this.mHero));
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new AntiCommand(this.mHero));    //反重力
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.H,new ShowControlCommand());
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
