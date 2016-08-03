@@ -86,13 +86,14 @@ WelcomeScene.prototype.update = function(){
         gEngine.GameLoop.stop();
     }
     
-    MyScene.prototype.update.call(this);
     this.myTimer -= 10;
     if(this.myTimer > 0 || this.myTimer <1800){
         if(this.mColor[3]>=0 && this.mColor[3]<=255){
             this.mColor[3] += 1;
         }
     }
+    
+    MyScene.prototype.update.call(this);
 };
 
 WelcomeScene.prototype.draw = function(){

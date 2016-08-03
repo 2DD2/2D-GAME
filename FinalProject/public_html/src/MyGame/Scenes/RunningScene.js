@@ -14,8 +14,6 @@ function RunningScene(){
     this.kParticleTexture = "assets/FGP_1.png";
     this.kUIBanner_Path = "assets/UIBanner.png";
     
-    this.kUIBanner_Path = "assets/UIBanner.png";
-    
     // Hero 和障碍物
     this.kHero = "assets/hero.png";
     this.kBlock = "assets/Block.png";
@@ -81,7 +79,7 @@ RunningScene.prototype.initialize = function(){
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
         console.log(this.mBlock[i],i);
-         gManager.ObjectPool.addObject(this.mBlock[i],3);
+        gManager.ObjectPool.addObject(this.mBlock[i],3);
     }
     
     this.mDanger = new DangerA(this.kSock);
