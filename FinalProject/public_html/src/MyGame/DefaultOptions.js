@@ -6,20 +6,12 @@ var gManager = gManager || {};
 
 
 gManager.DefaultOptions = (function(){
-    var up =2.5;
-    var down = -2.5;
     var eObjectType = {
         Hero : "Hero",
         BG : "BG",
         Obstacle : "Obstacle",
         Land : "Land"
     };
-    function setUp(x){
-        up = x;
-    }
-    function setDown(y){
-        down= y;
-    }
     var mPublic = {
         //BackGround
         mSpeed:0.3,
@@ -36,15 +28,11 @@ gManager.DefaultOptions = (function(){
         FULL_SCREEN_WCWIDTH:40,
         
         //Land way 
-        mWaySpeed: 0.2,
-        
+        mWaySpeed: 0.2,       
         eObjectType : eObjectType,
         
-        //LAND
-        up:up,
-        down:down,
-        setUp:setUp,
-        setDown:setDown,
+        //Level
+        mLevel:1,
         
         //Score
         score:0,

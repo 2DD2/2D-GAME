@@ -10,12 +10,18 @@
 
 function Obstacle(spriteTexture,flag, firstXPos) {
     this.mRender = new SpriteRenderable(spriteTexture);
-    this.FirstPos = firstXPos;
-//    if(flag > 0){
-//           this.YPos =3.2;
-//        }else{
-//          this.YPos = -3.2;
-//    }
+    if(firstXPos){
+        this.FirstPos = firstXPos;
+    }else{
+        this.FirstPos = 25;
+    }
+    if(flag === 1){
+        this.YPos =3.2;
+    }else if(flag === -1){
+          this.YPos = -3.2;
+    }else{
+        this.YPos = 0;
+    }
      this.YPos =4.2;
     GameObject.call(this,this.mRender);
     this.setSpeed(gManager.DefaultOptions.mWaySpeed/2);
@@ -106,6 +112,16 @@ function DangerA(blockTexture,n){
 }
 
 
-function BlockController(){
+function BlockController(blockTexture){
+    this.mSet=[];
+    var Block1 = new GameObject(blockTexture);
+    var Block2 = new Obstacle(blockTexture);
+    var Block3 = new Obstacle(blockTexture);
+    var Block4 = new Obstacle(blockTexture);
     
+    gManeger.ObjectPool.addObject(Block1);
+    gManeger.ObjectPool.addObject(Block2);
+    gManeger.ObjectPool.addObject(Block3);
+    gManeger.ObjectPool.addObject(Block4);
+     
 }

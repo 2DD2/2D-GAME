@@ -67,6 +67,7 @@ GameOverScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kRestart);
 
     gManager.DefaultOptions.score = 0;
+    gManager.DefaultOptions.mLevel = 1;
 
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);

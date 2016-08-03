@@ -57,6 +57,7 @@ RunningScene.prototype.unloadScene = function(){
     
     gEngine.Textures.unloadTexture(this.mWayImg);
     gEngine.Textures.unloadTexture(this.mWayImg1);
+    
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 
@@ -85,7 +86,7 @@ RunningScene.prototype.initialize = function(){
     
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
-        gManager.ObjectPool.addObject(this.mBlock[i],3);
+        gManager.ObjectPool.addObject(this.mBlock[i],4);
     }
     
     this.mDanger = new DangerA(this.kSock);
@@ -113,6 +114,9 @@ RunningScene.prototype.update = function(){
      gManager.DefaultOptions.score += 1;
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
+     }
+     if( gManager.DefaultOptions.score % 1024 < 1){
+          gManager.DefaultOptions.mLevel +=1;
      }
      
      
