@@ -107,6 +107,7 @@
         <script type="text/javascript" src="src/MyGame/Utils/Commands/JumpCommand.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/Commands/JumpPressCom.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/Commands/AntiCommand.js"></script>
+        <script type="text/javascript" src="src/MyGame/Utils/Commands/ShowAboutUsCommand.js"></script>
 
         <script type="text/javascript" src="src/MyGame/Utils/Commands/EventList.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/InputManager.js"></script>
@@ -142,7 +143,7 @@
     </head>
     
     <body onload="
-        var mMain = new BeginningScene();
+        var mMain = new WelcomeScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
         <div style="width:1200px;margin:0 auto;">

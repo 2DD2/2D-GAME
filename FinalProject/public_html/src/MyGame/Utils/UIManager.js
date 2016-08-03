@@ -28,11 +28,6 @@ var gManager = gManager || {};
 
 gManager.UIManager = (function(){
     
-    /* 
-     * 当前的UI名
-     */
-    var mCurrentUIRootName = null;
-    
     /*
      * 当前的UI列表
      */
@@ -98,14 +93,6 @@ gManager.UIManager = (function(){
         if(mElementMapping[index]) return true;
         else return false;
     };
-    
-    var setUIRoot = function(name){
-        mCurrentUIRootName = name;
-        
-        // 读取UI
-        
-    };
-    
     
     var mPublic = {
         update : update,

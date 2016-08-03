@@ -12,7 +12,7 @@ function BeginningScene(){
     this.kUIRes_1 = "assets/aboutusbtn.png";
     this.kUIRes_2 = "assets/startbtn.png";
     this.kUIRes_3 = "assets/startscene.png";
-
+    this.kUIRes_4 = "assets/aboutuscontent.png";
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);
@@ -21,12 +21,18 @@ BeginningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
-    
-    
-    
+
     gManager.UIManager.initManager(sceneLoader);
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"));
-        
+    
+    var uiAboutUs = new ShowAboutUsCommand();
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.A,uiAboutUs);
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Q,uiAboutUs);
+    
+    var ui = gManager.UIManager.getElementbyNum(1);
+    ui.setState(true);
+    ui = gManager.UIManager.getElementbyNum(2);
+    ui.setState(true);
 };
 
 BeginningScene.prototype.loadScene = function () {
@@ -35,6 +41,7 @@ BeginningScene.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kUIRes_1);
     gEngine.Textures.loadTexture(this.kUIRes_2);
     gEngine.Textures.loadTexture(this.kUIRes_3);
+    gEngine.Textures.loadTexture(this.kUIRes_4);
 
 };
 
@@ -44,6 +51,7 @@ BeginningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kUIRes_1);
     gEngine.Textures.unloadTexture(this.kUIRes_2);
     gEngine.Textures.unloadTexture(this.kUIRes_3);
+    gEngine.Textures.unloadTexture(this.kUIRes_4);
     
     gEngine.Core.startScene(new RunningScene());
 };
