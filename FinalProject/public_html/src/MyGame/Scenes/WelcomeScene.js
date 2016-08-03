@@ -1,6 +1,6 @@
 /* 
  * Created by 周玮皓 on 2016/8/1.
- * WelcomeScene用来加载开场动画
+ * WelcomeScene 用来加载开场动画
  */
 
 /* global gEngine, Scene, MyScene, vec2, gManager */
