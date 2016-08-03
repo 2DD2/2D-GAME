@@ -11,10 +11,11 @@ function MyLight(target){
     this.mLight.setColor([0.8,0.6,0.0,1.0]);
     this.mLight.setXPos(0);
     this.mLight.setYPos(0);
-    this.mLight.setZPos(2);
-    this.mLight.setNear(20);
-    this.mLight.setFar(40);
-    this.mLight.setIntensity(10);
+    this.mLight.setZPos(0);
+    this.mLight.setNear(14);
+    this.mLight.setFar(20);
+    this.mLight.setDirection([0,0,-1]);
+    this.mLight.setIntensity(15);
     
     this.mTarget = target;
     this.mLinarRate = 30;
@@ -34,8 +35,8 @@ MyLight.prototype.update = function(){
     
     var current = this.mLight.getPosition();
     var target = this.mTarget.getXform().getPosition();
-    var deltaX = target[0] - current[0] - 23;
-    var deltaY = target[1] - current[1];
+    var deltaX = target[0] - current[0] - 12;
+    var deltaY = target[1] - current[1] + 4;
 
     console.log(current[0]);
     if(Math.abs(deltaX) > 0.1 || Math.abs(deltaY) > 0.1){
