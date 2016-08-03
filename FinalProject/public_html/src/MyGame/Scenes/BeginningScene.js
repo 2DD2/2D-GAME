@@ -13,6 +13,10 @@ function BeginningScene(){
     this.kUIRes_2 = "assets/startbtn.png";
     this.kUIRes_3 = "assets/startscene.png";
     this.kUIRes_4 = "assets/aboutuscontent.png";
+    
+    this.kWaitTime = 30;
+    this.mTimeCount = 0;
+    this.mIsQuit = false;
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);
@@ -58,6 +62,24 @@ BeginningScene.prototype.unloadScene = function () {
 
 BeginningScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
+    
+    if(gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)){
+        this.mIsQuit = true;
+        gManager.InputManager.initManager();
+        var ui = gManager.UIManager.getElementbyNum(1);
+        ui.setState(false);
+        ui = gManager.UIManager.getElementbyNum(2);
+        ui.setState(false);
+        ui = gManager.UIManager.getElementbyNum(3);
+        ui.setState(false);
+    }
+    
+    if(this.kWaitTime < this.mTimeCount && this.mIsQuit ){
+        gEngine.GameLoop.stop();
+    }else if(this.mIsQuit){
+        this.mTimeCount++;
+    }
+    
 };
 
 BeginningScene.prototype.draw = function(){

@@ -35,7 +35,7 @@
            hY = "-5"
            Rp = "assets/startbtn.png"
            Type = "animUI"/>
-    <GUI_3 SizeX="4" SizeY="0.45"
+    <GUI_3 SizeX="3.75" SizeY="0.40"
            X="-15.5" Y="-6"
            hX = "-24" 
            hY = "-6"
