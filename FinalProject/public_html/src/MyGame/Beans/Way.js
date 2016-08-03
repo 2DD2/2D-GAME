@@ -8,10 +8,10 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Way(spriteTexture) {
+function Way(spriteTexture,light) {
     GameObject.call(this, spriteTexture);   
-    
-     var rigidShape = new RigidRectangle(this.getXform(), 30, 6);
+    spriteTexture.addLight(light);
+    var rigidShape = new RigidRectangle(this.getXform(), 30, 6);
     rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setFriction(5);
     this.setPhysicsComponent(rigidShape);
