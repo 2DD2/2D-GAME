@@ -113,15 +113,15 @@ RunningScene.prototype.update = function(){
     var hBbox = this.mHero.getBBox();
     var block = gManager.ObjectPool.getObjectsByLayer(3).mSet;
     for(var i =0 ;i < block.length; i++){
-         if(hBbox.intersectsBound(block[i].getBBox())){
-            
-             this.mHero.getXform().setXPos(block[i].getXform().getXPos()- block[i].getXform().getWidth());
+          var offsetX =  block[i].getXform().getWidth();
+          var offsetY =  block[i].getXform().getHeight();
+         if(hBbox.boundCollideStatus(block[i].getBBox())=== 2){
+             this.mHero.getXform().setXPos(block[i].getXform().getXPos() - offset);
          }
      }
      var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
      
       for(var i =0 ;i < danger.length; i++){
-           console.log(hBbox.boundCollideStatus(danger[i].getBBox()));
          if(hBbox.intersectsBound(danger[i].getBBox())){
              alert("You are died");
              this.mHero.Die();

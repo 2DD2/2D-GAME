@@ -96,7 +96,7 @@ Hero.prototype.resetFirstSpeed = function(){
 };
 Hero.prototype.IncFirstSpeed = function(){
    
-    if( this.mFirst < 0.50){
+    if( this.mFirst < 0.30){
          this.mFirst = this.mFirst + 0.01;
     }
 };
