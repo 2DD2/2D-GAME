@@ -21,8 +21,15 @@ function Hero(renderableObj) {
     
     this.mGravity = -1;
     
-    this.mRender.getXform().setSize(1.5,3);
+    this.mRender.setColor([1, 1, 1, 0]);
+    this.mRender.getXform().setSize(3,3);
     this.mRender.getXform().setYPos(4);
+    this.mRender.setSpriteSequence(128, 0,
+                                102.4, 102,
+                                4,
+                                0);
+    this.mRender.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+    this.mRender.setAnimationSpeed(50);
     
     GameObject.call(this,this.mRender);
         
