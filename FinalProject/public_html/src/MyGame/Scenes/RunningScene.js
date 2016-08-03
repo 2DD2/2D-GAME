@@ -10,7 +10,7 @@ function RunningScene(){
     // 背景
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";
-    this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
+    this.kSceneDataFile = "assets/SceneData/Running_Scene.xml";
     this.kParticleTexture = "assets/FGP_1.png";
     this.kUIBanner_Path = "assets/UIBanner.png";
     
@@ -124,22 +124,18 @@ RunningScene.prototype.draw = function(){
 RunningScene.prototype.update = function(){
     var hBbox = this.mHero.getBBox();
     var block = gManager.ObjectPool.getObjectsByLayer(3).mSet;
+    
     for(var i =0 ;i < block.length; i++){
-          var offsetX =  block[i].getXform().getWidth();
-          var offsetY =  block[i].getXform().getHeight();
-         if(hBbox.boundCollideStatus(block[i].getBBox())=== 2){
-             this.mHero.getXform().setXPos(block[i].getXform().getXPos() - offsetX);
-         }else if(hBbox.boundCollideStatus(block[i].getBBox())=== 4){
-              this.mHero.getXform().setPosistion(block[i].getXform().getXPos(),block[i].getXform().getYPos()+offsetY);
+         if(hBbox.intersectsBound(block[i].getBBox())){
+             var offsetX = block[i].getXform().getWidth() ;
+             this.mHero.getXform().setXPos(block[i].getXform().getXPos() -  offsetX);
          }
      }
      var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
-     
+     var h =[];
       for(var i =0 ;i < danger.length; i++){
-         if(hBbox.intersectsBound(danger[i].getBBox())){
-             alert("You are died");
+         if(this.mHero.pixelTouches(danger[i],h)){
              this.mHero.Die();
-            
          }
      }
      
