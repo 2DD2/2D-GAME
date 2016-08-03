@@ -12,7 +12,7 @@ function RunningScene(){
     this.kFgPath = "assets/FG_1.png";
     this.kSceneDataFile = "assets/SceneData/Running_Scene.xml";
     this.kParticleTexture = "assets/FGP_1.png";
-    this.kUIBanner_Path = "assets/UIBanner.png";
+    this.kUIBanner_Path = "assets/UIrunning.png";
     
     // Hero 和障碍物
     this.kHero = "assets/herosheet.png";
@@ -24,8 +24,10 @@ function RunningScene(){
     this.mWayImg1 = "assets/landdown.png";
     this.mWayImg2 = "assets/landupnormal.png";
     this.mWayImg3 = "assets/landdownnormal.png";
+    this.mWayImg4 = "assets/control.png";
     
     this.mScore =null;
+
 }
 
 gEngine.Core.inheritPrototype(RunningScene,MyScene);
@@ -45,6 +47,7 @@ RunningScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.mWayImg1);
     gEngine.Textures.loadTexture(this.mWayImg2);
     gEngine.Textures.loadTexture(this.mWayImg3);
+    gEngine.Textures.loadTexture(this.mWayImg4);
 };
 
 
@@ -63,6 +66,8 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.mWayImg1);
     gEngine.Textures.unloadTexture(this.mWayImg2);
     gEngine.Textures.unloadTexture(this.mWayImg3);
+    gEngine.Textures.unloadTexture(this.mWayImg4);
+    
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 
@@ -71,16 +76,37 @@ RunningScene.prototype.unloadScene = function(){
 RunningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
+    /*
+     * 
+     * 加载UI
+     */
     var sceneLoader = new SceneDataLoader(this.kSceneDataFile);
     gManager.UIManager.initManager(sceneLoader);
+    var ui = gManager.UIManager.getElementbyNum(0);
+    ui.setState(true);
+    if(gManager.DefaultOptions.getIsFirst()){
+        ui = gManager.UIManager.getElementbyNum(1);
+        ui.setState(true);
+    }
     
+    
+    /*
+     * 
+     * 加载场景，前景后景
+     */
     var controller = new BGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,1);
     controller = new FGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,8);
     
+    
+    /*
+     * 加载英雄
+     */
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,2);
+    
+    
     
     /*
      * 这个landController随便加哪个层都行
@@ -89,6 +115,7 @@ RunningScene.prototype.initialize = function(){
     var landController = new LandController(light);
     gManager.ObjectPool.addObject(landController,1);
     gManager.ObjectPool.addObject(light,7);
+    
     
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
@@ -100,12 +127,9 @@ RunningScene.prototype.initialize = function(){
          gManager.ObjectPool.addObject(this.mDanger[i],5);
     }
     
-    
-    
-    gManager.InputManager.initManager();
-    
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));    //反重力
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.H,new ShowControlCommand());
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };

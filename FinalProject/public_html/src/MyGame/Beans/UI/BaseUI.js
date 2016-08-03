@@ -44,7 +44,7 @@ BaseUI.prototype.update = function(){
             var deltaX = this.mShowPosition[0] - currentPos[0];
             var deltaY = this.mShowPosition[1] - currentPos[1];
             
-            if(Math.abs(deltaX) < 0.001 && Math.abs(deltaY) < 0.001 ) this.mLinarState = true;
+            if(Math.abs(deltaX) < 0.01 && Math.abs(deltaY) < 0.01 ) this.mLinarState = true;
 
             currentPos[0] += deltaX / this.mLinarRate;
             currentPos[1] += deltaY / this.mLinarRate;
