@@ -48,25 +48,7 @@ WelcomeScene.prototype.initialize = function(){
     this.mColor[3] = 1;
     
     gEngine.AudioClips.playBackgroundAudio(this.kAudio_Path);
-//=======
-//    this.mWelSprite = new GameObject(new SpriteRenderable(this.kWelScene));
-//    this.mWelSprite.getXform().setPosition(0, 0);
-//    this.mWelSprite.getXform().setSize(512, 256);
-//    gManager.ObjectPool.addObject(this.mWelSprite,1);
-//    
-//    var camera = new Camera(vec2.fromValues(0,0),
-//                             1200,
-//                             [0,0,1200,600]);
-//    camera.setBackgroundColor([0.1, 0.1, 0.1, 1.0]);
-//    gManager.CameraManager.registerCamera(camera,0);
-//    
-//    var UICamera = new Camera(vec2.fromValues(0,0),
-//                                40,
-//                                [20,20,400,400]);
-//    gManager.UIManager.setRenderringCamera(UICamera);
-//    
-//    this.mColor = this.mWelSprite.getRenderable().getColor();
-//>>>>>>> Stashed changes
+
 };
 
 WelcomeScene.prototype.loadScene = function () {
@@ -88,12 +70,7 @@ WelcomeScene.prototype.unloadScene = function () {
     gEngine.AudioClips.unloadAudio(this.kAudio_Path);
     
     gEngine.Core.startScene(new BeginningScene());
-//=======
-//    gEngine.Textures.unloadTexture(this.kWelScene);
-//    
-//    var nextScene = new BeginningScene();
-//    gEngine.Core.startScene(nextScene);
-//>>>>>>> Stashed changes
+
 };
 
 WelcomeScene.prototype.update = function(){

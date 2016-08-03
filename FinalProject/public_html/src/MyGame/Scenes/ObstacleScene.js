@@ -9,7 +9,7 @@
 function ObstacleScene(){
     this.kBgPath = "assets/BG_1.jpg";
     this.kFgPath = "assets/FG_1.png";
-    this.kSceneDataFile = "assets/SceneData/Test_Scene.xml";
+    this.kSceneDataFile = "assets/SceneData/Start_Scene.xml";
     
     this.kUIBanner_Path = "assets/UIBanner.png";
     
