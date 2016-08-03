@@ -7,9 +7,8 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function UIButton(renderableObj, font, x, y, w, h) {
+function UIButton(renderableObj, x, y, w, h) {
     this.mRender = renderableObj;
-    this.mFont = font;
     this.posX = x;  this.posY = y;  this.width = w; this.height = h;
     this.mRender.getXform().setPosition(this.posX, this.posY);
     this.mRender.getXform().setSize(this.width, this.height);
