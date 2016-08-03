@@ -5,45 +5,62 @@
  */
 
 
-/* global gEngine, GameObjectSet */
-/* 场景控制器*/
-function LandController(sceneLoader){    
-    
+/* global gEngine, GameObjectSet, gManager */
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * SmirkinDino
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+function LandController(){
     //list of lands
-    this.mLands = [];
+    this.mUpLands = [];
+    this.mDownLands = [];
+    this.kLandRes = "assets/land.png";
     
-    this.mSceneLoader = sceneLoader;
-    for(var i = 1; i <= this.mSceneLoader.GetNumber("LAND_Num");i++){
-        for(var k = 0; k < 2; k++){
-            var land = sceneLoader.LoadBG("LAND_" + i);
-            if(k === 0) land.getXform().setPosition(0,0);
-            else land.getXform().setPosition(land.getXform().getWidth(),0);
-            
-            this.mLands.push(land);
-        }
+    this.kPerLandLength = 12;
+    this.kPerLandHeight = 4;
+    
+    this.kUpPosY = 7;
+    this.kDownPosY = -7;
+    
+    this.mMaxLandNum = 5;
+    this.mLandSpeed = -0.2;
+    
+    
+    for(var i = 0 ; i < this.mMaxLandNum; i++){
+        this.mUpLands[i] = new Way(new TextureRenderable(this.kLandRes));
+        this.mUpLands[i].getXform().setPosition(this.kPerLandLength / 2 + this.kPerLandLength * i,this.kUpPosY);
+        this.mUpLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
+        gManager.ObjectPool.addObject(this.mUpLands[i],3);
+        
+        this.mDownLands[i] = new Way(new TextureRenderable(this.kLandRes));
+        this.mDownLands[i].getXform().setPosition(this.kPerLandLength / 2 + this.kPerLandLength * i,this.kDownPosY);
+        this.mDownLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
+        gManager.ObjectPool.addObject(this.mDownLands[i],3);
     }
-}
-
+};
 
 LandController.prototype.update = function(){
-   
-    for(var i = 0; i < this.mSceneLoader.GetNumber("LAND_Num") * 2;i += 2){
-        for(var k = 0; k < 4; k++){
-            if(this.mLands[i + k].getXform().getXPos() < -80) this.mLands[i+k].getXform().setXPos(79.5);
-            
-            this.mLands[i + k].getXform().setXPos(this.mLands[i+k].getXform().getXPos() - 0.1);
-        }
-    }
-
-    for(var i = 0 ; i < this.mLands.length ; i++){
-        if(this.mLands[i])
-            this.mLands[i].update();
+    for(var i = 0 ; i < this.mMaxLandNum; i++){
+        if(this.mUpLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength))
+            this.mUpLands[i].getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 ,this.kUpPosY);
+        if(this.mDownLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength))
+            this.mDownLands[i].getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 ,this.kDownPosY);
+        
+        this.mUpLands[i].getXform().setXPos(this.mUpLands[i].getXform().getXPos() + this.mLandSpeed);
+        this.mDownLands[i].getXform().setXPos(this.mDownLands[i].getXform().getXPos() + this.mLandSpeed);
     }
 };
 
 LandController.prototype.draw = function (aCamera) {
-    for(var i = 0 ; i < this.mLands.length ; i++){
-        if(this.mLands[i])
-            this.mLands[i].draw(aCamera);
-    }
 };

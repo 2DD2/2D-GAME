@@ -19,6 +19,8 @@ ShowAboutUsCommand.prototype.excute = function(){
         ui.setState(!this.mCurrentState);
         ui = gManager.UIManager.getElementbyNum(2);
         ui.setState(!this.mCurrentState);
+        ui = gManager.UIManager.getElementbyNum(4);
+        ui.setState(!this.mCurrentState);
         
     }else{
         this.mCurrentState = !this.mCurrentState;
@@ -27,6 +29,8 @@ ShowAboutUsCommand.prototype.excute = function(){
         ui = gManager.UIManager.getElementbyNum(1);
         ui.setState(!this.mCurrentState);
         ui = gManager.UIManager.getElementbyNum(2);
+        ui.setState(!this.mCurrentState);
+        ui = gManager.UIManager.getElementbyNum(4);
         ui.setState(!this.mCurrentState);
     }
 };

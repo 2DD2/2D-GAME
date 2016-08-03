@@ -13,6 +13,7 @@ function BeginningScene(){
     this.kUIRes_2 = "assets/startbtn.png";
     this.kUIRes_3 = "assets/startscene.png";
     this.kUIRes_4 = "assets/aboutuscontent.png";
+    this.kUIRes_5 = "assets/gamename.png";
     
     this.kWaitTime = 30;
     this.mTimeCount = 0;
@@ -31,12 +32,13 @@ BeginningScene.prototype.initialize = function(){
 
     
     var uiAboutUs = new ShowAboutUsCommand();
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.A,uiAboutUs);
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Q,uiAboutUs);
     
     var ui = gManager.UIManager.getElementbyNum(1);
     ui.setState(true);
     ui = gManager.UIManager.getElementbyNum(2);
+    ui.setState(true);
+    ui = gManager.UIManager.getElementbyNum(4);
     ui.setState(true);
 
 };
@@ -49,7 +51,7 @@ BeginningScene.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kUIRes_2);
     gEngine.Textures.loadTexture(this.kUIRes_3);
     gEngine.Textures.loadTexture(this.kUIRes_4);
-
+    gEngine.Textures.loadTexture(this.kUIRes_5);
 
 };
 
@@ -60,6 +62,7 @@ BeginningScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kUIRes_2);
     gEngine.Textures.unloadTexture(this.kUIRes_3);
     gEngine.Textures.unloadTexture(this.kUIRes_4);
+    gEngine.Textures.unloadTexture(this.kUIRes_5);
     
     gEngine.Core.startScene(new RunningScene());
 
@@ -76,6 +79,8 @@ BeginningScene.prototype.update = function(){
         ui = gManager.UIManager.getElementbyNum(2);
         ui.setState(false);
         ui = gManager.UIManager.getElementbyNum(3);
+        ui.setState(false);
+        ui = gManager.UIManager.getElementbyNum(4);
         ui.setState(false);
     }
     
