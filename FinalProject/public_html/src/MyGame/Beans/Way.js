@@ -11,7 +11,7 @@
 function Way(spriteTexture) {
     GameObject.call(this, spriteTexture);   
     
-     var rigidShape = new RigidRectangle(this.getXform(), 30, 3.5);
+     var rigidShape = new RigidRectangle(this.getXform(), 30, 6);
     rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setFriction(5);
     this.setPhysicsComponent(rigidShape);
