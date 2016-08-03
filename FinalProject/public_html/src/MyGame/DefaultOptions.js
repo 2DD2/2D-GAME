@@ -44,7 +44,8 @@ gManager.DefaultOptions = (function(){
         setDown:setDown,
         
         //Score
-        score:0
+        score:0,
+        maxScore:0
     };
     return mPublic;
 }());

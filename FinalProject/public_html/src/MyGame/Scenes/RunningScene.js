@@ -1,10 +1,9 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Created by 周玮皓 on 2016/8/1.
+ * RunningScene是游戏进行场景
  */
 
-/* global gEngine, MyScene, gManager, vec2 */
+/* global gEngine, Scene, MyScene, DefaultOptions, vec2, gManager */
 
 function RunningScene(){
     this.kBgPath = "assets/BG_1.jpg";
@@ -20,7 +19,8 @@ function RunningScene(){
     this.kSock = "assets/Sock.png";
     
     this.mWayImg = "assets/land.png";
-
+    
+    this.mScore =null;
 }
 
 gEngine.Core.inheritPrototype(RunningScene,MyScene);
@@ -88,6 +88,9 @@ RunningScene.prototype.initialize = function(){
     this.mWay3 = new Way(this.mWayImg,15);
     this.mWay4 = new Way(this.mWayImg,25);
     
+    this.mScore = new Score(new FontRenderable(""), 0, -7, [1, 1, 1, 1], 1);
+    gManager.ObjectPool.addObject(this.mScore, 6);
+    
     gManager.ObjectPool.addObject(this.mWay,1);
     gManager.ObjectPool.addObject(this.mWay1,1);
     gManager.ObjectPool.addObject(this.mWay2,1);
@@ -127,6 +130,11 @@ RunningScene.prototype.update = function(){
              this.mHero.Die();
             
          }
+     }
+     
+     gManager.DefaultOptions.score += 1;
+     if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
+         gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
 
     MyScene.prototype.update.call(this);
