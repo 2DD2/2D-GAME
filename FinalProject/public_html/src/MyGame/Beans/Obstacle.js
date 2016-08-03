@@ -39,7 +39,7 @@ Obstacle.prototype.draw = function(camera){
 
 function BlockA(blockTexture,n){
     var mSet = [];
-    var Block1 = new Obstacle(blockTexture,-1,36);
+    var Block1 = new Obstacle(blockTexture,-1,50);
     var Block2 = new Obstacle(blockTexture,-1,30);
     var Block3 = new Obstacle(blockTexture,-1,20);
     var Block4 = new Obstacle(blockTexture,-1,40);
@@ -52,11 +52,43 @@ function BlockA(blockTexture,n){
    return mSet;
 }
 
+function DangerB(blockTexture,n){
+    var mSet = [];
+    var Danger1 = new Obstacle(blockTexture,-1,40);
+    var Danger2 = new Obstacle(blockTexture,1,35);
+    var Danger3 = new Obstacle(blockTexture,-1,550);
+    var Danger4 = new Obstacle(blockTexture,1,25);
+    
+    mSet.push(Danger1);
+    mSet.push(Danger2);
+    mSet.push(Danger3);
+    mSet.push(Danger4);
+    
+   return mSet;
+}
+
+
+
+function BlockB(blockTexture,n){
+    var mSet = [];
+    var Block1 = new Obstacle(blockTexture,1,35);
+    var Block2 = new Obstacle(blockTexture,1,30);
+    var Block3 = new Obstacle(blockTexture,1,20);
+    var Block4 = new Obstacle(blockTexture,1,40);
+    
+    mSet.push(Block1);
+    mSet.push(Block2);
+    mSet.push(Block3);
+    mSet.push(Block4);
+    
+   return mSet;
+}
+
 function DangerA(blockTexture,n){
     var mSet = [];
     var Danger1 = new Obstacle(blockTexture,1,40);
-    var Danger2 = new Obstacle(blockTexture,1,35);
-    var Danger3 = new Obstacle(blockTexture,1,25);
+    var Danger2 = new Obstacle(blockTexture,-1,35);
+    var Danger3 = new Obstacle(blockTexture,-1,30);
     var Danger4 = new Obstacle(blockTexture,1,45);
     
     mSet.push(Danger1);
