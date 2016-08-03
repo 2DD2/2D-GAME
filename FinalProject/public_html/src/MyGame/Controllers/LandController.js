@@ -27,7 +27,7 @@ function LandController(){
     this.mDownLands = [];
     this.kLandRes = "assets/land.png";
     
-    this.kPerLandLength = 12;
+    this.kPerLandLength = 10;
     this.kPerLandHeight = 4;
     
     this.kUpPosY = 7;
@@ -39,12 +39,12 @@ function LandController(){
     
     for(var i = 0 ; i < this.mMaxLandNum; i++){
         this.mUpLands[i] = new Way(new TextureRenderable(this.kLandRes));
-        this.mUpLands[i].getXform().setPosition(this.kPerLandLength / 2 + this.kPerLandLength * i,this.kUpPosY);
+        this.mUpLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kUpPosY);
         this.mUpLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mUpLands[i],3);
         
         this.mDownLands[i] = new Way(new TextureRenderable(this.kLandRes));
-        this.mDownLands[i].getXform().setPosition(this.kPerLandLength / 2 + this.kPerLandLength * i,this.kDownPosY);
+        this.mDownLands[i].getXform().setPosition(-gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 + this.kPerLandLength * i,this.kDownPosY);
         this.mDownLands[i].getXform().setSize(this.kPerLandLength,this.kPerLandHeight);
         gManager.ObjectPool.addObject(this.mDownLands[i],3);
     }
@@ -52,9 +52,9 @@ function LandController(){
 
 LandController.prototype.update = function(){
     for(var i = 0 ; i < this.mMaxLandNum; i++){
-        if(this.mUpLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength))
+        if(this.mUpLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2))
             this.mUpLands[i].getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 ,this.kUpPosY);
-        if(this.mDownLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength))
+        if(this.mDownLands[i].getXform().getXPos() <= -(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2))
             this.mDownLands[i].getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 + this.kPerLandLength / 2 ,this.kDownPosY);
         
         this.mUpLands[i].getXform().setXPos(this.mUpLands[i].getXform().getXPos() + this.mLandSpeed);
