@@ -6,16 +6,13 @@
 /* global gEngine, Scene, MyScene, vec2, gManager */
 
 function BeginningScene(){
-    this.kTitleSprite = "assets/logo.png";
-    this.kStartSprite = "assets/logo.png";
-    this.kAboutUsSprite = "assets/logo.png";
-    //字体
-    this.kFont = "assets/fonts/system-default-font";
     
-    this.mTitleSprite = null;
-    this.mStartSprite = null;
-    this.mAboutUsSprite = null;
-    this.mTextSysFont = null;
+    this.kSceneFile_Path = "assets/SceneData/Start_Scene.xml";
+    
+    this.kUIRes_1 = "assets/aboutusbtn.png";
+    this.kUIRes_2 = "assets/startbtn.png";
+    this.kUIRes_3 = "assets/startscene.png";
+
 }
 
 gEngine.Core.inheritPrototype(BeginningScene, MyScene);
@@ -23,70 +20,40 @@ gEngine.Core.inheritPrototype(BeginningScene, MyScene);
 BeginningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
     
-    this.mTitleSprite = new GameObject(new SpriteRenderable(this.kTitleSprite));
-    this.mTitleSprite.getXform().setPosition(0, 200);
-    this.mTitleSprite.getXform().setSize(400, 200);
-    gManager.ObjectPool.addObject(this.mTitleSprite,1);
+    var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
     
-    this.mStartSprite = new UIButton(new SpriteRenderable(this.kStartSprite), this.kFont, 0, 0, 200, 100);
-    gManager.ObjectPool.addObject(this.mStartSprite,1);
-    this.mTextStart = new FontRenderable("Start");
-    this._initText(this.mTextStart, -60, 10, [0, 0, 0, 1.0], 50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextStart), 1);
-    this.mTextStartHint = new FontRenderable("Press \"Space\" to start");
-    this._initText(this.mTextStartHint, -120, -30, [0, 0, 0, 1.0], 20);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextStartHint), 1);
     
-    this.mAboutUsSprite = new UIButton(new SpriteRenderable(this.kAboutUsSprite), this.kFont, 0, -200, 200, 100);
-    gManager.ObjectPool.addObject(this.mAboutUsSprite,1);
-    this.mTextCredit = new FontRenderable("Credits");
-    this._initText(this.mTextCredit, -90, -190, [0, 0, 0, 1.0], 50);
-    gManager.ObjectPool.addObject(new GameObject(this.mTextCredit), 1);
     
-    var camera = new Camera(vec2.fromValues(0,0),
-                             1200,
-                             [0,0,1200,600]);
-    camera.setBackgroundColor([0.1, 0.1, 0.1, 1.0]);
-    gManager.CameraManager.registerCamera(camera,0);
-    
-    var UICamera = new Camera(vec2.fromValues(0,0),
-                                40,
-                                [20,20,400,400]);
-    gManager.UIManager.setRenderringCamera(UICamera);
+    gManager.UIManager.initManager(sceneLoader);
+    gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"));
+        
 };
 
 BeginningScene.prototype.loadScene = function () {
     // 加载场景
-    gEngine.Textures.loadTexture(this.kTitleSprite);
-    gEngine.Textures.loadTexture(this.kStartSprite);
-    gEngine.Textures.loadTexture(this.kAboutUsSprite);
+    gEngine.TextFileLoader.loadTextFile(this.kSceneFile_Path,gEngine.TextFileLoader.eTextFileType.eXMLFile);
+    gEngine.Textures.loadTexture(this.kUIRes_1);
+    gEngine.Textures.loadTexture(this.kUIRes_2);
+    gEngine.Textures.loadTexture(this.kUIRes_3);
+
 };
 
 BeginningScene.prototype.unloadScene = function () {
     // 卸载场景
-    gEngine.Textures.unloadTexture(this.kTitleSprite);
-    gEngine.Textures.unloadTexture(this.kStartSprite);
-    gEngine.Textures.unloadTexture(this.kAboutUsSprite);
+    gEngine.TextFileLoader.unloadTextFile(this.kSceneFile_Path);
+    gEngine.Textures.unloadTexture(this.kUIRes_1);
+    gEngine.Textures.unloadTexture(this.kUIRes_2);
+    gEngine.Textures.unloadTexture(this.kUIRes_3);
     
-    var nextScene = new RunningScene();
-    gEngine.Core.startScene(nextScene);
+    gEngine.Core.startScene(new RunningScene());
 };
 
 BeginningScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
-    //按 空格 键切换到RunningScene
-    if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
-        gEngine.GameLoop.stop();
-    }
 };
 
 BeginningScene.prototype.draw = function(){
     MyScene.prototype.draw.call(this);
 };
 
-BeginningScene.prototype._initText = function (font, posX, posY, color, textH) {
-    font.setColor(color);
-    font.getXform().setPosition(posX, posY);
-    font.setTextHeight(textH);
-};
 

@@ -102,6 +102,12 @@ SceneDataLoader.prototype.LoadUI = function(name){
         //ui = new GameObject();
     }else if(type === "square"){
         ui = new GameObject(new TextureRenderable(path));
+    }else if(type === "animUI"){
+        var hideX = Number(elm[0].getAttribute("hX"));
+        var hideY = Number(elm[0].getAttribute("hY"));
+        ui = new BaseUI(new TextureRenderable(path),[posX,posY],[hideX,hideY]);
+        ui.getXform().setSize(scaleX,scaleY);
+        return ui;
     }
     
     ui.getXform().setPosition(posX,posY);
