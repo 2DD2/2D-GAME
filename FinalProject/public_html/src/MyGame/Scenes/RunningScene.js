@@ -90,7 +90,10 @@ RunningScene.prototype.initialize = function(){
     gManager.UIManager.initManager(sceneLoader);
     var ui = gManager.UIManager.getElementbyNum(0);
     ui.setState(true);
+    var ui = gManager.UIManager.getElementbyNum(2);
+    ui.setState(true);
     if(gManager.DefaultOptions.getIsFirst()){
+        gManager.DefaultOptions.setIsFirst(false);
         ui = gManager.UIManager.getElementbyNum(1);
         ui.setState(true);
     }
@@ -105,14 +108,11 @@ RunningScene.prototype.initialize = function(){
     controller = new FGController(sceneLoader);
     gManager.ObjectPool.addObject(controller,8);
     
-    
     /*
      * 加载英雄
      */
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
     gManager.ObjectPool.addObject(this.mHero,2);
-    
-    
     
     /*
      * 这个landController随便加哪个层都行
@@ -153,7 +153,7 @@ RunningScene.prototype.draw = function(){
 RunningScene.prototype.update = function(){
     
      // 分数显示
-     gManager.DefaultOptions.score += 1;
+     gManager.DefaultOptions.score = gManager.DefaultOptions.score + 0.02;
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }

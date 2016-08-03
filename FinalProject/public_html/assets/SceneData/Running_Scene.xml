@@ -18,7 +18,7 @@
     
     <FGP_1 Rp = "assets/FGP_1.png">
     
-    <GUI_Num Number="2">
+    <GUI_Num Number="3">
     <GUI_1 SizeX="8" SizeY="2"
            X="0" Y="9"
            hX = "0"
@@ -31,6 +31,12 @@
            hY = "-16"
            Rp = "assets/control.png"
            Type = "animUI"/>
+    <GUI_3 SizeX="1" SizeY="0.6"
+            X="0" Y="9.05"
+            hX = "0"
+            hY = "15"
+            Rp = ""
+            Type = "score"/>
         
 
     <LAND_Num Number="1"/>

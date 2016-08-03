@@ -38,7 +38,6 @@ MyLight.prototype.update = function(){
     var deltaX = target[0] - current[0] - 12;
     var deltaY = target[1] - current[1] + 4;
 
-    console.log(current[0]);
     if(Math.abs(deltaX) > 0.1 || Math.abs(deltaY) > 0.1){
         this.mLight.set2DPosition([current[0] + deltaX / this.mLinarRate,current[1] + deltaY / this.mLinarRate]);
     }
