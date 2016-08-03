@@ -17,8 +17,8 @@ function Hero(renderableObj) {
     this.mRender = renderableObj;
     this.mGravity = -0.02;
     
-    this.Top = 5;
-    this.Bot = -5;
+    this.Top = 2.5;
+    this.Bot = -2.5;
 
     this.mFirst = 0.2;
     this.mOnGround = true;
@@ -35,7 +35,7 @@ gEngine.Core.inheritPrototype(Hero, GameObject);
 
 
 Hero.prototype.update = function () {
-    GameObject.prototype.update.call(this);
+    
     if (this.getXform().getYPos() < this.Bot){
         this.getXform().setYPos(this.Bot);
         this.mOnGround = true;
@@ -48,7 +48,10 @@ Hero.prototype.update = function () {
     } else {
         this.mSpeed += this.mGravity;
     } 
-    
+    if(this.getXform().getXPos()< -20 ){
+        this.Die();
+    }
+    GameObject.prototype.update.call(this);
 };
 Hero.prototype.draw = function (camera) {
     GameObject.prototype.draw.call(this,camera);
@@ -72,9 +75,9 @@ Hero.prototype.antiJump= function () {
     }else{
      this.getXform().setRotationInDegree(0);
     }
-    var w=this.getXform().getWidth();
-    var h=this.getXform().getHeight();
-    this.getXform().setSize(-w,h);
+//    var w=this.getXform().getWidth();
+//    var h=this.getXform().getHeight();
+//    this.getXform().setSize(-w,h);
 
     this.Jump();
     
@@ -82,7 +85,7 @@ Hero.prototype.antiJump= function () {
 };
 
 Hero.prototype.Die = function () {
-    alert("你死了！！！！！！！！！！！！！！！！！！！！");
+   gEngine.GameLoop.stop();
 };
 
 Hero.prototype.setOnGround = function (bool) {
@@ -93,7 +96,7 @@ Hero.prototype.resetFirstSpeed = function(){
 };
 Hero.prototype.IncFirstSpeed = function(){
    
-    if( this.mFirst < 0.50){
+    if( this.mFirst < 0.30){
          this.mFirst = this.mFirst + 0.01;
     }
 };

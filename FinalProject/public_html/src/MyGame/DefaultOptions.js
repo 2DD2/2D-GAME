@@ -6,8 +6,8 @@ var gManager = gManager || {};
 
 
 gManager.DefaultOptions = (function(){
-    var up =5;
-    var down = -5;
+    var up =2.5;
+    var down = -2.5;
     var eObjectType = {
         Hero : "Hero",
         BG : "BG",
@@ -44,7 +44,8 @@ gManager.DefaultOptions = (function(){
         setDown:setDown,
         
         //Score
-        score:0
+        score:0,
+        maxScore:0
     };
     return mPublic;
 }());

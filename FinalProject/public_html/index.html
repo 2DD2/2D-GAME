@@ -124,9 +124,10 @@
         <!-- 控制器 -->
         <script type="text/javascript" src="src/MyGame/Controllers/BGController.js"></script>
         <script type="text/javascript" src="src/MyGame/Controllers/FGController.js"></script>
+
         <script type="text/javascript" src="src/MyGame/Controllers/LandController.js"></script>
         <script type="text/javascript" src="src/MyGame/Controllers/SimpleEmitter.js"></script>
-        
+
         <script type="text/javascript" src="src/MyGame/Test/TestScene.js"></script>
 
         
@@ -140,9 +141,14 @@
         <script type="text/javascript" src="src/MyGame/Beans/Particle/RandomColorSq.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/UI/BaseUI.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/ReusePool.js"></script>
+
+        <script type="text/javascript" src="src/MyGame/Beans/Way.js"></script>
+        
     </head>
     
+    
     <body onload="
+
         var mMain = new WelcomeScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
@@ -152,8 +158,6 @@
             Your browser does not support the HTML5 canvas.
             <!-- this message will show only if WebGL clearing failed -->
         </canvas>
-
-
         </div>
 
     </body>

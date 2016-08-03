@@ -7,9 +7,10 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Score(renderableObj) {
+function Score(renderableObj, x, y, c, h) {
+    this.posX = x; this.posY = y; this.color = c; this.height = h;
     this.mFontRender = renderableObj;
-    this._initText(this.mFontRender, 77, -27, [1, 1, 1, 1], 50);
+    this._initText(this.mFontRender, this.posX, this.posY, this.color, this.height);
     
 
     GameObject.call(this,this.mFontRender);
@@ -29,8 +30,4 @@ Score.prototype._initText = function (font, posX, posY, color, textH) {
     font.setColor(color);
     font.getXform().setPosition(posX, posY);
     font.setTextHeight(textH);
-};
-
-Score.prototype.getScore = function () {
-    return this.mScore;
 };

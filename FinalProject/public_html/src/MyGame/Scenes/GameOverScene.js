@@ -12,6 +12,7 @@ function GameOverScene(){
     
     this.mScore = null;
     this.mRestartButton = null;
+    this.mMaxScore = null;
     this.mTextRestart =null;
     
     this.mTurn = 15;            //闪烁帧数
@@ -28,8 +29,12 @@ GameOverScene.prototype.initialize = function(){
     this.mGameOver.getXform().setSize(600, 600);
     gManager.ObjectPool.addObject(this.mGameOver,1);
     
-    this.mScore = new Score(new FontRenderable(String(this.mScore)));
+    this.mScore = new Score(new FontRenderable(""), 77, -27, [1, 1, 1, 1], 50);
     gManager.ObjectPool.addObject(this.mScore, 1);
+    var str = "max:" + String(gManager.DefaultOptions.maxScore);
+    this.mMaxScore = new FontRenderable(str);
+    this._initText(this.mMaxScore, -60, -100, [1, 1, 1, 1.0], 50);
+    gManager.ObjectPool.addObject(new GameObject(this.mMaxScore), 1);
 //    this.mRank1 = new FontRenderable("1.    300");
 //    this._initText(this.mRank1, -100, 0, [1, 1, 1, 1], 30);
 //    gManager.ObjectPool.addObject(new GameObject(this.mRank1), 1);
@@ -67,13 +72,15 @@ GameOverScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kGameOver);
     gEngine.Textures.unloadTexture(this.kRestart);
 
+    gManager.DefaultOptions.score = 0;
+
     var nextScene = new RunningScene();
     gEngine.Core.startScene(nextScene);
 };
 
 GameOverScene.prototype.update = function(){
     MyScene.prototype.update.call(this);
-    gManager.DefaultOptions.score += 1;
+//    gManager.DefaultOptions.score += 1;
     if(this.mFrame >= 0){
         this.mFrame++;
         this.mRestartButton.setVisibility(false);
