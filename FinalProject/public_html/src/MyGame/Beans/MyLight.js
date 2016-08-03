@@ -18,7 +18,7 @@ function MyLight(target){
     this.mLight.setIntensity(15);
     
     this.mTarget = target;
-    this.mLinarRate = 30;
+    this.mLinarRate = 10;
 };
 
 gEngine.Core.inheritPrototype(MyLight,Light);

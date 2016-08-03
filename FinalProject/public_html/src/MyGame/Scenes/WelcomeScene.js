@@ -23,10 +23,6 @@ function WelcomeScene(){
 
 
     this.mWelSprite = null;
-    
-    this.myTimer = 1800;
-
-
 }
 
 gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
@@ -68,6 +64,9 @@ WelcomeScene.prototype.unloadScene = function () {
     gEngine.TextFileLoader.unloadTextFile(this.kSceneFile_Path,gEngine.TextFileLoader.eTextFileType.eXMLFile);
     gEngine.AudioClips.stopBackgroundAudio();
     gEngine.AudioClips.unloadAudio(this.kAudio_Path);
+    
+    this.mWelSprite = null;
+    this.mEmitter = null;
     
     gEngine.Core.startScene(new BeginningScene());
 

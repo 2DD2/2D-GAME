@@ -68,9 +68,10 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.mWayImg3);
     gEngine.Textures.unloadTexture(this.mWayImg4);
     
+    this.mScore =null;
+    
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
-
 };
 
 RunningScene.prototype.initialize = function(){

@@ -22,17 +22,20 @@ function BaseUI(renderable,showpos,hidepos){
      */
     this.mState = false;
     
-    this.mLinarRate = 10;
+    this.mLinarRate = 8;
     
     this.mLinarState = false;
     
 };
 
 gEngine.Core.inheritPrototype(BaseUI,GameObject);
-
+ 
 BaseUI.prototype.setState = function(show){
+    if(show) this.setVisibility(true); 
     this.mState = show;
     this.mLinarState = false;
+    
+    
 };
 
 BaseUI.prototype.update = function(){
@@ -44,7 +47,9 @@ BaseUI.prototype.update = function(){
             var deltaX = this.mShowPosition[0] - currentPos[0];
             var deltaY = this.mShowPosition[1] - currentPos[1];
             
-            if(Math.abs(deltaX) < 0.01 && Math.abs(deltaY) < 0.01 ) this.mLinarState = true;
+            if(Math.abs(deltaX) < 0.01 && Math.abs(deltaY) < 0.01 ) {
+                this.mLinarState = true;
+            }
 
             currentPos[0] += deltaX / this.mLinarRate;
             currentPos[1] += deltaY / this.mLinarRate;
@@ -53,7 +58,10 @@ BaseUI.prototype.update = function(){
             var deltaX = this.mHidePosition[0] - currentPos[0];
             var deltaY = this.mHidePosition[1] - currentPos[1];
             
-            if(Math.abs(deltaX) < 0.01 && Math.abs(deltaY) < 0.01 ) this.mLinarState = true;
+            if(Math.abs(deltaX) < 0.01 && Math.abs(deltaY) < 0.01 ) {
+                this.mLinarState = true;
+                this.setVisibility(false);
+            }
             
             currentPos[0] += deltaX / this.mLinarRate;
             currentPos[1] += deltaY / this.mLinarRate;
