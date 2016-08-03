@@ -29,6 +29,7 @@ GameOverScene.prototype.initialize = function(){
     this.mGameOver.getXform().setSize(600, 600);
     gManager.ObjectPool.addObject(this.mGameOver,1);
     
+
     this.mScore = new Score(new FontRenderable(""), 77, -27, [1, 1, 1, 1], 50);
     gManager.ObjectPool.addObject(this.mScore, 1);
     var str = "max:" + String(gManager.DefaultOptions.maxScore);
@@ -49,6 +50,7 @@ GameOverScene.prototype.initialize = function(){
     this.mTextRestart = new FontRenderable("Press \"Space\" to Restart");
     this._initText(this.mTextRestart, -210, -190, [1, 1, 1, 1.0], 30);
     gManager.ObjectPool.addObject(new GameObject(this.mTextRestart), 1);
+
     var camera = new Camera(vec2.fromValues(0,0),
                              1200,
                              [0,0,1200,600]);
