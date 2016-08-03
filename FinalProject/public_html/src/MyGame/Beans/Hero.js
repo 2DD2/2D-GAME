@@ -7,7 +7,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable, gManager: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable, gManager, SpriteAnimateRenderable: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -26,10 +26,10 @@ function Hero(renderableObj) {
     this.mRender.getXform().setYPos(4);
     this.mRender.setSpriteSequence(128, 0,
                                 102.4, 102,
-                                4,
+                                5,
                                 0);
     this.mRender.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
-    this.mRender.setAnimationSpeed(50);
+    this.mRender.setAnimationSpeed(10);
     
     GameObject.call(this,this.mRender);
         
@@ -57,7 +57,7 @@ Hero.prototype.update = function () {
            v[0]  = 0;
         }
     }
-
+    this.mRender.updateAnimation();
     GameObject.prototype.update.call(this);
 };
 Hero.prototype.draw = function (camera) {

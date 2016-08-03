@@ -12,7 +12,20 @@ gManager.DefaultOptions = (function(){
         Obstacle : "Obstacle",
         Land : "Land"
     };
+    
+    var isFirst = true;
+    
+    var getIsFirst = function(){
+        return isFirst;
+    };
+    var setIsFirst = function(first){
+        return isFirst = first;
+    };
+    
     var mPublic = {
+        getIsFirst : getIsFirst,
+        setIsFirst : setIsFirst,
+        
         //BackGround
         mSpeed:0.3,
         mBgColor:[1, 1, 1, 0.0],
@@ -37,6 +50,8 @@ gManager.DefaultOptions = (function(){
         //Score
         score:0,
         maxScore:0
+        
+        
     };
     return mPublic;
 }());

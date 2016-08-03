@@ -23,10 +23,6 @@ function WelcomeScene(){
 
 
     this.mWelSprite = null;
-    
-    this.myTimer = 1800;
-
-
 }
 
 gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
@@ -69,11 +65,15 @@ WelcomeScene.prototype.unloadScene = function () {
     gEngine.AudioClips.stopBackgroundAudio();
     gEngine.AudioClips.unloadAudio(this.kAudio_Path);
     
+    this.mWelSprite = null;
+    this.mEmitter = null;
+    
     gEngine.Core.startScene(new BeginningScene());
 
 };
 
 WelcomeScene.prototype.update = function(){
+    
     
     this.mTimeNow++;
     if(this.mTimeShow > this.mTimeNow){
@@ -84,13 +84,6 @@ WelcomeScene.prototype.update = function(){
         this.mEmitter.setAlpha(1 - (this.mTimeNow - this.mTimeShow) / (this.mTimeOff - this.mTimeShow));
     }else if(this.mTimeTurn < this.mTimeNow){
         gEngine.GameLoop.stop();
-    }
-    
-    this.myTimer -= 10;
-    if(this.myTimer > 0 || this.myTimer <1800){
-        if(this.mColor[3]>=0 && this.mColor[3]<=255){
-            this.mColor[3] += 1;
-        }
     }
     
     MyScene.prototype.update.call(this);
