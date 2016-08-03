@@ -102,12 +102,9 @@ RunningScene.prototype.initialize = function(){
     
     
     gManager.InputManager.initManager();
-    //    跳
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     
-    //反重力
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
-   
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));    //反重力
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };

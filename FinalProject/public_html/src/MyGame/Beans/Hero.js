@@ -29,6 +29,7 @@ function Hero(renderableObj) {
     this.mRigid = new RigidRectangle(this.mRender.getXform(), 1.5, 3);
     this.mRigid.setMass(0.7);  // less dense than Minions
     this.mRigid.setRestitution(0.3);
+    //this.getPhysicsComponent().setAcceleration([0,-10]);
     this.setPhysicsComponent(this.mRigid);   
 }
 
@@ -40,15 +41,12 @@ Hero.prototype.update = function () {
     
     var v = this.getPhysicsComponent().getVelocity();
     if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)){
-        v[0] -= this.kXDelta;
+        v[0] = -2;
     }
-    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
-        v[0] += this.kXDelta;
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right && this.getXform().getXPos <15 )) {
+        v[0] = 2;
     }
-    if ( this.getXform().getXPos() > 10){
-        v[0]-= this.kXDelta*1.2;
-    }
-    
+
     GameObject.prototype.update.call(this);
 };
 Hero.prototype.draw = function (camera) {
@@ -61,8 +59,12 @@ Hero.prototype.draw = function (camera) {
 };
 
 Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
-    var v = this.getPhysicsComponent().getVelocity();
-    v[1] += this.kYDelta *( -this.mGravity );
+    var v = this.getPhysicsComponent().getVelocity(); 
+    console.log(v[1])  
+    if(Math.abs(v[1]) < 3){
+        v[1] = 20 ;
+    }
+
 };
      
 Hero.prototype.antiJump= function () {  
