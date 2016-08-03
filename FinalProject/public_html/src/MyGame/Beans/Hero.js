@@ -66,7 +66,7 @@ Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
            }   
     }
    this.mOnGround = false;
-    this.resetFirstSpeed();
+   this.resetFirstSpeed();
 };
 
 Hero.prototype.antiJump= function () {  
@@ -75,11 +75,15 @@ Hero.prototype.antiJump= function () {
     }else{
      this.getXform().setRotationInDegree(0);
     }
-//    var w=this.getXform().getWidth();
-//    var h=this.getXform().getHeight();
-//    this.getXform().setSize(-w,h);
 
-    this.Jump();
+    if(this.mOnGround){
+        if(this.mGravity > 0){
+                this.setSpeed(-this.mFirst);
+           }else{
+                this.setSpeed(this.mFirst);
+           }   
+    }
+   this.mOnGround = false;
     
     this.mGravity = - this.mGravity;
 };
@@ -95,7 +99,6 @@ Hero.prototype.resetFirstSpeed = function(){
     this.mFirst = 0.2;
 };
 Hero.prototype.IncFirstSpeed = function(){
-   
     if( this.mFirst < 0.40){
          this.mFirst = this.mFirst + 0.01;
     }
