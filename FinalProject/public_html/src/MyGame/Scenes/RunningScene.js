@@ -22,6 +22,8 @@ function RunningScene(){
     
     this.mWayImg = "assets/landup.png";
     this.mWayImg1 = "assets/landdown.png";
+    this.mWayImg2 = "assets/landupnormal.png";
+    this.mWayImg3 = "assets/landdownnormal.png";
     
     this.mScore =null;
 }
@@ -41,6 +43,8 @@ RunningScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kSock);    
     gEngine.Textures.loadTexture(this.mWayImg);
     gEngine.Textures.loadTexture(this.mWayImg1);
+    gEngine.Textures.loadTexture(this.mWayImg2);
+    gEngine.Textures.loadTexture(this.mWayImg3);
 };
 
 
@@ -57,6 +61,8 @@ RunningScene.prototype.unloadScene = function(){
     
     gEngine.Textures.unloadTexture(this.mWayImg);
     gEngine.Textures.unloadTexture(this.mWayImg1);
+    gEngine.Textures.unloadTexture(this.mWayImg2);
+    gEngine.Textures.unloadTexture(this.mWayImg3);
     var nextScene = new GameOverScene();
     gEngine.Core.startScene(nextScene);
 
