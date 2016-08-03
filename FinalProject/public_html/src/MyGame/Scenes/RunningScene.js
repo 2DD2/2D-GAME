@@ -75,7 +75,7 @@ RunningScene.prototype.initialize = function(){
     
     
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
-    gManager.ObjectPool.addObject(this.mHero,4);
+    gManager.ObjectPool.addObject(this.mHero,2);
     
     /*
      * 这个landController随便加哪个层都行
@@ -83,10 +83,8 @@ RunningScene.prototype.initialize = function(){
     var landController = new LandController();
     gManager.ObjectPool.addObject(landController,1);
     
-    /*
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
-        console.log(this.mBlock[i],i);
         gManager.ObjectPool.addObject(this.mBlock[i],3);
     }
     
@@ -94,17 +92,16 @@ RunningScene.prototype.initialize = function(){
     for(var i = 0 ;i< this.mDanger.length ; i++){
          gManager.ObjectPool.addObject(this.mDanger[i],5);
     }
-   
-    this.mScore = new Score(new FontRenderable(""), 0, -7, [1, 1, 1, 1], 1);
-    gManager.ObjectPool.addObject(this.mScore, 6);
-   
-    // 跳
-    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpPressCom(this.mHero));
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
+    
+    
+    
+    gManager.InputManager.initManager();
+    //    跳
+    gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     
     //反重力
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
-    */
+   
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
@@ -114,29 +111,18 @@ RunningScene.prototype.draw = function(){
 };
 
 RunningScene.prototype.update = function(){
-    var hBbox = this.mHero.getBBox();
-    var block = gManager.ObjectPool.getObjectsByLayer(3).mSet;
     
-    for(var i =0 ;i < block.length; i++){
-         if(hBbox.intersectsBound(block[i].getBBox())){
-             var offsetX = block[i].getXform().getWidth() ;
-             this.mHero.getXform().setXPos(block[i].getXform().getXPos() -  offsetX);
-         }
-     }
-     var danger = gManager.ObjectPool.getObjectsByLayer(5).mSet;
-     var h =[];
-      for(var i =0 ;i < danger.length; i++){
-         if(this.mHero.pixelTouches(danger[i],h)){
-             this.mHero.Die();
-         }
-     }
-     
      // 分数显示
      gManager.DefaultOptions.score += 1;
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
-
+     
+     
+   // physics simulation
+    this._physicsSimulation();
+    
+    
     MyScene.prototype.update.call(this);
     
 };

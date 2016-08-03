@@ -11,17 +11,23 @@
 function Obstacle(spriteTexture,flag, firstXPos) {
     this.mRender = new SpriteRenderable(spriteTexture);
     this.FirstPos = firstXPos;
-    if(flag > 0){
-           this.YPos =3.2;
-        }else{
-          this.YPos = -3.2;
-    }
-
+//    if(flag > 0){
+//           this.YPos =3.2;
+//        }else{
+//          this.YPos = -3.2;
+//    }
+     this.YPos =4.2;
     GameObject.call(this,this.mRender);
-    this.setSpeed(0.05);
+    this.setSpeed(gManager.DefaultOptions.mWaySpeed/2);
     this.setCurrentFrontDir(vec2.fromValues(-1, 0));
     this.getXform().setPosition(this.FirstPos,this.YPos);
     this.getXform().setSize(1,1);
+    
+    var r = new RigidRectangle(this.mRender.getXform(), 1,1);
+    r.setMass(0.7);  // less dense than Minions
+    r.setRestitution(0.3);
+    this.setPhysicsComponent(r);
+    
 }
 gEngine.Core.inheritPrototype(Obstacle, GameObject);
 
@@ -56,7 +62,7 @@ function DangerB(blockTexture,n){
     var mSet = [];
     var Danger1 = new Obstacle(blockTexture,-1,40);
     var Danger2 = new Obstacle(blockTexture,1,35);
-    var Danger3 = new Obstacle(blockTexture,-1,550);
+    var Danger3 = new Obstacle(blockTexture,-1,50);
     var Danger4 = new Obstacle(blockTexture,1,25);
     
     mSet.push(Danger1);
@@ -97,4 +103,9 @@ function DangerA(blockTexture,n){
     mSet.push(Danger4);
     
    return mSet;
+}
+
+
+function BlockController(){
+    
 }

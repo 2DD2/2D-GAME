@@ -35,6 +35,9 @@ gManager.DefaultOptions = (function(){
         SCREEN_HEIGHT:600,
         FULL_SCREEN_WCWIDTH:40,
         
+        //Land way 
+        mWaySpeed: 0.2,
+        
         eObjectType : eObjectType,
         
         //LAND

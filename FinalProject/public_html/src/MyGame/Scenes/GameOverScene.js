@@ -36,15 +36,7 @@ GameOverScene.prototype.initialize = function(){
     this.mMaxScore = new FontRenderable(str);
     this._initText(this.mMaxScore, -60, -100, [1, 1, 1, 1.0], 50);
     gManager.ObjectPool.addObject(new GameObject(this.mMaxScore), 1);
-//    this.mRank1 = new FontRenderable("1.    300");
-//    this._initText(this.mRank1, -100, 0, [1, 1, 1, 1], 30);
-//    gManager.ObjectPool.addObject(new GameObject(this.mRank1), 1);
-//    this.mRank2 = new FontRenderable("2.    200");
-//    this._initText(this.mRank2, -100, -60, [1, 1, 1, 1], 30);
-//    gManager.ObjectPool.addObject(new GameObject(this.mRank2), 1);
-//    this.mRank3 = new FontRenderable("3.    100");
-//    this._initText(this.mRank3, -100, -120, [1, 1, 1, 1], 30);
-//    gManager.ObjectPool.addObject(new GameObject(this.mRank3), 1);
+
     this.mRestartButton = new UIButton(new SpriteRenderable(this.kRestart), 0, -230, 200, 100);
     gManager.ObjectPool.addObject(this.mRestartButton,1);
     this.mTextRestart = new FontRenderable("Press \"Space\" to Restart");
@@ -97,7 +89,7 @@ GameOverScene.prototype.update = function(){
         }
     }
     //按 空格 键切换到RunningScene
-    if (gEngine.Input.isKeyReleased(gEngine.Input.keys.Space)) {
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space)) {
         gEngine.GameLoop.stop();
     }
 };

@@ -7,7 +7,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, GameObject: false, SpriteRenderable: false */
+/*global gEngine: false, GameObject: false, SpriteRenderable, gManager: false */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -15,100 +15,68 @@
 function Hero(renderableObj) {
  
     this.mRender = renderableObj;
-    this.mGravity = -0.02;
+  
+    this.kXDelta = 0.2;
+    this.kYDelta = 2.0;
     
-    this.Top = 2.5;
-    this.Bot = -2.5;
-
-    this.mFirst = 0.2;
-    this.mOnGround = true;
-//    this.mRender.setElementPixelPositions(0, 10, 0, 10);    
-    this.setCurrentFrontDir(0,1);
-  //  this.incSpeedBy(3);
+    this.mGravity = -1;
+    
     this.mRender.getXform().setSize(1.5,3);
-    this.mRender.getXform().setPosition(0, -5);
-
+    this.mRender.getXform().setYPos(4);
+    
     GameObject.call(this,this.mRender);
+        
+    this.mRigid = new RigidRectangle(this.mRender.getXform(), 1.5, 3);
+    this.mRigid.setMass(0.7);  // less dense than Minions
+    this.mRigid.setRestitution(0.3);
+    this.setPhysicsComponent(this.mRigid);   
 }
 
 gEngine.Core.inheritPrototype(Hero, GameObject);
-
-
 Hero.prototype.update = function () {
-    
-    if (this.getXform().getYPos() < this.Bot){
-        this.getXform().setYPos(this.Bot);
-        this.mOnGround = true;
-    }else if(this.getXform().getYPos()> this.Top){
-         this.getXform().setYPos(this.Top);
-        this.mOnGround = true;
-    }
-    if (this.mOnGround) {
-        this.mSpeed = 0;
-    } else {
-        this.mSpeed += this.mGravity;
-    } 
-    if(this.getXform().getXPos()< -20 ){
+    if(this.getXform().getXPos()< -20 || this.getXform().getYPos()< -10 || this.getXform().getYPos()> 10){
         this.Die();
     }
+    
+    var v = this.getPhysicsComponent().getVelocity();
+    if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)){
+        v[0] -= this.kXDelta;
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
+        v[0] += this.kXDelta;
+    }
+    if ( this.getXform().getXPos() > 10){
+        v[0]-= this.kXDelta*1.2;
+    }
+    
     GameObject.prototype.update.call(this);
 };
 Hero.prototype.draw = function (camera) {
+    
     GameObject.prototype.draw.call(this,camera);
+};
+ Hero.prototype.Die = function () {
+     
+   gEngine.GameLoop.stop();
 };
 
 Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
-    if(this.mOnGround){
-        if(this.mGravity > 0){
-                this.setSpeed(-this.mFirst);
-           }else{
-                this.setSpeed(this.mFirst);
-           }   
-    }
-   this.mOnGround = false;
-   this.resetFirstSpeed();
+    var v = this.getPhysicsComponent().getVelocity();
+    v[1] += this.kYDelta *( -this.mGravity );
 };
-
+     
 Hero.prototype.antiJump= function () {  
-    if(this.mGravity < 0){
+   var g = this.getPhysicsComponent().getAcceleration();
+   var g1 = [g[0], -g[1]];
+   this.getPhysicsComponent().setAcceleration(g1);
+   
+   var w= this.getXform().getWidth();
+   this.getXform().setWidth(-w);
+   
+   if(this.mGravity < 0){
      this.getXform().setRotationInDegree(180);    
     }else{
      this.getXform().setRotationInDegree(0);
     }
-
-    if(this.mOnGround){
-        if(this.mGravity > 0){
-                this.setSpeed(-this.mFirst);
-           }else{
-                this.setSpeed(this.mFirst);
-           }   
-    }
-   this.mOnGround = false;
-    
-    this.mGravity = - this.mGravity;
+    this.mGravity = -this.mGravity ;
 };
-
-Hero.prototype.Die = function () {
-   gEngine.GameLoop.stop();
-};
-
-Hero.prototype.setOnGround = function (bool) {
-    this.mOnGround = bool;
-};
-Hero.prototype.resetFirstSpeed = function(){
-    this.mFirst = 0.2;
-};
-Hero.prototype.IncFirstSpeed = function(){
-    if( this.mFirst < 0.40){
-         this.mFirst = this.mFirst + 0.01;
-    }
-};
-
-Hero.prototype.moveX=function (x){
-    this.getXform().setXPos(x);
-};
-
-//Hero.protype.setLand = function(up,down){
-//    this.Top = up;
-//    this.Bot = down;
-//};

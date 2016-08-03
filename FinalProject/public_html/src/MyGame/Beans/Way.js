@@ -9,15 +9,20 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Way(spriteTexture) {
-    GameObject.call(this, spriteTexture);
+    GameObject.call(this, spriteTexture);   
     
-    Way.prototype.getXform = GameObject.prototype.getXform;
+     var rigidShape = new RigidRectangle(this.getXform(), 30, 6);
+    rigidShape.setMass(0);  // ensures no movements!
+    rigidShape.setFriction(5);
+    this.setPhysicsComponent(rigidShape);
+
 }
 gEngine.Core.inheritPrototype(Way, GameObject);
 
 
 
 Way.prototype.update = function () {
+
     GameObject.prototype.update.call(this); 
 };
 
