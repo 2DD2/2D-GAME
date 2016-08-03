@@ -24,19 +24,19 @@
     
     <FGP_1 Rp = "assets/FGP_1.png">
     
-    <GUI_Num Number="4">
+    <GUI_Num Number="5">
     <GUI_1 SizeX="40" SizeY="20"
            X="0" Y="0"
            Rp = "assets/startscene.png"
            Type = "square"/>
-    <GUI_2 SizeX="4" SizeY="0.5"
-           X="-16.5" Y="-5"
+    <GUI_2 SizeX="6" SizeY="0.75"
+           X="-16" Y="-5"
            hX = "-24" 
            hY = "-5"
            Rp = "assets/startbtn.png"
            Type = "animUI"/>
-    <GUI_3 SizeX="3.75" SizeY="0.40"
-           X="-15.5" Y="-6"
+    <GUI_3 SizeX="6" SizeY="0.75"
+           X="-16" Y="-6"
            hX = "-24" 
            hY = "-6"
            Rp = "assets/aboutusbtn.png"
@@ -46,6 +46,12 @@
            hX = "31" 
            hY = "0"
            Rp = "assets/aboutuscontent.png"
+           Type = "animUI"/>
+    <GUI_5 SizeX="20" SizeY="5"
+           X="8" Y="5"
+           hX = "31" 
+           hY = "5"
+           Rp = "assets/gamename.png"
            Type = "animUI"/>
 
     <LAND_Num Number="1"/>

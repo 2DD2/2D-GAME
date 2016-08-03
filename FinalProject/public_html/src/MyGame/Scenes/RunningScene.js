@@ -73,8 +73,13 @@ RunningScene.prototype.initialize = function(){
     
     
     this.mHero = new Hero(new SpriteAnimateRenderable(this.kHero));
-    gManager.ObjectPool.addObject(this.mHero,3);
+    gManager.ObjectPool.addObject(this.mHero,2);
     
+    /*
+     * 这个landController随便加哪个层都行
+     */
+    var landController = new LandController();
+    gManager.ObjectPool.addObject(landController,1);
     
     this.mBlock = new BlockA(this.kBlock);
     for(var i = 0 ;i< this.mBlock.length ; i++){
@@ -85,30 +90,16 @@ RunningScene.prototype.initialize = function(){
     for(var i = 0 ;i< this.mDanger.length ; i++){
          gManager.ObjectPool.addObject(this.mDanger[i],5);
     }
-   
-    this.mWay = new Way(this.mWayImg,-15);
-    this.mWay1 = new Way(this.mWayImg,-5);
-    this.mWay2 = new Way(this.mWayImg,5);
-    this.mWay3 = new Way(this.mWayImg,15);
-    this.mWay4 = new Way(this.mWayImg,25);
     
-    this.mScore = new Score(new FontRenderable(""), 0, -7, [1, 1, 1, 1], 1);
-    gManager.ObjectPool.addObject(this.mScore, 6);
     
-    gManager.ObjectPool.addObject(this.mWay,2);
-    gManager.ObjectPool.addObject(this.mWay1,2);
-    gManager.ObjectPool.addObject(this.mWay2,2);
-    gManager.ObjectPool.addObject(this.mWay3,2);
-    gManager.ObjectPool.addObject(this.mWay4,2);  
-  
+    
     gManager.InputManager.initManager();
-   
-    // 跳
+    //    跳
     gManager.InputManager.bindCommand("press",gEngine.Input.keys.Space, new JumpCommand(this.mHero));
     
-//    //反重力
+    //反重力
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Up, new AntiCommand(this.mHero));
-    
+   
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };
