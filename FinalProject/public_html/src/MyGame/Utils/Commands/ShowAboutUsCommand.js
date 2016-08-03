@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 
-/* global gManager */
+/* global gManager, Command, gEngine */
 
 function ShowAboutUsCommand(){
     this.mCurrentState = false;
 };
+
+gEngine.Core.inheritPrototype(ShowAboutUsCommand,Command);
 
 ShowAboutUsCommand.prototype.excute = function(){
     if(this.mCurrentState){

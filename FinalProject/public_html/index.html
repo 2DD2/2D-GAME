@@ -109,6 +109,7 @@
         <script type="text/javascript" src="src/MyGame/Utils/Commands/AntiCommand.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/Commands/ShowAboutUsCommand.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/Commands/ShowControlCommand.js"></script>
+        <script type="text/javascript" src="src/MyGame/Utils/Commands/TurnToStartCommand.js"></script>
 
         <script type="text/javascript" src="src/MyGame/Utils/Commands/EventList.js"></script>
         <script type="text/javascript" src="src/MyGame/Utils/InputManager.js"></script>
@@ -147,14 +148,14 @@
         <script type="text/javascript" src="src/MyGame/Beans/Way.js"></script>
         <script type="text/javascript" src="src/MyGame/Beans/MyLight.js"></script>
         
-        <! -- 物理 -- >
+        <!-- 物理 -->
         <script type="text/javascript" src="src/MyGame/Scenes/Running_Physics.js "></script>
         
     </head>
     
     
     <body onload="
-        var mMain = new WelcomeScene();
+        var mMain = new GameOverScene();
         gEngine.Core.initializeEngineCore('GLCanvas', mMain);
      "> 
         <div style="width:1200px;margin:0 auto;">

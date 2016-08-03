@@ -86,6 +86,7 @@ RunningScene.prototype.initialize = function(){
     var ui = gManager.UIManager.getElementbyNum(0);
     ui.setState(true);
     if(gManager.DefaultOptions.getIsFirst()){
+        gManager.DefaultOptions.setIsFirst(false);
         ui = gManager.UIManager.getElementbyNum(1);
         ui.setState(true);
     }
