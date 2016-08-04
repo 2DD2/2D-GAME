@@ -27,7 +27,7 @@ RunningScene.prototype._physicsSimulation = function() {
     gEngine.Physics.processObjSet(hero, block);
     
     gEngine.Physics.processSetSet(block,land);       
-    gEngine.Physics.processSetSet(block,target);
+   // gEngine.Physics.processSetSet(block,target);
     gEngine.Physics.processSetSet(target,land);
     
    

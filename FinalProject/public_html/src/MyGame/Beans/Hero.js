@@ -21,6 +21,7 @@ function Hero(renderableObj) {
     
     this.mGravity = -1;
     
+    //动画
     this.mRender.setColor([1, 1, 1, 0]);
     this.mRender.getXform().setSize(3,3);
     this.mRender.getXform().setYPos(4);
@@ -32,37 +33,46 @@ function Hero(renderableObj) {
     this.mRender.setAnimationSpeed(10);
     
     GameObject.call(this,this.mRender);
-        
-    this.mRigid = new RigidRectangle(this.mRender.getXform(), 3, 3);
+    
+    //刚体
+    this.mRigid = new RigidCircle(this.mRender.getXform(), 1.5);
     this.mRigid.setMass(0.7);  // less dense than Minions
     this.mRigid.setRestitution(0);
-    //this.getPhysicsComponent().setAcceleration([0,-10]);
+    
     this.setPhysicsComponent(this.mRigid);   
 }
 
 gEngine.Core.inheritPrototype(Hero, GameObject);
 Hero.prototype.update = function () {
+    
+    //超出屏幕死亡
     if(this.getXform().getXPos()< -20 || this.getXform().getYPos()< -10 || this.getXform().getYPos()> 10){
         this.Die();
     }
+    
+    //和红色 碰撞则死亡
     for( var i =0 ;i < gManager.ObjectPool.getObjectsByLayer(5).length;i++){
         var ob=gManager.ObjectPool.getObjectsByLayer(5)[i];
         if(this.getBBox().intersectsBound(ob.getBBox())) {
             this.Die();
         }
     }
+    
+    //前后速度控制
     var v = this.getPhysicsComponent().getVelocity();
     if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.A)){
         v[0] = -10;
     }
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D )) {
         if(this.getXform().getXPos() < 10){
-           v[0] = 15;
+           v[0] = 10;
        }
     }
     if(this.getXform().getXPos() > 10){
-        v[0] = -5;
+          v[0] = -5;
     }
+    
+    //绘制动画
     this.mRender.updateAnimation();
     GameObject.prototype.update.call(this);
 };
