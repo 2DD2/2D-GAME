@@ -32,13 +32,13 @@ function FGController(sceneLoader){
     
     this.mSceneLoader = sceneLoader;
     
-    this.mMaxParticleNumber = 40;
+    this.mMaxParticleNumber = 30;
     
     this.mCurrentNum = 0;
 
     this.mParticlePath = sceneLoader.GetNode("FGP_1","Rp");
     
-    this.mInterval = 5;
+    this.mInterval = 8;
     
     this.mParticleLayer = 8;
     
@@ -49,7 +49,7 @@ function FGController(sceneLoader){
 
 FGController.prototype.update = function(){
     
-    if(this.mInterval === 5 && this.mMaxParticleNumber > this.mReusePool.length){
+    if(this.mInterval === 8 && this.mMaxParticleNumber > this.mReusePool.length){
         
         var par = new Snow(new TextureRenderable(this.mParticlePath));
         this._reset(par);
@@ -82,10 +82,10 @@ FGController.prototype.draw = function (aCamera) {
 
 FGController.prototype._reset = function(par){
     par.getXform().setPosition(gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2,
-                                   8 + gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 4 * Math.random() - gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 * Math.random());
-    var size = 0.2 + 0.5 * Math.random();
+                                   10 + gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 4 * Math.random() - gManager.DefaultOptions.FULL_SCREEN_WCWIDTH / 2 * Math.random());
+    var size = 0.2 + 0.8 * Math.random();
     par.getXform().setSize(size,size);          
-    par.setspeed([0.15 + 0.15 * Math.random(),0.1 * Math.random()]);
+    par.setspeed([0.15 + 0.15 * Math.random(),0.05 + 0.05 * Math.random()]);
     
     var rotation = 0.15 - 0.3 * Math.random();
     par.setrotation(rotation);

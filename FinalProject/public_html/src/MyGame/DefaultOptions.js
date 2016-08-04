@@ -26,6 +26,9 @@ gManager.DefaultOptions = (function(){
         getIsFirst : getIsFirst,
         setIsFirst : setIsFirst,
         
+        
+        mBoxSpeed : -15.0,
+        
         //BackGround
         mSpeed:0.3,
         mBgColor:[1, 1, 1, 0.0],

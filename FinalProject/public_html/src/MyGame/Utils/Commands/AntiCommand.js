@@ -8,14 +8,15 @@
  *  created by yangqihua 2016-08-01 15:13:45
  *  ========================================
  */
+/* global Command, gEngine */
+
 function AntiCommand(hero) {
     this.mHero = hero;
-}
+};
 
 gEngine.Core.inheritPrototype(AntiCommand, Command);
 
 AntiCommand.prototype.excute = function(){
-    console.log("hero is Jump");
     this.mHero.antiJump();
-}
+};
 

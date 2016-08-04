@@ -24,6 +24,7 @@ gEngine.Core.inheritPrototype(BeginningScene, MyScene);
 
 BeginningScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
+    //gEngine.AudioClips.stopBackgroundAudio();
 
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
 

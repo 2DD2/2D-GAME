@@ -11,6 +11,7 @@ function WelcomeScene(){
     this.kLogo = "assets/logo.png";
     this.kSceneFile_Path = "assets/SceneData/Welcome_Scene.xml";
     this.kAudio_Path = "assets/Sounds/Intro.mp3";
+    this.kAudioRun_Path = "assets/Sounds/On the Come Up.mp3";
     
     this.mColor = null;
     this.mEmitter = null;
@@ -29,7 +30,7 @@ gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
 
 WelcomeScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
-    
+    gEngine.AudioClips.loadAudio(this.kAudioRun_Path);
 
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
     
@@ -55,6 +56,7 @@ WelcomeScene.prototype.loadScene = function () {
     加载背景音乐
      */
     gEngine.AudioClips.loadAudio(this.kAudio_Path);
+    
 };
 
 WelcomeScene.prototype.unloadScene = function () {

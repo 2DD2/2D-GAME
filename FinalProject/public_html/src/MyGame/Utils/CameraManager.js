@@ -52,19 +52,19 @@ gManager.CameraManager = (function(){
 
         // 如果注册的渲染层级不合法则输出并退出
         if(indexNumber > kMaxCameraNumber || indexNumber < 0) {
-            alert(camera + " 渲染层级" + indexNumber + " 不合法");
+            //alert(camera + " 渲染层级" + indexNumber + " 不合法");
             return;
         }
 
         // 如果指定渲染层级被占用，则输出并退出
         if(mCameraRenderArray[indexNumber]){
-            alert(camera + " 渲染层级" + indexNumber + " 已被占用");
+            //alert(camera + " 渲染层级" + indexNumber + " 已被占用");
             return;
         }
 
         // 如果相机对象为空则输出并对出
         if(!camera){
-            alert("指定序号相机" + indexNumber + "对象为空");
+            //alert("指定序号相机" + indexNumber + "对象为空");
             return;
         }
 

@@ -17,8 +17,8 @@ function RunningScene(){
     // Hero 和障碍物
     this.kHero = "assets/herosheet.png";
     this.kBlock = "assets/Block.png";
+    this.kBlocknormal = "assets/BlockNormal.png";
     this.kSock = "assets/Sock.png";
-    this.kTarget = "assets/Target.png";
 
     
     this.mWayImg = "assets/landup.png";
@@ -38,13 +38,13 @@ RunningScene.prototype.loadScene = function(){
     gEngine.Textures.loadTexture(this.kFgPath);
     gEngine.Textures.loadTexture(this.kUIBanner_Path);
     gEngine.Textures.loadTexture(this.kParticleTexture);
+    gEngine.Textures.loadTexture(this.kBlocknormal);
     gEngine.TextFileLoader.loadTextFile(this.kSceneDataFile,gEngine.TextFileLoader.eTextFileType.eXMLFile);
     
 
     gEngine.Textures.loadTexture(this.kHero);
     gEngine.Textures.loadTexture(this.kBlock);
     gEngine.Textures.loadTexture(this.kSock);   
-    gEngine.Textures.loadTexture(this.kTarget); 
     
     gEngine.Textures.loadTexture(this.mWayImg);
     gEngine.Textures.loadTexture(this.mWayImg1);
@@ -59,12 +59,11 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.kFgPath);
     gEngine.TextFileLoader.unloadTextFile(this.kSceneDataFile);
     gEngine.Textures.unloadTexture(this.kParticleTexture);
-    
+    gEngine.Textures.unloadTexture(this.kBlocknormal);
 
     gEngine.Textures.unloadTexture(this.kHero);
     gEngine.Textures.unloadTexture(this.kBlock);
     gEngine.Textures.unloadTexture(this.kSock);
-    gEngine.Textures.unloadTexture(this.kTarget);
     
     gEngine.Textures.unloadTexture(this.mWayImg);
     gEngine.Textures.unloadTexture(this.mWayImg1);
@@ -74,6 +73,8 @@ RunningScene.prototype.unloadScene = function(){
     gEngine.Textures.unloadTexture(this.mWayImg4);
     
     this.mScore =null;
+    this.mHero = null;
+    this.blockmgr = null;
     gManager.DefaultOptions.mLevel=0;
     
     var nextScene = new GameOverScene();
@@ -81,7 +82,9 @@ RunningScene.prototype.unloadScene = function(){
 };
 
 RunningScene.prototype.initialize = function(){
+    
     MyScene.prototype.initialize.call(this);
+    gEngine.AudioClips.playBackgroundAudio("assets/Sounds/On the Come Up.mp3");
     
     /*
      * 
@@ -124,13 +127,13 @@ RunningScene.prototype.initialize = function(){
     gManager.ObjectPool.addObject(light,7);
      
     //Block在第五层
-    this.mDanger = new DangerB(this.kSock);
-    for(var i = 0 ;i< this.mDanger.length ; i++){
-         gManager.ObjectPool.addObject(this.mDanger[i],5);
-    }
+//    this.mDanger = new DangerB(this.kSock);
+//    for(var i = 0 ;i< this.mDanger.length ; i++){
+//         gManager.ObjectPool.addObject(this.mDanger[i],5);
+//    }
     
     //内部物体在第四层
-    this.blockmgr = new BlockController(this.kTarget);
+    this.blockmgr = new BlockController(this.kBlock,this.kBlocknormal,light);
     gManager.ObjectPool.addObject(this.blockmgr,1);
     
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.W, new JumpCommand(this.mHero));         //跳
@@ -151,6 +154,11 @@ RunningScene.prototype.update = function(){
      if(gManager.DefaultOptions.score > gManager.DefaultOptions.maxScore){
          gManager.DefaultOptions.maxScore = gManager.DefaultOptions.score;
      }
+     
+     /*
+      * 难度增加
+      */
+     gManager.DefaultOptions.mBoxSpeed -= 0.005;
 
      
    // physics simulation

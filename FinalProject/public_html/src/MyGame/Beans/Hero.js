@@ -18,8 +18,8 @@ function Hero(renderableObj) {
   
     this.kXDelta = 0.2;
     this.kYDelta = 2.0;
-    
-    this.mGravity = -1;
+    this.kMaxSpeed = 20;
+    this.mGravity = -1.5;
     
     //动画
     this.mRender.setColor([1, 1, 1, 0]);
@@ -36,7 +36,7 @@ function Hero(renderableObj) {
     
     //刚体
     this.mRigid = new RigidCircle(this.mRender.getXform(), 1.5);
-    this.mRigid.setMass(0.7);  // less dense than Minions
+    this.mRigid.setMass(1.0);  // less dense than Minions
     this.mRigid.setRestitution(0);
     
     this.setPhysicsComponent(this.mRigid);   
@@ -61,13 +61,15 @@ Hero.prototype.update = function () {
     //前后速度控制
     var v = this.getPhysicsComponent().getVelocity();
     if ( gEngine.Input.isKeyPressed(gEngine.Input.keys.A)){
-        v[0] = -10;
+        v[0] = -8;
     }
+    
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D )) {
         if(this.getXform().getXPos() < 10){
-           v[0] = 10;
-       }
+           v[0] = 8;
+        }
     }
+    
     if(this.getXform().getXPos() > 10){
           v[0] = -5;
     }
@@ -88,7 +90,7 @@ Hero.prototype.draw = function (camera) {
 Hero.prototype.Jump = function () { // y: current Ypos ,hight: the hight to jump
     var v = this.getPhysicsComponent().getVelocity(); 
     if(Math.abs(v[1]) < 3){
-        v[1] = 25 * (-this.mGravity);
+        v[1] = 13 * (-this.mGravity);
     }
 
 };

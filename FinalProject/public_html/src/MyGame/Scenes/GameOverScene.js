@@ -55,6 +55,7 @@ GameOverScene.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kUIRes_3);
 
     gManager.DefaultOptions.score = 0;
+    gManager.DefaultOptions.mBoxSpeed = -15.0;
     gManager.DefaultOptions.mLevel = 1;
 
     gEngine.Core.startScene(new BeginningScene());
