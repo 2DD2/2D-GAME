@@ -122,28 +122,20 @@ RunningScene.prototype.initialize = function(){
     var landController = new LandController(light);
     gManager.ObjectPool.addObject(landController,1);
     gManager.ObjectPool.addObject(light,7);
-    
-//    this.mBlock = new BlockA(this.kBlock);
-//    for(var i = 0 ;i< this.mBlock.length ; i++){
-//        gManager.ObjectPool.addObject(this.mBlock[i],4);
-//    }
-//    
+     
+    //Block在第五层
     this.mDanger = new DangerB(this.kSock);
     for(var i = 0 ;i< this.mDanger.length ; i++){
          gManager.ObjectPool.addObject(this.mDanger[i],5);
     }
     
-
+    //内部物体在第四层
     this.blockmgr = new BlockController(this.kTarget);
     gManager.ObjectPool.addObject(this.blockmgr,1);
-//    this.targetmgr = new TargetController(this.kSock);
-//    gManager.ObjectPool.addObject(this.targetmgr,1);
-//    
-    gManager.InputManager.initManager();
     
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.W, new JumpCommand(this.mHero));
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.W, new JumpCommand(this.mHero));         //跳
     gManager.InputManager.bindCommand("click",gEngine.Input.keys.Space, new AntiCommand(this.mHero));    //反重力
-    gManager.InputManager.bindCommand("click",gEngine.Input.keys.H,new ShowControlCommand());
+    gManager.InputManager.bindCommand("click",gEngine.Input.keys.H,new ShowControlCommand());            //UI
     
     gManager.CameraManager.registerCamera(sceneLoader.LoadCamera("Camera_Main"),1);
 };

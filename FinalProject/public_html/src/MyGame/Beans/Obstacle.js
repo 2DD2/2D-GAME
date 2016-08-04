@@ -16,13 +16,13 @@ function Obstacle(spriteTexture,flag, firstXPos) {
         this.FirstPos = 25;
     }
     if(flag === 1){
-        this.YPos =3.2;
+        this.YPos =4.2;
     }else if(flag === -1){
-          this.YPos = -3.2;
+          this.YPos = -4.2;
     }else{
         this.YPos = 0;
     }
-     this.YPos =4.2;
+    
     GameObject.call(this,this.mRender);
     
     this.setSpeed(gManager.DefaultOptions.mWaySpeed/2);
@@ -30,9 +30,20 @@ function Obstacle(spriteTexture,flag, firstXPos) {
     this.getXform().setPosition(this.FirstPos,this.YPos);
     this.getXform().setSize(3,3);
     
-    var r = new RigidRectangle(this.mRender.getXform(), 3,3);
-    r.setMass(0.7);  // less dense than Minions
-    r.setRestitution(0.3);
+    //刚体
+    var r = new RigidRectangle(this.mRender.getXform(), 2.8,2.8);
+    r.setMass(0.5);  // less dense than Minions
+    r.setRestitution(10);
+    
+    // 重力方向
+    if(flag === 1){
+        r.setAcceleration([0,-50]);
+    }else if(flag === -1){
+         r.setAcceleration([0,50]);
+    }else{
+        r.setAcceleration([0,50]);
+    }
+    
     this.setPhysicsComponent(r);
     
 }
@@ -50,22 +61,8 @@ Obstacle.prototype.draw = function(camera){
     GameObject.prototype.draw.call(this,camera);
 };
 
-function BlockA(blockTexture){
-  
-    var Block1 = new Obstacle(blockTexture,1,50);
-    var Block2 = new Obstacle(blockTexture,-1,30);
-    var Block3 = new Obstacle(blockTexture,1,20);
-    var Block4 = new Obstacle(blockTexture,-1,40);
-    
-    mSet.push(Block1);
-    mSet.push(Block2);
-    mSet.push(Block3);
-    mSet.push(Block4);
-    
-   return mSet;
-}
 
-function DangerB(blockTexture,n){
+function DangerB(blockTexture){
     var mSet = [];
     var Danger1 = new Obstacle(blockTexture,-1,40);
     var Danger2 = new Obstacle(blockTexture,1,35);
