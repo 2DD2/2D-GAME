@@ -63,7 +63,7 @@ function BlockController(blockTexture){
     
     
     var update = function(){   
-         console.log(current,gManager.DefaultOptions.mLevel);
+
         if(Math.abs(gManager.DefaultOptions.score - 4) < 0.01){
             addNew();
             console.log(current,gManager.DefaultOptions.mLevel);
@@ -75,7 +75,7 @@ function BlockController(blockTexture){
     };
     var draw = function(cam){
         
-    }
+    };
     var addNew = function (){
          if(current < 3){
               gManager.ObjectPool.addObject(mSet[current],4);
@@ -85,7 +85,7 @@ function BlockController(blockTexture){
     };
     var clear = function(){
         mSet = [];
-    }
+    };
     var mPublic = {
         mSet:mSet,
         update:update,
@@ -134,7 +134,7 @@ function TargetController(blockTexture){
     };
     var clear = function(){
         mSet = [];
-    }
+    };
     var mPublic = {
         mSet:mSet,
         update:update,
