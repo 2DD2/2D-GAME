@@ -17,7 +17,7 @@ function Block(spriteTexture,normalmap,light,name) {
     this.getXform().setSize(3,3);
     
     var r = new RigidRectangle(this.mRender.getXform(), 3,3);
-    r.setMass(50);  // less dense than Minions
+    r.setMass(80);  // less dense than Minions
     r.setRestitution(0.5);
     r.setVelocity([gManager.DefaultOptions.mBoxSpeed - 12 * Math.random(),-15 + 30 * Math.random()]);
     //r.setAcceleration([-10,-10]);

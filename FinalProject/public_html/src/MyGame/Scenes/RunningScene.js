@@ -84,7 +84,8 @@ RunningScene.prototype.unloadScene = function(){
 RunningScene.prototype.initialize = function(){
     
     MyScene.prototype.initialize.call(this);
-    gEngine.AudioClips.playBackgroundAudio("assets/Sounds/On the Come Up.mp3");
+    
+
     
     /*
      * 
@@ -97,6 +98,7 @@ RunningScene.prototype.initialize = function(){
     var ui = gManager.UIManager.getElementbyNum(2);
     ui.setState(true);
     if(gManager.DefaultOptions.getIsFirst()){
+        gEngine.AudioClips.playBackgroundAudio("assets/Sounds/On the Come Up.mp3");
         gManager.DefaultOptions.setIsFirst(false);
         ui = gManager.UIManager.getElementbyNum(1);
         ui.setState(true);
