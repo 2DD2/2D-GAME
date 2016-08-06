@@ -30,7 +30,7 @@ gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
 
 WelcomeScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
-    gEngine.AudioClips.loadAudio(this.kAudioRun_Path);
+    
 
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
     
@@ -56,6 +56,7 @@ WelcomeScene.prototype.loadScene = function () {
     加载背景音乐
      */
     gEngine.AudioClips.loadAudio(this.kAudio_Path);
+    gEngine.AudioClips.loadAudio(this.kAudioRun_Path);
     
 };
 
