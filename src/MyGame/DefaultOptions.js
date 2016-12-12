@@ -4,7 +4,6 @@
  */
 var gManager = gManager || {};
 
-
 gManager.DefaultOptions = (function(){
     var eObjectType = {
         Hero : "Hero",

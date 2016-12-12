@@ -18,7 +18,6 @@ function RunningScene(){
     this.kHero = "assets/herosheet.png";
     this.kBlock = "assets/Block.png";
     this.kBlocknormal = "assets/BlockNormal.png";
-    this.kSock = "assets/Sock.png";
 
     
     this.mWayImg = "assets/landup.png";
@@ -44,7 +43,6 @@ RunningScene.prototype.loadScene = function(){
 
     gEngine.Textures.loadTexture(this.kHero);
     gEngine.Textures.loadTexture(this.kBlock);
-    gEngine.Textures.loadTexture(this.kSock);   
     
     gEngine.Textures.loadTexture(this.mWayImg);
     gEngine.Textures.loadTexture(this.mWayImg1);
@@ -63,7 +61,6 @@ RunningScene.prototype.unloadScene = function(){
 
     gEngine.Textures.unloadTexture(this.kHero);
     gEngine.Textures.unloadTexture(this.kBlock);
-    gEngine.Textures.unloadTexture(this.kSock);
     
     gEngine.Textures.unloadTexture(this.mWayImg);
     gEngine.Textures.unloadTexture(this.mWayImg1);

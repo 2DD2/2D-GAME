@@ -16,7 +16,6 @@ function WelcomeScene(){
     this.mColor = null;
     this.mEmitter = null;
     
-    
     this.mTimeNow = 0;
     this.mTimeShow = 250;
     this.mTimeOff = 400;
@@ -30,7 +29,6 @@ gEngine.Core.inheritPrototype(WelcomeScene, MyScene);
 
 WelcomeScene.prototype.initialize = function(){
     MyScene.prototype.initialize.call(this);
-    
 
     var sceneLoader = new SceneDataLoader(this.kSceneFile_Path);
     
@@ -76,7 +74,6 @@ WelcomeScene.prototype.unloadScene = function () {
 };
 
 WelcomeScene.prototype.update = function(){
-    
     
     this.mTimeNow++;
     if(this.mTimeShow > this.mTimeNow){

@@ -19,10 +19,7 @@ function Way(spriteTexture,light) {
 }
 gEngine.Core.inheritPrototype(Way, GameObject);
 
-
-
 Way.prototype.update = function () {
-
     GameObject.prototype.update.call(this); 
 };
 

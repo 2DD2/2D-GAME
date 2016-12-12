@@ -2,6 +2,7 @@
 
 /* global gEngine */
 
+
 var gManager = gManager || {};
 
 gManager.InputManager = (function () {
